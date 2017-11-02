@@ -25,7 +25,7 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 25
-        applicationId="com.google.sample.cast.refplayer"
+        applicationId="com.codesyntax.jarrion"
     }
     enforceUniquePackageName=false
     dexOptions {
