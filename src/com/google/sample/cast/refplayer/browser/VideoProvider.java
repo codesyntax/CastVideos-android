@@ -72,7 +72,7 @@ public class VideoProvider {
 
     public static final String KEY_DESCRIPTION = "description";
 
-    private static final String TARGET_FORMAT = TAG_HLS;
+    private static final String TARGET_FORMAT = TAG_MP4;
     private static List<MediaInfo> mediaList;
 
     protected JSONObject parseUrl(String urlString) {
