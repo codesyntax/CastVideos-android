@@ -49,8 +49,9 @@ public class VideoBrowserFragment extends Fragment implements VideoListAdapter.I
         LoaderManager.LoaderCallbacks<List<MediaInfo>> {
 
     private static final String TAG = "VideoBrowserFragment";
-    private static final String CATALOG_URL =
-            "https://commondatastorage.googleapis.com/gtv-videos-bucket/CastVideos/f.json";
+    //private static final String CATALOG_URL = "https://tbx.eus/api/1.0/chromecast.json";
+    //private static final String CATALOG_URL = "https://bertsoa.eus/api/1.0/chromecast.json";
+    private static final String CATALOG_URL = "https://dantzan.eus/chromecast.dantzan";
     private RecyclerView mRecyclerView;
     private VideoListAdapter mAdapter;
     private View mEmptyView;
