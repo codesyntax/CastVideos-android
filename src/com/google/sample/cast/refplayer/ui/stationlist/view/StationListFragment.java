@@ -1,4 +1,4 @@
-package com.google.sample.cast.refplayer.ui.stationlist;
+package com.google.sample.cast.refplayer.ui.stationlist.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,11 +9,14 @@ import android.view.ViewGroup;
 
 import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.di.component.DaggerStationListComponent;
+import com.google.sample.cast.refplayer.ui.stationlist.model.StationListViewModel;
 import com.google.sample.cast.refplayer.ui.stationlist.presenter.StationListPresenter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
-public class StationListFragment extends Fragment {
+public class StationListFragment extends Fragment implements StationListView {
     @Inject
     StationListPresenter presenter;
 
@@ -29,5 +32,10 @@ public class StationListFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_station_list, container, false);
+    }
+
+    @Override
+    public void showStations(List<StationListViewModel> stations) {
+
     }
 }
