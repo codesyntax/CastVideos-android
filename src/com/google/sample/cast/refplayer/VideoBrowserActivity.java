@@ -41,7 +41,6 @@ import android.view.MenuItem;
  * The main activity that displays the list of videos.
  */
 public class VideoBrowserActivity extends AppCompatActivity {
-
     private static final String TAG = "VideoBrowserActivity";
     private CastContext mCastContext;
     private final SessionManagerListener<CastSession> mSessionManagerListener =
