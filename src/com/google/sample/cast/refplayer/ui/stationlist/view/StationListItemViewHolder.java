@@ -10,17 +10,26 @@ import com.google.sample.cast.refplayer.ui.stationlist.model.StationListItemView
 import com.squareup.picasso.Picasso;
 
 public class StationListItemViewHolder extends RecyclerView.ViewHolder {
+    private View itemView;
     private AppCompatImageView cover;
     private AppCompatTextView name;
 
     public StationListItemViewHolder(View itemView) {
         super(itemView);
+        this.itemView = itemView;
         cover = itemView.findViewById(R.id.station_cover);
         name = itemView.findViewById(R.id.station_name);
     }
 
-    public void bind(StationListItemViewModel stationListItemViewModel) {
+    public void bind(final StationListItemViewModel stationListItemViewModel,
+                     final StationListItemClickListener stationListItemClickListener) {
         Picasso.with(cover.getContext()).load(stationListItemViewModel.getCoverURL()).into(cover);
         name.setText(stationListItemViewModel.getName());
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stationListItemClickListener.onItemClick(stationListItemViewModel);
+            }
+        });
     }
 }

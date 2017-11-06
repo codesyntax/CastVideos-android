@@ -4,6 +4,7 @@ import com.google.sample.cast.refplayer.di.scope.FragmentScope;
 import com.google.sample.cast.refplayer.domain.interactor.GetStationsInteractor;
 import com.google.sample.cast.refplayer.domain.interactor.GetStationsInteractorImpl;
 import com.google.sample.cast.refplayer.navigation.VideoBrowserActivityNavigator;
+import com.google.sample.cast.refplayer.navigation.VideoBrowserActivityNavigatorImpl;
 import com.google.sample.cast.refplayer.ui.stationlist.model.StationListItemViewModelMapper;
 import com.google.sample.cast.refplayer.ui.stationlist.model.StationListItemViewModelMapperImpl;
 import com.google.sample.cast.refplayer.ui.stationlist.presenter.StationListPresenter;
@@ -35,7 +36,7 @@ public class StationListModule {
 
     @FragmentScope
     @Provides
-    public VideoBrowserActivityNavigator provideVideoBrowserActivityNavigator(VideoBrowserActivityNavigator navigator) {
+    public VideoBrowserActivityNavigator provideVideoBrowserActivityNavigator(VideoBrowserActivityNavigatorImpl navigator) {
         return navigator;
     }
 }
