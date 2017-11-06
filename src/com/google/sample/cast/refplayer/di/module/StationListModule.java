@@ -1,6 +1,10 @@
 package com.google.sample.cast.refplayer.di.module;
 
 import com.google.sample.cast.refplayer.di.scope.FragmentScope;
+import com.google.sample.cast.refplayer.domain.interactor.GetStationsInteractor;
+import com.google.sample.cast.refplayer.domain.interactor.GetStationsInteractorImpl;
+import com.google.sample.cast.refplayer.ui.stationlist.model.StationListItemViewModelMapper;
+import com.google.sample.cast.refplayer.ui.stationlist.model.StationListItemViewModelMapperImpl;
 import com.google.sample.cast.refplayer.ui.stationlist.presenter.StationListPresenter;
 import com.google.sample.cast.refplayer.ui.stationlist.presenter.StationListPresenterImpl;
 
@@ -14,5 +18,17 @@ public class StationListModule {
     @Provides
     public StationListPresenter provideStationListPresenter(StationListPresenterImpl presenter) {
         return presenter;
+    }
+
+    @FragmentScope
+    @Provides
+    public StationListItemViewModelMapper provideStationListItemViewModelMapper(StationListItemViewModelMapperImpl mapper) {
+        return mapper;
+    }
+
+    @FragmentScope
+    @Provides
+    public GetStationsInteractor provideGetStationsInteractor(GetStationsInteractorImpl interactor) {
+        return interactor;
     }
 }
