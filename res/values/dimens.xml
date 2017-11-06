@@ -29,5 +29,6 @@
 
     <!-- StationList -->
     <dimen name="item_station_list_height">180dp</dimen>
+    <dimen name="item_station_name_padding">4dp</dimen>
 
 </resources>
