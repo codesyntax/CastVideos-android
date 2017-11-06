@@ -74,6 +74,6 @@
     <color name="cast_activity_text_color">#FFFFFF</color>
     
     <!-- JarriOn -->
-    <color name="item_station_list_background_text_color">#400015ff</color>
+    <color name="item_station_list_background_text_color">#A00015ff</color>
 
 </resources>

@@ -19,6 +19,7 @@ import javax.inject.Inject;
 
 public class StationListFragment extends Fragment implements StationListView {
     private RecyclerView stationsRecyclerView;
+    private StationListAdapter stationListAdapter;
     @Inject
     StationListPresenter presenter;
 
@@ -40,10 +41,31 @@ public class StationListFragment extends Fragment implements StationListView {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         stationsRecyclerView = view.findViewById(R.id.stations_recycler_view);
+        setupRecyclerView();
+        presenter.setView(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.getStations();
+    }
+
+    @Override
+    public void onDestroyView() {
+        if (presenter != null) {
+            presenter.removeView();
+        }
+        super.onDestroyView();
+    }
+
+    private void setupRecyclerView() {
+        stationListAdapter = new StationListAdapter();
+        stationsRecyclerView.setAdapter(stationListAdapter);
     }
 
     @Override
     public void showStations(List<StationListItemViewModel> stations) {
-
+        stationListAdapter.setStations(stations);
     }
 }
