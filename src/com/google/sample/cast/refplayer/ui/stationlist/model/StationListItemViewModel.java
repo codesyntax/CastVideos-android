@@ -1,7 +1,8 @@
 package com.google.sample.cast.refplayer.ui.stationlist.model;
 
-public class StationListViewModel {
+public class StationListItemViewModel {
     private int id;
+    private String name;
     private String coverURL;
 
     public int getId() {
@@ -12,13 +13,19 @@ public class StationListViewModel {
         return coverURL;
     }
 
-    private StationListViewModel(Builder builder) {
+    public String getName() {
+        return name;
+    }
+
+    private StationListItemViewModel(Builder builder) {
         id = builder.id;
+        name = builder.name;
         coverURL = builder.coverURL;
     }
 
     public static final class Builder {
         private int id;
+        private String name;
         private String coverURL;
 
         public Builder() {
@@ -29,13 +36,18 @@ public class StationListViewModel {
             return this;
         }
 
+        public Builder name(String val) {
+            name = val;
+            return this;
+        }
+
         public Builder coverURL(String val) {
             coverURL = val;
             return this;
         }
 
-        public StationListViewModel build() {
-            return new StationListViewModel(this);
+        public StationListItemViewModel build() {
+            return new StationListItemViewModel(this);
         }
     }
 }

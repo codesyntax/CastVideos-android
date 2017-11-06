@@ -3,13 +3,14 @@ package com.google.sample.cast.refplayer.ui.stationlist.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.di.component.DaggerStationListComponent;
-import com.google.sample.cast.refplayer.ui.stationlist.model.StationListViewModel;
+import com.google.sample.cast.refplayer.ui.stationlist.model.StationListItemViewModel;
 import com.google.sample.cast.refplayer.ui.stationlist.presenter.StationListPresenter;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class StationListFragment extends Fragment implements StationListView {
+    private RecyclerView stationsRecyclerView;
     @Inject
     StationListPresenter presenter;
 
@@ -35,7 +37,13 @@ public class StationListFragment extends Fragment implements StationListView {
     }
 
     @Override
-    public void showStations(List<StationListViewModel> stations) {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        stationsRecyclerView = view.findViewById(R.id.stations_recycler_view);
+    }
+
+    @Override
+    public void showStations(List<StationListItemViewModel> stations) {
 
     }
 }
