@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.di.component.DaggerStationListComponent;
+import com.google.sample.cast.refplayer.navigation.VideoBrowserActivityNavigator;
 import com.google.sample.cast.refplayer.ui.stationlist.model.StationListItemViewModel;
 import com.google.sample.cast.refplayer.ui.stationlist.presenter.StationListPresenter;
 
@@ -17,11 +18,14 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class StationListFragment extends Fragment implements StationListView {
+public class StationListFragment extends Fragment
+        implements StationListView, StationListItemClickListener {
     private RecyclerView stationsRecyclerView;
     private StationListAdapter stationListAdapter;
     @Inject
     StationListPresenter presenter;
+    @Inject
+    VideoBrowserActivityNavigator videoBrowserActivityNavigator;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,12 +64,17 @@ public class StationListFragment extends Fragment implements StationListView {
     }
 
     private void setupRecyclerView() {
-        stationListAdapter = new StationListAdapter();
+        stationListAdapter = new StationListAdapter(this);
         stationsRecyclerView.setAdapter(stationListAdapter);
     }
 
     @Override
     public void showStations(List<StationListItemViewModel> stations) {
         stationListAdapter.setStations(stations);
+    }
+
+    @Override
+    public void onItemClick(StationListItemViewModel stationListItemViewModel) {
+        videoBrowserActivityNavigator.navigate(getContext(), stationListItemViewModel.getId());
     }
 }

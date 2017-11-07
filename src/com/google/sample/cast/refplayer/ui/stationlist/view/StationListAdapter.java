@@ -12,14 +12,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StationListAdapter extends RecyclerView.Adapter<StationListItemViewHolder> {
-    private List<StationListItemViewModel> stations;
+    private final List<StationListItemViewModel> stations;
+    private final StationListItemClickListener stationListItemClickListener;
 
-    public StationListAdapter() {
+    public StationListAdapter(StationListItemClickListener stationListItemClickListener) {
         this.stations = new ArrayList<>();
+        this.stationListItemClickListener = stationListItemClickListener;
     }
 
     public void setStations(List<StationListItemViewModel> stations) {
-        this.stations = stations;
+        this.stations.clear();
+        this.stations.addAll(stations);
         notifyDataSetChanged();
     }
 
@@ -34,7 +37,7 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListItemView
     @Override
     public void onBindViewHolder(StationListItemViewHolder holder, int position) {
         StationListItemViewModel station = stations.get(position);
-        holder.bind(station);
+        holder.bind(station, stationListItemClickListener);
     }
 
     @Override
