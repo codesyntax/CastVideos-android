@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragment_station_list"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:name="com.google.sample.cast.refplayer.ui.stationlist.view.StationListFragment" />
+    android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+    <fragment android:id="@+id/fragment_station_list"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:name="com.google.sample.cast.refplayer.ui.stationlist.view.StationListFragment" />
+</android.support.v7.widget.LinearLayoutCompat>
+
