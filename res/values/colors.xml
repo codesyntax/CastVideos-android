@@ -56,8 +56,6 @@
     <color name="bg_swipe_group_item_left">#fff45f30</color>
     <color name="bg_swipe_group_item_right">#ff295db3</color>
 
-    <color name="primary">#03A9F4</color>
-    <color name="primary_dark">#0288D1</color>
     <color name="primary_light">#B3E5FC</color>
     <color name="accent">@color/primary</color>
     <color name="primary_text">#212121</color>
@@ -72,8 +70,10 @@
     <color name="cast_activity_line2_text_color">#E5AAAAAA</color>
     <color name="cast_activity_background_color">#4D000000</color>
     <color name="cast_activity_text_color">#FFFFFF</color>
-    
+
     <!-- JarriOn -->
     <color name="item_station_list_background_text_color">#A00015ff</color>
+    <color name="primary">#f8453b</color>
+    <color name="primary_dark">#c51107</color>
 
 </resources>
