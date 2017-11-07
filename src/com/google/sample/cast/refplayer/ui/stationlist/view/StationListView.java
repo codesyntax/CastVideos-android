@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface StationListView {
     void showStations(List<StationListItemViewModel> stations);
+
+    void hideRefresh();
 }

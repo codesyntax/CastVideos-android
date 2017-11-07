@@ -3,6 +3,7 @@ package com.google.sample.cast.refplayer.ui.stationlist.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import javax.inject.Inject;
 
 public class StationListFragment extends Fragment
         implements StationListView, StationListItemClickListener {
+    private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView stationsRecyclerView;
     private StationListAdapter stationListAdapter;
     @Inject
@@ -44,8 +46,8 @@ public class StationListFragment extends Fragment
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        stationsRecyclerView = view.findViewById(R.id.stations_recycler_view);
-        setupRecyclerView();
+        setupRecyclerView(view);
+        setupRefreshLayout(view);
         presenter.setView(this);
     }
 
@@ -63,7 +65,18 @@ public class StationListFragment extends Fragment
         super.onDestroyView();
     }
 
-    private void setupRecyclerView() {
+    private void setupRefreshLayout(View view) {
+        swipeRefreshLayout = view.findViewById(R.id.swiperefresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                presenter.getStations();
+            }
+        });
+    }
+
+    private void setupRecyclerView(View view) {
+        stationsRecyclerView = view.findViewById(R.id.stations_recycler_view);
         stationListAdapter = new StationListAdapter(this);
         stationsRecyclerView.setAdapter(stationListAdapter);
     }
@@ -71,6 +84,11 @@ public class StationListFragment extends Fragment
     @Override
     public void showStations(List<StationListItemViewModel> stations) {
         stationListAdapter.setStations(stations);
+    }
+
+    @Override
+    public void hideRefresh() {
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override

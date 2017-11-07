@@ -42,6 +42,7 @@ public class StationListPresenterImpl implements StationListPresenter, GetStatio
     public void onSuccess(List<Station> stations) {
         List<StationListItemViewModel> stationListItemViewModels
                 = stationListItemViewModelMapper.map(stations);
+        view.hideRefresh();
         view.showStations(stationListItemViewModels);
     }
 }
