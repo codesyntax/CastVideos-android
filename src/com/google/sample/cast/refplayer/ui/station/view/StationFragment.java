@@ -47,10 +47,10 @@ import java.util.List;
 /**
  * A fragment to host a list view of the video catalog.
  */
-public class VideoBrowserFragment extends Fragment implements VideoListAdapter.ItemClickListener,
+public class StationFragment extends Fragment implements VideoListAdapter.ItemClickListener,
         LoaderManager.LoaderCallbacks<List<MediaInfo>> {
 
-    private static final String TAG = "VideoBrowserFragment";
+    private static final String TAG = "StationFragment";
     //private static final String CATALOG_URL = "https://tbx.eus/api/1.0/chromecast.json";
     //private static final String CATALOG_URL = "https://bertsoa.eus/api/1.0/chromecast.json";
     private static final String CATALOG_URL = "https://dantzan.eus/chromecast.dantzan";
@@ -61,13 +61,13 @@ public class VideoBrowserFragment extends Fragment implements VideoListAdapter.I
     private final SessionManagerListener<CastSession> mSessionManagerListener =
             new MySessionManagerListener();
 
-    public VideoBrowserFragment() {
+    public StationFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.video_browser_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_station, container, false);
     }
 
     @Override

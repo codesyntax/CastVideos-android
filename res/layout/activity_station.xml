@@ -36,7 +36,7 @@
         android:layout_above="@+id/cast_mini_controller"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="-5dp"
-        class="com.google.sample.cast.refplayer.ui.station.view.VideoBrowserFragment" />
+        class="com.google.sample.cast.refplayer.ui.station.view.StationFragment" />
 
     <fragment
         android:id="@+id/cast_mini_controller"

@@ -19,9 +19,6 @@ package com.google.sample.cast.refplayer.ui.station.view;
 import com.google.android.gms.cast.framework.CastButtonFactory;
 import com.google.android.gms.cast.framework.CastContext;
 import com.google.android.gms.cast.framework.CastSession;
-import com.google.android.gms.cast.framework.CastState;
-import com.google.android.gms.cast.framework.CastStateListener;
-import com.google.android.gms.cast.framework.IntroductoryOverlay;
 import com.google.android.gms.cast.framework.SessionManagerListener;
 import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
@@ -29,7 +26,6 @@ import com.google.sample.cast.refplayer.settings.CastPreference;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -37,7 +33,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class VideoBrowserActivity extends AppCompatActivity {
+public class StationActivity extends AppCompatActivity {
     private CastContext mCastContext;
     private final SessionManagerListener<CastSession> mSessionManagerListener =
             new MySessionManagerListener();
@@ -99,7 +95,7 @@ public class VideoBrowserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.video_browser);
+        setContentView(R.layout.activity_station);
         setupActionBar();
         mCastContext = CastContext.getSharedInstance(this);
     }
@@ -130,10 +126,10 @@ public class VideoBrowserActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
         if (item.getItemId() == R.id.action_settings) {
-            intent = new Intent(VideoBrowserActivity.this, CastPreference.class);
+            intent = new Intent(StationActivity.this, CastPreference.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.action_show_queue) {
-            intent = new Intent(VideoBrowserActivity.this, QueueListViewActivity.class);
+            intent = new Intent(StationActivity.this, QueueListViewActivity.class);
             startActivity(intent);
         }
         return true;
