@@ -82,18 +82,26 @@ public class StationFragment extends Fragment implements VideoListAdapter.ItemCl
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Toolbar toolbar = getView().findViewById(R.id.toolbar);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        recyclerView = getView().findViewById(R.id.list);
+        setupToolbar();
+        setupRecyclerView();
         emptyView = getView().findViewById(R.id.empty_view);
         loadingView = getView().findViewById(R.id.progress_indicator);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new VideoListAdapter(this, getContext());
-        recyclerView.setAdapter(adapter);
         castContext = CastContext.getSharedInstance(getContext());
         getLoaderManager().initLoader(0, null, this);
+    }
+
+    private void setupRecyclerView() {
+        recyclerView = getView().findViewById(R.id.list);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        adapter = new VideoListAdapter(this, getContext());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(layoutManager);
+    }
+
+    private void setupToolbar() {
+        Toolbar toolbar = getView().findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
     }
 
     @Override
