@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package com.google.sample.cast.refplayer.browser;
+package com.google.sample.cast.refplayer.ui.station.view;
 
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.framework.CastContext;
 import com.google.android.gms.cast.framework.CastSession;
 import com.google.android.gms.cast.framework.SessionManagerListener;
 import com.google.sample.cast.refplayer.R;
+import com.google.sample.cast.refplayer.browser.VideoItemLoader;
+import com.google.sample.cast.refplayer.browser.VideoListAdapter;
 import com.google.sample.cast.refplayer.mediaplayer.LocalPlayerActivity;
 import com.google.sample.cast.refplayer.utils.Utils;
 

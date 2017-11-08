@@ -1,55 +1,99 @@
 package com.google.sample.cast.refplayer.ui;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.google.android.gms.cast.framework.CastButtonFactory;
 import com.google.android.gms.cast.framework.CastContext;
-import com.google.android.gms.cast.framework.CastSession;
+import com.google.android.gms.cast.framework.CastState;
+import com.google.android.gms.cast.framework.CastStateListener;
+import com.google.android.gms.cast.framework.IntroductoryOverlay;
 import com.google.android.gms.cast.framework.Session;
 import com.google.android.gms.cast.framework.SessionManager;
 import com.google.android.gms.cast.framework.SessionManagerListener;
 import com.google.sample.cast.refplayer.R;
 
 public class MainActivity extends AppCompatActivity {
-    private CastSession castSession;
+    private CastContext castContext;
+    private CastStateListener castStateListener;
+    private MenuItem castMenuItem;
     private SessionManager sessionManager;
     private final SessionManagerListener sessionManagerListener
             = new MainSessionManagerListener();
+    private IntroductoryOverlay introductoryOverlay;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        sessionManager = CastContext.getSharedInstance(this).getSessionManager();
+        castContext = CastContext.getSharedInstance(this);
+        sessionManager = castContext.getSessionManager();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        castStateListener = new CastStateListener() {
+            @Override
+            public void onCastStateChanged(int newState) {
+                if (newState != CastState.NO_DEVICES_AVAILABLE) {
+                    showIntroductoryOverlay();
+                }
+            }
+        };
     }
 
     @Override
     protected void onResume() {
-        castSession = sessionManager.getCurrentCastSession();
-        sessionManager.addSessionManagerListener(sessionManagerListener);
         super.onResume();
+        castContext.addCastStateListener(castStateListener);
+        sessionManager.addSessionManagerListener(sessionManagerListener);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        castContext.removeCastStateListener(castStateListener);
         sessionManager.removeSessionManagerListener(sessionManagerListener);
-        castSession = null;
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.main, menu);
-        CastButtonFactory.setUpMediaRouteButton(getApplicationContext(),
+        castMenuItem = CastButtonFactory.setUpMediaRouteButton(getApplicationContext(),
                                                 menu,
                                                 R.id.media_route_menu_item);
+        showIntroductoryOverlay();
         return true;
+    }
+
+    private void showIntroductoryOverlay() {
+        if (introductoryOverlay != null) {
+            introductoryOverlay.remove();
+        }
+        if ((castMenuItem != null) && castMenuItem.isVisible()) {
+            new Handler().post(new Runnable() {
+                @Override
+                public void run() {
+                    introductoryOverlay = new IntroductoryOverlay.Builder(
+                            MainActivity.this, castMenuItem)
+                            .setTitleText(getString(R.string.introducing_cast))
+                            .setOverlayColor(R.color.primary)
+                            .setSingleTime()
+                            .setOnOverlayDismissedListener(
+                                    new IntroductoryOverlay.OnOverlayDismissedListener() {
+                                        @Override
+                                        public void onOverlayDismissed() {
+                                            introductoryOverlay = null;
+                                        }
+                                    })
+                            .build();
+                    introductoryOverlay.show();
+                }
+            });
+        }
     }
 
     private class MainSessionManagerListener implements SessionManagerListener {

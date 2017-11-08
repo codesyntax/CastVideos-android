@@ -3,7 +3,7 @@ package com.google.sample.cast.refplayer.navigation;
 import android.content.Context;
 import android.content.Intent;
 
-import com.google.sample.cast.refplayer.VideoBrowserActivity;
+import com.google.sample.cast.refplayer.ui.station.view.VideoBrowserActivity;
 
 import javax.inject.Inject;
 
