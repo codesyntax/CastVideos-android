@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onSessionEnded(Session session, int i) {
-            finish();
+            invalidateOptionsMenu();
         }
 
         @Override

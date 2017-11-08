@@ -16,18 +16,9 @@
 
 package com.google.sample.cast.refplayer.ui.station.view;
 
-import com.google.android.gms.cast.MediaInfo;
-import com.google.android.gms.cast.framework.CastContext;
-import com.google.android.gms.cast.framework.CastSession;
-import com.google.android.gms.cast.framework.SessionManagerListener;
-import com.google.sample.cast.refplayer.R;
-import com.google.sample.cast.refplayer.browser.VideoItemLoader;
-import com.google.sample.cast.refplayer.browser.VideoListAdapter;
-import com.google.sample.cast.refplayer.mediaplayer.LocalPlayerActivity;
-import com.google.sample.cast.refplayer.utils.Utils;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -35,33 +26,51 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.util.Pair;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.google.android.gms.cast.MediaInfo;
+import com.google.android.gms.cast.framework.CastButtonFactory;
+import com.google.android.gms.cast.framework.CastContext;
+import com.google.android.gms.cast.framework.CastSession;
+import com.google.android.gms.cast.framework.SessionManagerListener;
+import com.google.sample.cast.refplayer.R;
+import com.google.sample.cast.refplayer.browser.VideoItemLoader;
+import com.google.sample.cast.refplayer.browser.VideoListAdapter;
+import com.google.sample.cast.refplayer.mediaplayer.LocalPlayerActivity;
+import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
+import com.google.sample.cast.refplayer.settings.CastPreference;
+import com.google.sample.cast.refplayer.utils.Utils;
+
 import java.util.List;
 
-/**
- * A fragment to host a list view of the video catalog.
- */
 public class StationFragment extends Fragment implements VideoListAdapter.ItemClickListener,
-        LoaderManager.LoaderCallbacks<List<MediaInfo>> {
-
-    private static final String TAG = "StationFragment";
-    //private static final String CATALOG_URL = "https://tbx.eus/api/1.0/chromecast.json";
-    //private static final String CATALOG_URL = "https://bertsoa.eus/api/1.0/chromecast.json";
+        LoaderManager.LoaderCallbacks<List<MediaInfo>>,DispatchKeyEventListener {
     private static final String CATALOG_URL = "https://dantzan.eus/chromecast.dantzan";
-    private RecyclerView mRecyclerView;
-    private VideoListAdapter mAdapter;
-    private View mEmptyView;
-    private View mLoadingView;
-    private final SessionManagerListener<CastSession> mSessionManagerListener =
+    private CastSession castSession;
+    private CastContext castContext;
+    private RecyclerView recyclerView;
+    private VideoListAdapter adapter;
+    private View emptyView;
+    private View loadingView;
+    private final SessionManagerListener<CastSession> sessionManagerListener =
             new MySessionManagerListener();
+    private MenuItem queueMenuItem;
 
-    public StationFragment() {
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -73,15 +82,56 @@ public class StationFragment extends Fragment implements VideoListAdapter.ItemCl
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecyclerView = (RecyclerView) getView().findViewById(R.id.list);
-        mEmptyView = getView().findViewById(R.id.empty_view);
-        mLoadingView = getView().findViewById(R.id.progress_indicator);
+        Toolbar toolbar = getView().findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        recyclerView = getView().findViewById(R.id.list);
+        emptyView = getView().findViewById(R.id.empty_view);
+        loadingView = getView().findViewById(R.id.progress_indicator);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mAdapter = new VideoListAdapter(this, getContext());
-        mRecyclerView.setAdapter(mAdapter);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new VideoListAdapter(this, getContext());
+        recyclerView.setAdapter(adapter);
+        castContext = CastContext.getSharedInstance(getContext());
         getLoaderManager().initLoader(0, null, this);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        if (activity instanceof DispatchKeyEventOwner) {
+            ((DispatchKeyEventOwner) activity).setDispatchKeyEventListener(this);
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.station, menu);
+        CastButtonFactory.setUpMediaRouteButton(getContext().getApplicationContext(), menu,
+                R.id.media_route_menu_item);
+        queueMenuItem = menu.findItem(R.id.action_show_queue);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        menu.findItem(R.id.action_show_queue).setVisible(
+                (castSession != null) && castSession.isConnected());
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        if (item.getItemId() == R.id.action_settings) {
+            intent = new Intent(getContext(), CastPreference.class);
+            startActivity(intent);
+        } else if (item.getItemId() == R.id.action_show_queue) {
+            intent = new Intent(getContext(), QueueListViewActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -91,7 +141,7 @@ public class StationFragment extends Fragment implements VideoListAdapter.ItemCl
         } else {
             String transitionName = getString(R.string.transition_image);
             VideoListAdapter.ViewHolder viewHolder =
-                    (VideoListAdapter.ViewHolder) mRecyclerView.findViewHolderForPosition(position);
+                    (VideoListAdapter.ViewHolder) recyclerView.findViewHolderForPosition(position);
             Pair<View, String> imagePair = Pair
                     .create((View) viewHolder.getImageView(), transitionName);
             ActivityOptionsCompat options = ActivityOptionsCompat
@@ -111,45 +161,80 @@ public class StationFragment extends Fragment implements VideoListAdapter.ItemCl
 
     @Override
     public void onLoadFinished(Loader<List<MediaInfo>> loader, List<MediaInfo> data) {
-        mAdapter.setData(data);
-        mLoadingView.setVisibility(View.GONE);
-        mEmptyView.setVisibility(null == data || data.isEmpty() ? View.VISIBLE : View.GONE);
+        adapter.setData(data);
+        loadingView.setVisibility(View.GONE);
+        emptyView.setVisibility(null == data || data.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public void onLoaderReset(Loader<List<MediaInfo>> loader) {
-        mAdapter.setData(null);
+        adapter.setData(null);
     }
 
     @Override
     public void onStart() {
         CastContext.getSharedInstance(getContext()).getSessionManager()
-                .addSessionManagerListener(mSessionManagerListener, CastSession.class);
+                .addSessionManagerListener(sessionManagerListener, CastSession.class);
         super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        castContext.getSessionManager().addSessionManagerListener(
+                sessionManagerListener, CastSession.class);
+        if (castSession == null) {
+            castSession = CastContext.getSharedInstance(getContext()).getSessionManager()
+                    .getCurrentCastSession();
+        }
+        if (queueMenuItem != null) {
+            queueMenuItem.setVisible(
+                    (castSession != null) && castSession.isConnected());
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        castContext.getSessionManager().removeSessionManagerListener(
+                sessionManagerListener, CastSession.class);
     }
 
     @Override
     public void onStop() {
         CastContext.getSharedInstance(getContext()).getSessionManager()
-                .removeSessionManagerListener(mSessionManagerListener, CastSession.class);
+                .removeSessionManagerListener(sessionManagerListener, CastSession.class);
         super.onStop();
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(@NonNull KeyEvent event) {
+        return castContext.onDispatchVolumeKeyEventBeforeJellyBean(event);
     }
 
     private class MySessionManagerListener implements SessionManagerListener<CastSession> {
 
         @Override
         public void onSessionEnded(CastSession session, int error) {
-            mAdapter.notifyDataSetChanged();
+            if (session == castSession) {
+                castContext = null;
+            }
+            getActivity().invalidateOptionsMenu();
+            adapter.notifyDataSetChanged();
         }
 
         @Override
         public void onSessionResumed(CastSession session, boolean wasSuspended) {
-            mAdapter.notifyDataSetChanged();
+            castSession = session;
+            getActivity().invalidateOptionsMenu();
+            adapter.notifyDataSetChanged();
         }
 
         @Override
         public void onSessionStarted(CastSession session, String sessionId) {
-            mAdapter.notifyDataSetChanged();
+            castSession = session;
+            getActivity().invalidateOptionsMenu();
+            adapter.notifyDataSetChanged();
         }
 
         @Override

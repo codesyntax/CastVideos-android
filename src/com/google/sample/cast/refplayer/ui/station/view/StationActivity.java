@@ -16,150 +16,34 @@
 
 package com.google.sample.cast.refplayer.ui.station.view;
 
-import com.google.android.gms.cast.framework.CastButtonFactory;
-import com.google.android.gms.cast.framework.CastContext;
-import com.google.android.gms.cast.framework.CastSession;
-import com.google.android.gms.cast.framework.SessionManagerListener;
-import com.google.sample.cast.refplayer.R;
-import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
-import com.google.sample.cast.refplayer.settings.CastPreference;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 
-public class StationActivity extends AppCompatActivity {
-    private CastContext mCastContext;
-    private final SessionManagerListener<CastSession> mSessionManagerListener =
-            new MySessionManagerListener();
-    private CastSession mCastSession;
-    private MenuItem mQueueMenuItem;
-    private Toolbar mToolbar;
+import com.google.sample.cast.refplayer.R;
 
-    private class MySessionManagerListener implements SessionManagerListener<CastSession> {
+public class StationActivity extends AppCompatActivity implements DispatchKeyEventOwner {
+    DispatchKeyEventListener listener;
 
-        @Override
-        public void onSessionEnded(CastSession session, int error) {
-            if (session == mCastSession) {
-                mCastSession = null;
-            }
-            invalidateOptionsMenu();
-        }
-
-        @Override
-        public void onSessionResumed(CastSession session, boolean wasSuspended) {
-            mCastSession = session;
-            invalidateOptionsMenu();
-        }
-
-        @Override
-        public void onSessionStarted(CastSession session, String sessionId) {
-            mCastSession = session;
-            invalidateOptionsMenu();
-        }
-
-        @Override
-        public void onSessionStarting(CastSession session) {
-        }
-
-        @Override
-        public void onSessionStartFailed(CastSession session, int error) {
-        }
-
-        @Override
-        public void onSessionEnding(CastSession session) {
-        }
-
-        @Override
-        public void onSessionResuming(CastSession session, String sessionId) {
-        }
-
-        @Override
-        public void onSessionResumeFailed(CastSession session, int error) {
-        }
-
-        @Override
-        public void onSessionSuspended(CastSession session, int reason) {
-        }
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see android.support.v4.app.FragmentActivity#onCreate(android.os.Bundle)
-     */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_station);
-        setupActionBar();
-        mCastContext = CastContext.getSharedInstance(this);
-    }
-
-    private void setupActionBar() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.browse, menu);
-        CastButtonFactory.setUpMediaRouteButton(getApplicationContext(), menu,
-                R.id.media_route_menu_item);
-        mQueueMenuItem = menu.findItem(R.id.action_show_queue);
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.action_show_queue).setVisible(
-                (mCastSession != null) && mCastSession.isConnected());
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent;
-        if (item.getItemId() == R.id.action_settings) {
-            intent = new Intent(StationActivity.this, CastPreference.class);
-            startActivity(intent);
-        } else if (item.getItemId() == R.id.action_show_queue) {
-            intent = new Intent(StationActivity.this, QueueListViewActivity.class);
-            startActivity(intent);
-        }
-        return true;
     }
 
     @Override
     public boolean dispatchKeyEvent(@NonNull KeyEvent event) {
-        return mCastContext.onDispatchVolumeKeyEventBeforeJellyBean(event)
-                || super.dispatchKeyEvent(event);
+        boolean result = false;
+        if (listener != null) {
+            result = listener.dispatchKeyEvent(event);
+        }
+        return result || super.dispatchKeyEvent(event);
     }
 
     @Override
-    protected void onResume() {
-        mCastContext.getSessionManager().addSessionManagerListener(
-                mSessionManagerListener, CastSession.class);
-        if (mCastSession == null) {
-            mCastSession = CastContext.getSharedInstance(this).getSessionManager()
-                    .getCurrentCastSession();
-        }
-        if (mQueueMenuItem != null) {
-            mQueueMenuItem.setVisible(
-                    (mCastSession != null) && mCastSession.isConnected());
-        }
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        mCastContext.getSessionManager().removeSessionManagerListener(
-                mSessionManagerListener, CastSession.class);
-        super.onPause();
+    public void setDispatchKeyEventListener(DispatchKeyEventListener listener) {
+        this.listener = listener;
     }
 }
