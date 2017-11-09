@@ -37,7 +37,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.framework.CastButtonFactory;
@@ -46,11 +45,9 @@ import com.google.android.gms.cast.framework.CastSession;
 import com.google.android.gms.cast.framework.SessionManagerListener;
 import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.browser.VideoItemLoader;
-import com.google.sample.cast.refplayer.browser.VideoListAdapter;
 import com.google.sample.cast.refplayer.mediaplayer.LocalPlayerActivity;
 import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
 import com.google.sample.cast.refplayer.settings.CastPreference;
-import com.google.sample.cast.refplayer.utils.Utils;
 
 import java.util.List;
 
@@ -144,22 +141,18 @@ public class StationFragment extends Fragment implements VideoListAdapter.ItemCl
 
     @Override
     public void itemClicked(View view, MediaInfo item, int position) {
-        if (view instanceof ImageButton) {
-            Utils.showQueuePopup(getActivity(), view, item);
-        } else {
-            String transitionName = getString(R.string.transition_image);
-            VideoListAdapter.ViewHolder viewHolder =
-                    (VideoListAdapter.ViewHolder) recyclerView.findViewHolderForPosition(position);
-            Pair<View, String> imagePair = Pair
-                    .create((View) viewHolder.getImageView(), transitionName);
-            ActivityOptionsCompat options = ActivityOptionsCompat
-                    .makeSceneTransitionAnimation(getActivity(), imagePair);
+        String transitionName = getString(R.string.transition_image);
+        VideoListAdapter.ViewHolder viewHolder =
+                (VideoListAdapter.ViewHolder) recyclerView.findViewHolderForPosition(position);
+        Pair<View, String> imagePair = Pair
+                .create((View) viewHolder.getImageView(), transitionName);
+        ActivityOptionsCompat options = ActivityOptionsCompat
+                .makeSceneTransitionAnimation(getActivity(), imagePair);
 
-            Intent intent = new Intent(getActivity(), LocalPlayerActivity.class);
-            intent.putExtra("media", item);
-            intent.putExtra("shouldStart", false);
-            ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
-        }
+        Intent intent = new Intent(getActivity(), LocalPlayerActivity.class);
+        intent.putExtra("media", item);
+        intent.putExtra("shouldStart", false);
+        ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
     }
 
     @Override

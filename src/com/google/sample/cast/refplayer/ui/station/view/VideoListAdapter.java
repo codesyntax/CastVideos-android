@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.sample.cast.refplayer.browser;
+package com.google.sample.cast.refplayer.ui.station.view;
 
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaMetadata;
@@ -53,7 +53,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         Context context = viewGroup.getContext();
-        View parent = LayoutInflater.from(context).inflate(R.layout.browse_row, viewGroup, false);
+        View parent = LayoutInflater.from(context).inflate(R.layout.item_video_list, viewGroup, false);
         return ViewHolder.newInstance(parent);
     }
 
@@ -84,10 +84,6 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
                 mClickListener.itemClicked(view, item, position);
             }
         });
-        CastSession castSession = CastContext.getSharedInstance(mAppContext).getSessionManager()
-                .getCurrentCastSession();
-        viewHolder.mMenu.setVisibility(
-                (castSession != null && castSession.isConnected()) ? View.VISIBLE : View.GONE);
     }
 
     @Override

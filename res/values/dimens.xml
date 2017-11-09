@@ -29,6 +29,10 @@
 
     <!-- StationList -->
     <dimen name="item_station_list_height">120dp</dimen>
-    <dimen name="item_station_name_padding">4dp</dimen>
+    <dimen name="item_station_list_name_padding">4dp</dimen>
+    <dimen name="item_video_list_image_height">60dp</dimen>
+    <dimen name="item_video_list_image_width">120dp</dimen>
+    <dimen name="item_video_list_padding">16dp</dimen>
+    <dimen name="item_video_list_text_padding">8dp</dimen>
 
 </resources>
