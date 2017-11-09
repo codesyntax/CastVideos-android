@@ -37,6 +37,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.framework.CastButtonFactory;
@@ -91,7 +92,7 @@ public class StationFragment extends Fragment implements VideoListAdapter.ItemCl
         recyclerView = getView().findViewById(R.id.list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        adapter = new VideoListAdapter(this, getContext());
+        adapter = new VideoListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
     }
@@ -140,15 +141,12 @@ public class StationFragment extends Fragment implements VideoListAdapter.ItemCl
     }
 
     @Override
-    public void itemClicked(View view, MediaInfo item, int position) {
+    public void itemClicked(ImageView imageView, MediaInfo item) {
         String transitionName = getString(R.string.transition_image);
-        VideoListAdapter.ViewHolder viewHolder =
-                (VideoListAdapter.ViewHolder) recyclerView.findViewHolderForPosition(position);
         Pair<View, String> imagePair = Pair
-                .create((View) viewHolder.getImageView(), transitionName);
+                .create((View) imageView, transitionName);
         ActivityOptionsCompat options = ActivityOptionsCompat
                 .makeSceneTransitionAnimation(getActivity(), imagePair);
-
         Intent intent = new Intent(getActivity(), LocalPlayerActivity.class);
         intent.putExtra("media", item);
         intent.putExtra("shouldStart", false);
