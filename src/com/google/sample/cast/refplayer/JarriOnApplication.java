@@ -1,8 +1,13 @@
 package com.google.sample.cast.refplayer;
 
-/**
- * Created by quique on 9/11/17.
- */
+import android.app.Application;
 
-public class JarriOnApplication {
+import com.google.sample.cast.refplayer.di.component.DaggerApplicationComponent;
+
+public class JarriOnApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        DaggerApplicationComponent.builder().build().inject(this);
+    }
 }

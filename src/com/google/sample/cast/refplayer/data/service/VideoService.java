@@ -1,8 +1,9 @@
 package com.google.sample.cast.refplayer.data.service;
 
-/**
- * Created by quique on 9/11/17.
- */
+import com.google.sample.cast.refplayer.data.model.VideoDataModel;
 
-public class VideoService {
+import java.util.List;
+
+public interface VideoService {
+    List<VideoDataModel> getVideos();
 }
