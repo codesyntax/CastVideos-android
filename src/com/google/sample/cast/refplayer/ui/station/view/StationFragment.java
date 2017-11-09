@@ -49,11 +49,12 @@ import com.google.sample.cast.refplayer.browser.VideoItemLoader;
 import com.google.sample.cast.refplayer.mediaplayer.LocalPlayerActivity;
 import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
 import com.google.sample.cast.refplayer.settings.CastPreference;
+import com.google.sample.cast.refplayer.ui.station.model.VideoListItemViewModel;
 
 import java.util.List;
 
 public class StationFragment extends Fragment implements VideoListAdapter.ItemClickListener,
-        LoaderManager.LoaderCallbacks<List<MediaInfo>>,DispatchKeyEventListener {
+        LoaderManager.LoaderCallbacks<List<MediaInfo>>,DispatchKeyEventListener, StationView {
     private static final String CATALOG_URL = "https://dantzan.eus/chromecast.dantzan";
     private CastSession castSession;
     private CastContext castContext;
@@ -209,6 +210,16 @@ public class StationFragment extends Fragment implements VideoListAdapter.ItemCl
     @Override
     public boolean dispatchKeyEvent(@NonNull KeyEvent event) {
         return castContext.onDispatchVolumeKeyEventBeforeJellyBean(event);
+    }
+
+    @Override
+    public void showVideos(List<VideoListItemViewModel> videos) {
+        //TODO set videos to adapter
+    }
+
+    @Override
+    public void hideRefresh() {
+        loadingView.setVisibility(View.GONE);
     }
 
     private class MySessionManagerListener implements SessionManagerListener<CastSession> {
