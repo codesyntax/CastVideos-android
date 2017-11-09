@@ -1,8 +1,28 @@
 package com.google.sample.cast.refplayer.ui.station.presenter;
 
-/**
- * Created by quique on 9/11/17.
- */
+import com.google.sample.cast.refplayer.ui.station.view.StationView;
 
-public class StationPresenterImpl {
+import javax.inject.Inject;
+
+public class StationPresenterImpl implements StationPresenter {
+    private StationView view;
+
+    @Inject
+    public StationPresenterImpl() {
+    }
+
+    @Override
+    public void setView(StationView view) {
+        this.view = view;
+    }
+
+    @Override
+    public void removeView() {
+        this.view = null;
+    }
+
+    @Override
+    public void getVideos() {
+        //TODO ask interactor
+    }
 }

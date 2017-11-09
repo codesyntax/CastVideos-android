@@ -1,9 +1,9 @@
-package com.google.sample.cast.refplayer.ui.stationlist.presenter;
+package com.google.sample.cast.refplayer.ui.station.presenter;
 
-import com.google.sample.cast.refplayer.ui.stationlist.view.StationListView;
+import com.google.sample.cast.refplayer.ui.station.view.StationView;
 
-public interface StationListPresenter {
-    void setView(StationListView view);
+public interface StationPresenter {
+    void setView(StationView view);
     void removeView();
-    void getStations();
+    void getVideos();
 }

@@ -46,12 +46,16 @@ import com.google.android.gms.cast.framework.CastSession;
 import com.google.android.gms.cast.framework.SessionManagerListener;
 import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.browser.VideoItemLoader;
+import com.google.sample.cast.refplayer.di.component.DaggerStationComponent;
 import com.google.sample.cast.refplayer.mediaplayer.LocalPlayerActivity;
 import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
 import com.google.sample.cast.refplayer.settings.CastPreference;
 import com.google.sample.cast.refplayer.ui.station.model.VideoListItemViewModel;
+import com.google.sample.cast.refplayer.ui.station.presenter.StationPresenter;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 public class StationFragment extends Fragment implements VideoListAdapter.ItemClickListener,
         LoaderManager.LoaderCallbacks<List<MediaInfo>>,DispatchKeyEventListener, StationView {
@@ -65,11 +69,14 @@ public class StationFragment extends Fragment implements VideoListAdapter.ItemCl
     private final SessionManagerListener<CastSession> sessionManagerListener =
             new MySessionManagerListener();
     private MenuItem queueMenuItem;
+    @Inject
+    StationPresenter stationPresenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        DaggerStationComponent.builder().build().inject(this);
     }
 
     @Override
@@ -81,12 +88,22 @@ public class StationFragment extends Fragment implements VideoListAdapter.ItemCl
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        stationPresenter.setView(this);
         setupToolbar();
         setupRecyclerView();
         emptyView = getView().findViewById(R.id.empty_view);
         loadingView = getView().findViewById(R.id.progress_indicator);
         castContext = CastContext.getSharedInstance(getContext());
         getLoaderManager().initLoader(0, null, this);
+        stationPresenter.getVideos();
+    }
+
+    @Override
+    public void onDestroyView() {
+        if (stationPresenter != null) {
+            stationPresenter.removeView();
+        }
+        super.onDestroyView();
     }
 
     private void setupRecyclerView() {
