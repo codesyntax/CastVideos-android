@@ -7,7 +7,7 @@ import com.google.sample.cast.refplayer.ui.station.view.StationFragment;
 import dagger.Component;
 
 @FragmentScope
-@Component(modules = StationModule.class)
+@Component(modules = StationModule.class, dependencies = ApplicationComponent.class)
 public interface StationComponent {
     void inject(StationFragment fragment);
 }

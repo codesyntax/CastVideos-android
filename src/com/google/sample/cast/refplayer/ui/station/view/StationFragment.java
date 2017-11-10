@@ -44,8 +44,10 @@ import com.google.android.gms.cast.framework.CastButtonFactory;
 import com.google.android.gms.cast.framework.CastContext;
 import com.google.android.gms.cast.framework.CastSession;
 import com.google.android.gms.cast.framework.SessionManagerListener;
+import com.google.sample.cast.refplayer.JarriOnApplication;
 import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.browser.VideoItemLoader;
+import com.google.sample.cast.refplayer.di.component.ApplicationComponent;
 import com.google.sample.cast.refplayer.di.component.DaggerStationComponent;
 import com.google.sample.cast.refplayer.mediaplayer.LocalPlayerActivity;
 import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
@@ -76,7 +78,11 @@ public class StationFragment extends Fragment implements VideoListAdapter.ItemCl
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        DaggerStationComponent.builder().build().inject(this);
+        ApplicationComponent component = JarriOnApplication.getInstance().getComponent();
+        DaggerStationComponent.builder()
+                .applicationComponent(component)
+                .build()
+                .inject(this);
     }
 
     @Override
