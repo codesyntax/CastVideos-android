@@ -15,7 +15,7 @@
   limitations under the License.
   -->
 <fragment
-    class="com.google.sample.cast.refplayer.ui.station.view.StationFragment"
+    class="com.google.sample.cast.refplayer.ui.channel.view.StationFragment"
     android:id="@+id/browse"
     android:layout_width="match_parent"
     android:layout_height="match_parent"

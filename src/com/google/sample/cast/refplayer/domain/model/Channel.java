@@ -1,6 +1,6 @@
 package com.google.sample.cast.refplayer.domain.model;
 
-public class Station {
+public class Channel {
     private int id;
     private String name;
     private String coverURL;
@@ -17,7 +17,7 @@ public class Station {
         return coverURL;
     }
 
-    private Station(Builder builder) {
+    private Channel(Builder builder) {
         id = builder.id;
         name = builder.name;
         coverURL = builder.coverURL;
@@ -36,8 +36,8 @@ public class Station {
         public Builder() {
         }
 
-        public Station build() {
-            return new Station(this);
+        public Channel build() {
+            return new Channel(this);
         }
 
         public Builder id(int val) {

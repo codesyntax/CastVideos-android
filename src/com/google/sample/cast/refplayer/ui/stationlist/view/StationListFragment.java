@@ -9,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.sample.cast.refplayer.JarriOnApplication;
 import com.google.sample.cast.refplayer.R;
+import com.google.sample.cast.refplayer.di.component.ApplicationComponent;
 import com.google.sample.cast.refplayer.di.component.DaggerStationListComponent;
 import com.google.sample.cast.refplayer.navigation.VideoBrowserActivityNavigator;
 import com.google.sample.cast.refplayer.ui.stationlist.model.StationListItemViewModel;
@@ -32,7 +34,11 @@ public class StationListFragment extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DaggerStationListComponent.builder().build().inject(this);
+        ApplicationComponent component = JarriOnApplication.getInstance().getComponent();
+        DaggerStationListComponent.builder()
+                .applicationComponent(component)
+                .build()
+                .inject(this);
     }
 
     @Nullable
@@ -67,12 +73,7 @@ public class StationListFragment extends Fragment
 
     private void setupRefreshLayout(View view) {
         swipeRefreshLayout = view.findViewById(R.id.swiperefresh);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                presenter.getStations();
-            }
-        });
+        swipeRefreshLayout.setOnRefreshListener(() -> presenter.getStations());
     }
 
     private void setupRecyclerView(View view) {

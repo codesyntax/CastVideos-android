@@ -37,7 +37,7 @@
             android:name=".JarriOnApplication">
 
         <activity
-                android:name="com.google.sample.cast.refplayer.ui.station.view.StationActivity"
+                android:name="com.google.sample.cast.refplayer.ui.channel.view.StationActivity"
                 android:label="@string/app_name"/>
         <activity
                 android:name="com.google.sample.cast.refplayer.mediaplayer.LocalPlayerActivity"
@@ -75,7 +75,7 @@
             </intent-filter>
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.google.sample.cast.refplayer.ui.station.view.StationActivity"/>
+                    android:value="com.google.sample.cast.refplayer.ui.channel.view.StationActivity"/>
         </activity>
         <activity android:name=".ui.MainActivity"
             android:screenOrientation="portrait"

@@ -1,6 +1,6 @@
 package com.google.sample.cast.refplayer.ui.stationlist.model;
 
-import com.google.sample.cast.refplayer.domain.model.Station;
+import com.google.sample.cast.refplayer.domain.model.Channel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class StationListItemViewModelMapperImpl implements StationListItemViewMo
     public StationListItemViewModelMapperImpl() {}
 
     @Override
-    public StationListItemViewModel map(Station source) {
+    public StationListItemViewModel map(Channel source) {
         return new StationListItemViewModel.Builder()
                 .id(source.getId())
                 .name(source.getName())
@@ -22,10 +22,10 @@ public class StationListItemViewModelMapperImpl implements StationListItemViewMo
     }
 
     @Override
-    public List<StationListItemViewModel> map(List<Station> source) {
+    public List<StationListItemViewModel> map(List<Channel> source) {
         List<StationListItemViewModel> result = new ArrayList<>();
-        for (Station station : source) {
-            result.add(map(station));
+        for (Channel channel : source) {
+            result.add(map(channel));
         }
         return result;
     }

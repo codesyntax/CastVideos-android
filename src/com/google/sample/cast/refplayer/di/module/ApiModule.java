@@ -9,6 +9,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class ApiModule {
@@ -28,9 +29,10 @@ public class ApiModule {
     @Provides
     @Named(NAME_JARRI_ON)
     Retrofit provideJarriOnRetrofit() {
-        String baseURL = "https://jarrion.korpoweb.com";
+        String baseURL = "https://jarrion.korpoweb.com/";
         return new Retrofit.Builder()
                 .baseUrl(baseURL)
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 
