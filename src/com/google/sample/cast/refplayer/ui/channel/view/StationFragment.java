@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.sample.cast.refplayer.ui.station.view;
+package com.google.sample.cast.refplayer.ui.channel.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -52,8 +52,8 @@ import com.google.sample.cast.refplayer.di.component.DaggerStationComponent;
 import com.google.sample.cast.refplayer.mediaplayer.LocalPlayerActivity;
 import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
 import com.google.sample.cast.refplayer.settings.CastPreference;
-import com.google.sample.cast.refplayer.ui.station.model.VideoListItemViewModel;
-import com.google.sample.cast.refplayer.ui.station.presenter.StationPresenter;
+import com.google.sample.cast.refplayer.ui.channel.model.VideoListItemViewModel;
+import com.google.sample.cast.refplayer.ui.channel.presenter.StationPresenter;
 
 import java.util.List;
 

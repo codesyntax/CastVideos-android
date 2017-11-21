@@ -14,7 +14,7 @@ import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.di.component.ApplicationComponent;
 import com.google.sample.cast.refplayer.di.component.DaggerStationListComponent;
 import com.google.sample.cast.refplayer.navigation.VideoBrowserActivityNavigator;
-import com.google.sample.cast.refplayer.ui.stationlist.model.StationListItemViewModel;
+import com.google.sample.cast.refplayer.ui.stationlist.model.ChannelListItemViewModel;
 import com.google.sample.cast.refplayer.ui.stationlist.presenter.StationListPresenter;
 
 import java.util.List;
@@ -83,7 +83,7 @@ public class StationListFragment extends Fragment
     }
 
     @Override
-    public void showStations(List<StationListItemViewModel> stations) {
+    public void showStations(List<ChannelListItemViewModel> stations) {
         stationListAdapter.setStations(stations);
     }
 
@@ -93,7 +93,7 @@ public class StationListFragment extends Fragment
     }
 
     @Override
-    public void onItemClick(StationListItemViewModel stationListItemViewModel) {
-        videoBrowserActivityNavigator.navigate(getContext(), stationListItemViewModel.getId());
+    public void onItemClick(ChannelListItemViewModel channelListItemViewModel) {
+        videoBrowserActivityNavigator.navigate(getContext(), channelListItemViewModel.getId());
     }
 }

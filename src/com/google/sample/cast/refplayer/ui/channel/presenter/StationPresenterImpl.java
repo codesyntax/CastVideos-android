@@ -1,10 +1,7 @@
-package com.google.sample.cast.refplayer.ui.station.presenter;
+package com.google.sample.cast.refplayer.ui.channel.presenter;
 
 import com.google.sample.cast.refplayer.domain.interactor.GetVideosByStationInteractor;
-import com.google.sample.cast.refplayer.domain.model.Video;
-import com.google.sample.cast.refplayer.ui.station.view.StationView;
-
-import java.util.List;
+import com.google.sample.cast.refplayer.ui.channel.view.StationView;
 
 import javax.inject.Inject;
 

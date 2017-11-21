@@ -2,6 +2,8 @@ package com.google.sample.cast.refplayer.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class ChannelDataModel {
     private String description;
     private ImageDataModel image;
@@ -28,5 +30,21 @@ public class ChannelDataModel {
 
     public String getWebsite() {
         return website;
+    }
+
+    public String getMosaicURL() {
+        String result = "";
+        if (image != null) {
+            List<ImageSizeDataModel> sizes = image.getSizes();
+            if (sizes != null) {
+                for (ImageSizeDataModel size : sizes) {
+                    if (ImageSizeDataModel.MOSAIC_NAME.equals(size.getName())) {
+                        result = size.getUrl();
+                        break;
+                    }
+                }
+            }
+        }
+        return result;
     }
 }

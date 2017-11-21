@@ -4,9 +4,9 @@ import com.google.sample.cast.refplayer.domain.model.Channel;
 
 import java.util.List;
 
-public interface StationListItemViewModelMapper {
+public interface ChannelListItemViewModelMapper {
 
-    StationListItemViewModel map(Channel source);
+    ChannelListItemViewModel map(Channel source);
 
-    List<StationListItemViewModel> map(List<Channel> source);
+    List<ChannelListItemViewModel> map(List<Channel> source);
 }

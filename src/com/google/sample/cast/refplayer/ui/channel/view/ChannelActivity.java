@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.sample.cast.refplayer.ui.station.view;
+package com.google.sample.cast.refplayer.ui.channel.view;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,7 +24,7 @@ import android.view.KeyEvent;
 
 import com.google.sample.cast.refplayer.R;
 
-public class StationActivity extends AppCompatActivity implements DispatchKeyEventOwner {
+public class ChannelActivity extends AppCompatActivity implements DispatchKeyEventOwner {
     DispatchKeyEventListener listener;
 
     @Override

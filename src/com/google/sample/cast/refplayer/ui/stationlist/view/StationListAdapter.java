@@ -6,13 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.sample.cast.refplayer.R;
-import com.google.sample.cast.refplayer.ui.stationlist.model.StationListItemViewModel;
+import com.google.sample.cast.refplayer.ui.stationlist.model.ChannelListItemViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StationListAdapter extends RecyclerView.Adapter<StationListItemViewHolder> {
-    private final List<StationListItemViewModel> stations;
+    private final List<ChannelListItemViewModel> stations;
     private final StationListItemClickListener stationListItemClickListener;
 
     public StationListAdapter(StationListItemClickListener stationListItemClickListener) {
@@ -20,7 +20,7 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListItemView
         this.stationListItemClickListener = stationListItemClickListener;
     }
 
-    public void setStations(List<StationListItemViewModel> stations) {
+    public void setStations(List<ChannelListItemViewModel> stations) {
         this.stations.clear();
         this.stations.addAll(stations);
         notifyDataSetChanged();
@@ -36,7 +36,7 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListItemView
 
     @Override
     public void onBindViewHolder(StationListItemViewHolder holder, int position) {
-        StationListItemViewModel station = stations.get(position);
+        ChannelListItemViewModel station = stations.get(position);
         holder.bind(station, stationListItemClickListener);
     }
 

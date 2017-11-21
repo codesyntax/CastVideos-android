@@ -1,4 +1,4 @@
-package com.google.sample.cast.refplayer.ui.station.view;
+package com.google.sample.cast.refplayer.ui.channel.view;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

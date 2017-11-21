@@ -14,15 +14,11 @@
  * limitations under the License.
  */
 
-package com.google.sample.cast.refplayer.ui.station.view;
+package com.google.sample.cast.refplayer.ui.channel.view;
 
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaMetadata;
-import com.google.android.gms.cast.framework.CastContext;
-import com.google.android.gms.cast.framework.CastSession;
 import com.google.sample.cast.refplayer.R;
-
-import com.androidquery.AQuery;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -31,7 +27,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.List;
 

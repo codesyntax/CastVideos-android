@@ -1,4 +1,4 @@
-package com.google.sample.cast.refplayer.ui.station.view;
+package com.google.sample.cast.refplayer.ui.channel.view;
 
 import android.support.annotation.NonNull;
 import android.view.KeyEvent;

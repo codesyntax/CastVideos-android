@@ -2,7 +2,7 @@ package com.google.sample.cast.refplayer.di.component;
 
 import com.google.sample.cast.refplayer.di.module.StationModule;
 import com.google.sample.cast.refplayer.di.scope.FragmentScope;
-import com.google.sample.cast.refplayer.ui.station.view.StationFragment;
+import com.google.sample.cast.refplayer.ui.channel.view.StationFragment;
 
 import dagger.Component;
 

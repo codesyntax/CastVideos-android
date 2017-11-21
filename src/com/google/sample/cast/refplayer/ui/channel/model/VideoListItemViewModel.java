@@ -1,4 +1,4 @@
-package com.google.sample.cast.refplayer.ui.station.model;
+package com.google.sample.cast.refplayer.ui.channel.model;
 
 public class VideoListItemViewModel {
     private String title;

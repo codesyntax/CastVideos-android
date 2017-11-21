@@ -1,7 +1,7 @@
 package com.google.sample.cast.refplayer.ui.stationlist.view;
 
-import com.google.sample.cast.refplayer.ui.stationlist.model.StationListItemViewModel;
+import com.google.sample.cast.refplayer.ui.stationlist.model.ChannelListItemViewModel;
 
 public interface StationListItemClickListener {
-    void onItemClick(StationListItemViewModel stationListItemViewModel);
+    void onItemClick(ChannelListItemViewModel channelListItemViewModel);
 }

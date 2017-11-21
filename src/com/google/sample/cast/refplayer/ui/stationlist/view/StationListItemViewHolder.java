@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.google.sample.cast.refplayer.R;
-import com.google.sample.cast.refplayer.ui.stationlist.model.StationListItemViewModel;
+import com.google.sample.cast.refplayer.ui.stationlist.model.ChannelListItemViewModel;
 import com.squareup.picasso.Picasso;
 
 public class StationListItemViewHolder extends RecyclerView.ViewHolder {
@@ -21,14 +21,14 @@ public class StationListItemViewHolder extends RecyclerView.ViewHolder {
         name = itemView.findViewById(R.id.station_name);
     }
 
-    public void bind(final StationListItemViewModel stationListItemViewModel,
+    public void bind(final ChannelListItemViewModel channelListItemViewModel,
                      final StationListItemClickListener stationListItemClickListener) {
-        Picasso.with(cover.getContext()).load(stationListItemViewModel.getCoverURL()).into(cover);
-        name.setText(stationListItemViewModel.getName());
+        Picasso.with(cover.getContext()).load(channelListItemViewModel.getCoverURL()).into(cover);
+        name.setText(channelListItemViewModel.getName());
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stationListItemClickListener.onItemClick(stationListItemViewModel);
+                stationListItemClickListener.onItemClick(channelListItemViewModel);
             }
         });
     }

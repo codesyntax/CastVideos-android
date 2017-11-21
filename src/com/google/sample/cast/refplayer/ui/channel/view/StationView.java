@@ -1,6 +1,6 @@
-package com.google.sample.cast.refplayer.ui.station.view;
+package com.google.sample.cast.refplayer.ui.channel.view;
 
-import com.google.sample.cast.refplayer.ui.station.model.VideoListItemViewModel;
+import com.google.sample.cast.refplayer.ui.channel.model.VideoListItemViewModel;
 
 import java.util.List;
 

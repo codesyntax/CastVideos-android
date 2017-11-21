@@ -1,6 +1,6 @@
 package com.google.sample.cast.refplayer.ui.stationlist.model;
 
-public class StationListItemViewModel {
+public class ChannelListItemViewModel {
     private int id;
     private String name;
     private String coverURL;
@@ -17,7 +17,7 @@ public class StationListItemViewModel {
         return name;
     }
 
-    private StationListItemViewModel(Builder builder) {
+    private ChannelListItemViewModel(Builder builder) {
         id = builder.id;
         name = builder.name;
         coverURL = builder.coverURL;
@@ -46,8 +46,8 @@ public class StationListItemViewModel {
             return this;
         }
 
-        public StationListItemViewModel build() {
-            return new StationListItemViewModel(this);
+        public ChannelListItemViewModel build() {
+            return new ChannelListItemViewModel(this);
         }
     }
 }

@@ -1,25 +1,25 @@
 package com.google.sample.cast.refplayer.ui.stationlist.presenter;
 
-import com.google.sample.cast.refplayer.domain.interactor.GetStationsInteractor;
+import com.google.sample.cast.refplayer.domain.interactor.GetChannelsInteractor;
 import com.google.sample.cast.refplayer.domain.model.Channel;
-import com.google.sample.cast.refplayer.ui.stationlist.model.StationListItemViewModel;
-import com.google.sample.cast.refplayer.ui.stationlist.model.StationListItemViewModelMapper;
+import com.google.sample.cast.refplayer.ui.stationlist.model.ChannelListItemViewModel;
+import com.google.sample.cast.refplayer.ui.stationlist.model.ChannelListItemViewModelMapper;
 import com.google.sample.cast.refplayer.ui.stationlist.view.StationListView;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class StationListPresenterImpl implements StationListPresenter, GetStationsInteractor.Callback {
-    private final GetStationsInteractor getStationsInteractor;
-    private final StationListItemViewModelMapper stationListItemViewModelMapper;
+public class StationListPresenterImpl implements StationListPresenter, GetChannelsInteractor.Callback {
+    private final GetChannelsInteractor getChannelsInteractor;
+    private final ChannelListItemViewModelMapper channelListItemViewModelMapper;
     private StationListView view;
 
     @Inject
-    public StationListPresenterImpl(GetStationsInteractor getStationsInteractor,
-                                    StationListItemViewModelMapper stationListItemViewModelMapper) {
-        this.getStationsInteractor = getStationsInteractor;
-        this.stationListItemViewModelMapper = stationListItemViewModelMapper;
+    public StationListPresenterImpl(GetChannelsInteractor getChannelsInteractor,
+                                    ChannelListItemViewModelMapper channelListItemViewModelMapper) {
+        this.getChannelsInteractor = getChannelsInteractor;
+        this.channelListItemViewModelMapper = channelListItemViewModelMapper;
     }
 
     @Override
@@ -34,14 +34,14 @@ public class StationListPresenterImpl implements StationListPresenter, GetStatio
 
     @Override
     public void getStations() {
-        getStationsInteractor.execute(this);
+        getChannelsInteractor.execute(this);
     }
 
     @Override
     public void onSuccess(List<Channel> channels) {
-        List<StationListItemViewModel> stationListItemViewModels
-                = stationListItemViewModelMapper.map(channels);
+        List<ChannelListItemViewModel> channelListItemViewModels
+                = channelListItemViewModelMapper.map(channels);
         view.hideRefresh();
-        view.showStations(stationListItemViewModels);
+        view.showStations(channelListItemViewModels);
     }
 }

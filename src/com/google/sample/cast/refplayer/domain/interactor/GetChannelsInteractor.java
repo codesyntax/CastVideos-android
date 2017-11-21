@@ -4,7 +4,7 @@ import com.google.sample.cast.refplayer.domain.model.Channel;
 
 import java.util.List;
 
-public interface GetStationsInteractor {
+public interface GetChannelsInteractor {
     void execute(Callback callback);
 
     interface Callback {

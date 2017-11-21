@@ -7,23 +7,23 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class StationListItemViewModelMapperImpl implements StationListItemViewModelMapper {
+public class ChannelListItemViewModelMapperImpl implements ChannelListItemViewModelMapper {
 
     @Inject
-    public StationListItemViewModelMapperImpl() {}
+    public ChannelListItemViewModelMapperImpl() {}
 
     @Override
-    public StationListItemViewModel map(Channel source) {
-        return new StationListItemViewModel.Builder()
+    public ChannelListItemViewModel map(Channel source) {
+        return new ChannelListItemViewModel.Builder()
                 .id(source.getId())
                 .name(source.getName())
-                .coverURL(source.getCoverURL())
+                .coverURL(source.getMosaicCoverURL())
                 .build();
     }
 
     @Override
-    public List<StationListItemViewModel> map(List<Channel> source) {
-        List<StationListItemViewModel> result = new ArrayList<>();
+    public List<ChannelListItemViewModel> map(List<Channel> source) {
+        List<ChannelListItemViewModel> result = new ArrayList<>();
         for (Channel channel : source) {
             result.add(map(channel));
         }
