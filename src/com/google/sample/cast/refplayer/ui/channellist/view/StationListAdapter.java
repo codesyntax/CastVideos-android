@@ -30,7 +30,7 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListItemView
     public StationListItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.item_station_list, parent, false);
+                .inflate(R.layout.item_channel_list, parent, false);
         return new StationListItemViewHolder(view);
     }
 

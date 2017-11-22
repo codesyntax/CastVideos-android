@@ -96,7 +96,7 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_station, container, false);
+        return inflater.inflate(R.layout.fragment_channel, container, false);
     }
 
     @Override
