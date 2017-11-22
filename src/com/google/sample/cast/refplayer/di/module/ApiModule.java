@@ -22,6 +22,7 @@ public class ApiModule {
     Retrofit provideCategoryRetrofit() {
         return new Retrofit.Builder()
                 .baseUrl("https://ignore.ignore")
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 

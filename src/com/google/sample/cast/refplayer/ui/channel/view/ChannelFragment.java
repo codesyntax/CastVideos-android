@@ -84,9 +84,7 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState != null) {
-            jsonURL = savedInstanceState.getString(KEY_JSON_URL);
-        }
+        jsonURL = getArguments().getString(KEY_JSON_URL);
         setHasOptionsMenu(true);
         ApplicationComponent component = JarriOnApplication.getInstance().getComponent();
         DaggerChannelComponent.builder()
