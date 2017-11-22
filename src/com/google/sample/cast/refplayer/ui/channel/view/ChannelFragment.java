@@ -23,8 +23,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -39,29 +37,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.framework.CastButtonFactory;
 import com.google.android.gms.cast.framework.CastContext;
 import com.google.android.gms.cast.framework.CastSession;
 import com.google.android.gms.cast.framework.SessionManagerListener;
 import com.google.sample.cast.refplayer.JarriOnApplication;
 import com.google.sample.cast.refplayer.R;
-import com.google.sample.cast.refplayer.browser.VideoItemLoader;
+import com.google.sample.cast.refplayer.browser.VideoProvider;
 import com.google.sample.cast.refplayer.di.component.ApplicationComponent;
-import com.google.sample.cast.refplayer.di.component.DaggerStationComponent;
+import com.google.sample.cast.refplayer.di.component.DaggerChannelComponent;
 import com.google.sample.cast.refplayer.mediaplayer.LocalPlayerActivity;
 import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
 import com.google.sample.cast.refplayer.settings.CastPreference;
 import com.google.sample.cast.refplayer.ui.channel.model.VideoListItemViewModel;
-import com.google.sample.cast.refplayer.ui.channel.presenter.StationPresenter;
+import com.google.sample.cast.refplayer.ui.channel.presenter.ChannelPresenter;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class StationFragment extends Fragment implements VideoListAdapter.ItemClickListener,
-        LoaderManager.LoaderCallbacks<List<MediaInfo>>,DispatchKeyEventListener, StationView {
-    private static final String CATALOG_URL = "https://dantzan.eus/chromecast.dantzan";
+public class ChannelFragment extends Fragment implements VideoListAdapter.ItemClickListener,
+        DispatchKeyEventListener,
+        StationView {
+    private static final String KEY_JSON_URL = "jsonURL";
+    private String jsonURL;
     private CastSession castSession;
     private CastContext castContext;
     private RecyclerView recyclerView;
@@ -72,14 +71,25 @@ public class StationFragment extends Fragment implements VideoListAdapter.ItemCl
             new MySessionManagerListener();
     private MenuItem queueMenuItem;
     @Inject
-    StationPresenter stationPresenter;
+    ChannelPresenter channelPresenter;
+
+    public static ChannelFragment newInstance(String jsonURL) {
+        ChannelFragment fragment = new ChannelFragment();
+        Bundle args = new Bundle();
+        args.putString(KEY_JSON_URL, jsonURL);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            jsonURL = savedInstanceState.getString(KEY_JSON_URL);
+        }
         setHasOptionsMenu(true);
         ApplicationComponent component = JarriOnApplication.getInstance().getComponent();
-        DaggerStationComponent.builder()
+        DaggerChannelComponent.builder()
                 .applicationComponent(component)
                 .build()
                 .inject(this);
@@ -94,20 +104,19 @@ public class StationFragment extends Fragment implements VideoListAdapter.ItemCl
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        stationPresenter.setView(this);
+        channelPresenter.setView(this);
         setupToolbar();
         setupRecyclerView();
         emptyView = getView().findViewById(R.id.empty_view);
         loadingView = getView().findViewById(R.id.progress_indicator);
         castContext = CastContext.getSharedInstance(getContext());
-        getLoaderManager().initLoader(0, null, this);
-        stationPresenter.getVideos();
+        channelPresenter.getVideos(jsonURL);
     }
 
     @Override
     public void onDestroyView() {
-        if (stationPresenter != null) {
-            stationPresenter.removeView();
+        if (channelPresenter != null) {
+            channelPresenter.removeView();
         }
         super.onDestroyView();
     }
@@ -165,33 +174,25 @@ public class StationFragment extends Fragment implements VideoListAdapter.ItemCl
     }
 
     @Override
-    public void itemClicked(ImageView imageView, MediaInfo item) {
+    public void itemClicked(ImageView imageView, VideoListItemViewModel item) {
         String transitionName = getString(R.string.transition_image);
         Pair<View, String> imagePair = Pair
-                .create((View) imageView, transitionName);
+                .create(imageView, transitionName);
         ActivityOptionsCompat options = ActivityOptionsCompat
                 .makeSceneTransitionAnimation(getActivity(), imagePair);
         Intent intent = new Intent(getActivity(), LocalPlayerActivity.class);
-        intent.putExtra("media", item);
+        intent.putExtra("media", VideoProvider
+                .buildMediaInfo(item.getTitle()
+                        ,item.getStudio()
+                        ,item.getDescription()
+                        ,(int) item.getDuration()
+                        ,item.getVideoURL()
+                        ,null
+                        ,item.getThumbnailURL()
+                        ,item.getCoverURL()
+                        ,null));
         intent.putExtra("shouldStart", false);
         ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
-    }
-
-    @Override
-    public Loader<List<MediaInfo>> onCreateLoader(int id, Bundle args) {
-        return new VideoItemLoader(getActivity(), CATALOG_URL);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<List<MediaInfo>> loader, List<MediaInfo> data) {
-        adapter.setData(data);
-        loadingView.setVisibility(View.GONE);
-        emptyView.setVisibility(null == data || data.isEmpty() ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<List<MediaInfo>> loader) {
-        adapter.setData(null);
     }
 
     @Override
@@ -237,7 +238,9 @@ public class StationFragment extends Fragment implements VideoListAdapter.ItemCl
 
     @Override
     public void showVideos(List<VideoListItemViewModel> videos) {
-        //TODO set videos to adapter
+        adapter.setData(videos);
+        loadingView.setVisibility(View.GONE);
+        emptyView.setVisibility(null == videos || videos.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
     @Override

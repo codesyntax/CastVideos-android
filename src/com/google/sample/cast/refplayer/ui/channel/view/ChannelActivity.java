@@ -19,10 +19,12 @@ package com.google.sample.cast.refplayer.ui.channel.view;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 
 import com.google.sample.cast.refplayer.R;
+import com.google.sample.cast.refplayer.navigation.ChannelActivityNavigator;
 
 public class ChannelActivity extends AppCompatActivity implements DispatchKeyEventOwner {
     DispatchKeyEventListener listener;
@@ -31,6 +33,13 @@ public class ChannelActivity extends AppCompatActivity implements DispatchKeyEve
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_station);
+        String jsonURL = "";
+        if (savedInstanceState != null) {
+            jsonURL = savedInstanceState.getString(ChannelActivityNavigator.EXTRA_JSON_URL);
+        }
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.container, ChannelFragment.newInstance(jsonURL));
+        ft.commit();
     }
 
     @Override

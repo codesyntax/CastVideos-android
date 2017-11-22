@@ -20,15 +20,14 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public List<VideoDataModel> getVideos() {
-        List<VideoDataModel> result = new ArrayList<>();
-        //TODO replace hardcoded url
+    public CategoryDataModel getVideos(String url) {
+        CategoryDataModel result = null;
         try {
             CategoriesResponseDataModel categoriesResponseDataModel = categoryApi
-                    .getCategories("https://bertsoa.eus/api/1.0/chromecast.json")
+                    .getCategories(url)
                     .execute()
                     .body();
-            result = categoriesResponseDataModel.getCategories().get(0).getVideos();
+            result = categoriesResponseDataModel.getCategories().get(0);
         } catch (IOException e) {
             e.printStackTrace();
         }

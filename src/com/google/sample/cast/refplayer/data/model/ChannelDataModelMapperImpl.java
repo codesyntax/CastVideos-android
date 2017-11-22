@@ -18,6 +18,7 @@ public class ChannelDataModelMapperImpl implements ChannelDataModelMapper {
         return new Channel.Builder()
                 .name(source.getTitle())
                 .mosaicCoverURL(mosaicURL)
+                .jsonURL(source.getSourceJsonURL())
                 .build();
     }
 

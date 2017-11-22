@@ -14,9 +14,8 @@
   See the License for the specific language governing permissions and
   limitations under the License.
   -->
-<fragment
-    class="com.google.sample.cast.refplayer.ui.channel.view.StationFragment"
-    android:id="@+id/browse"
+<FrameLayout
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android" />

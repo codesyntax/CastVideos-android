@@ -1,4 +1,4 @@
-package com.google.sample.cast.refplayer.ui.stationlist.view;
+package com.google.sample.cast.refplayer.ui.channellist.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,30 +12,30 @@ import android.view.ViewGroup;
 import com.google.sample.cast.refplayer.JarriOnApplication;
 import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.di.component.ApplicationComponent;
-import com.google.sample.cast.refplayer.di.component.DaggerStationListComponent;
-import com.google.sample.cast.refplayer.navigation.VideoBrowserActivityNavigator;
-import com.google.sample.cast.refplayer.ui.stationlist.model.ChannelListItemViewModel;
-import com.google.sample.cast.refplayer.ui.stationlist.presenter.StationListPresenter;
+import com.google.sample.cast.refplayer.di.component.DaggerChannelListComponent;
+import com.google.sample.cast.refplayer.navigation.ChannelActivityNavigator;
+import com.google.sample.cast.refplayer.ui.channellist.model.ChannelListItemViewModel;
+import com.google.sample.cast.refplayer.ui.channellist.presenter.ChannelListPresenter;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class StationListFragment extends Fragment
+public class ChannelListFragment extends Fragment
         implements StationListView, StationListItemClickListener {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView stationsRecyclerView;
     private StationListAdapter stationListAdapter;
     @Inject
-    StationListPresenter presenter;
+    ChannelListPresenter presenter;
     @Inject
-    VideoBrowserActivityNavigator videoBrowserActivityNavigator;
+    ChannelActivityNavigator channelActivityNavigator;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ApplicationComponent component = JarriOnApplication.getInstance().getComponent();
-        DaggerStationListComponent.builder()
+        DaggerChannelListComponent.builder()
                 .applicationComponent(component)
                 .build()
                 .inject(this);
@@ -94,6 +94,6 @@ public class StationListFragment extends Fragment
 
     @Override
     public void onItemClick(ChannelListItemViewModel channelListItemViewModel) {
-        videoBrowserActivityNavigator.navigate(getContext(), channelListItemViewModel.getId());
+        channelActivityNavigator.navigate(getContext(), channelListItemViewModel.getJsonURL());
     }
 }

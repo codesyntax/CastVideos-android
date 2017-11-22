@@ -1,4 +1,4 @@
-package com.google.sample.cast.refplayer.ui.stationlist.model;
+package com.google.sample.cast.refplayer.ui.channellist.model;
 
 import com.google.sample.cast.refplayer.domain.model.Channel;
 
@@ -18,6 +18,7 @@ public class ChannelListItemViewModelMapperImpl implements ChannelListItemViewMo
                 .id(source.getId())
                 .name(source.getName())
                 .coverURL(source.getMosaicCoverURL())
+                .jsonURL(source.getJsonURL())
                 .build();
     }
 

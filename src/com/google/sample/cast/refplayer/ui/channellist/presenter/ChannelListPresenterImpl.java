@@ -1,22 +1,22 @@
-package com.google.sample.cast.refplayer.ui.stationlist.presenter;
+package com.google.sample.cast.refplayer.ui.channellist.presenter;
 
 import com.google.sample.cast.refplayer.domain.interactor.GetChannelsInteractor;
 import com.google.sample.cast.refplayer.domain.model.Channel;
-import com.google.sample.cast.refplayer.ui.stationlist.model.ChannelListItemViewModel;
-import com.google.sample.cast.refplayer.ui.stationlist.model.ChannelListItemViewModelMapper;
-import com.google.sample.cast.refplayer.ui.stationlist.view.StationListView;
+import com.google.sample.cast.refplayer.ui.channellist.model.ChannelListItemViewModel;
+import com.google.sample.cast.refplayer.ui.channellist.model.ChannelListItemViewModelMapper;
+import com.google.sample.cast.refplayer.ui.channellist.view.StationListView;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class StationListPresenterImpl implements StationListPresenter, GetChannelsInteractor.Callback {
+public class ChannelListPresenterImpl implements ChannelListPresenter, GetChannelsInteractor.Callback {
     private final GetChannelsInteractor getChannelsInteractor;
     private final ChannelListItemViewModelMapper channelListItemViewModelMapper;
     private StationListView view;
 
     @Inject
-    public StationListPresenterImpl(GetChannelsInteractor getChannelsInteractor,
+    public ChannelListPresenterImpl(GetChannelsInteractor getChannelsInteractor,
                                     ChannelListItemViewModelMapper channelListItemViewModelMapper) {
         this.getChannelsInteractor = getChannelsInteractor;
         this.channelListItemViewModelMapper = channelListItemViewModelMapper;

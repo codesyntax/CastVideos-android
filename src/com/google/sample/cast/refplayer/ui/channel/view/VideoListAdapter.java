@@ -16,10 +16,6 @@
 
 package com.google.sample.cast.refplayer.ui.channel.view;
 
-import com.google.android.gms.cast.MediaInfo;
-import com.google.android.gms.cast.MediaMetadata;
-import com.google.sample.cast.refplayer.R;
-
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,6 +24,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
+import com.google.android.gms.cast.MediaInfo;
+import com.google.sample.cast.refplayer.R;
+import com.google.sample.cast.refplayer.ui.channel.model.VideoListItemViewModel;
+
 import java.util.List;
 
 /**
@@ -35,7 +35,7 @@ import java.util.List;
  */
 public class VideoListAdapter extends RecyclerView.Adapter<VideoListItemViewHolder> {
     private final ItemClickListener mClickListener;
-    private List<MediaInfo> videos;
+    private List<VideoListItemViewModel> videos;
 
     public VideoListAdapter(ItemClickListener clickListener) {
         mClickListener = clickListener;
@@ -50,17 +50,12 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListItemViewHold
 
     @Override
     public void onBindViewHolder(final VideoListItemViewHolder viewHolder, final int position) {
-        final MediaInfo item = videos.get(position);
-        MediaMetadata mm = item.getMetadata();
-        viewHolder.setTitle(mm.getString(MediaMetadata.KEY_TITLE));
-        viewHolder.setDescription(mm.getString(MediaMetadata.KEY_SUBTITLE));
-        viewHolder.setImage(mm.getImages().get(0).getUrl().toString());
-        viewHolder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mClickListener.itemClicked(viewHolder.getImageView(), item);
-            }
-        });
+        final VideoListItemViewModel video = videos.get(position);
+        viewHolder.setTitle(video.getTitle());
+        viewHolder.setDescription(video.getDescription());
+        viewHolder.setImage(video.getCoverURL());
+        viewHolder.setOnClickListener(
+                view -> mClickListener.itemClicked(viewHolder.getImageView(), video));
     }
 
     @Override
@@ -68,8 +63,8 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListItemViewHold
         return videos == null ? 0 : videos.size();
     }
 
-    public void setData(List<MediaInfo> data) {
-        videos = data;
+    public void setData(List<VideoListItemViewModel> videos) {
+        this.videos = videos;
         notifyDataSetChanged();
     }
 
@@ -78,7 +73,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListItemViewHold
      */
     public interface ItemClickListener {
 
-        void itemClicked(ImageView view, MediaInfo item);
+        void itemClicked(ImageView view, VideoListItemViewModel item);
     }
 
     @Override

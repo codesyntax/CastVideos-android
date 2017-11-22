@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface VideoDataModelMapper {
 
-    Video map(VideoDataModel source);
+    Video map(VideoDataModel source, CategoryDataModel categoryDataModel);
 
-    List<Video> map(List<VideoDataModel> source);
+    List<Video> map(CategoryDataModel categoryDataModel);
 }

@@ -15,6 +15,6 @@
     <fragment android:id="@+id/fragment_station_list"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:name="com.google.sample.cast.refplayer.ui.stationlist.view.StationListFragment" />
+        android:name="com.google.sample.cast.refplayer.ui.channellist.view.ChannelListFragment" />
 </android.support.v7.widget.LinearLayoutCompat>
 

@@ -5,9 +5,9 @@ import com.google.sample.cast.refplayer.domain.model.Video;
 import java.util.List;
 
 public interface GetVideosByStationInteractor {
-    void execute(Callback callback);
+    void execute(String url, Callback callback);
 
     interface Callback {
-        void onSuccess(List<Video> stations);
+        void onSuccess(List<Video> videos);
     }
 }

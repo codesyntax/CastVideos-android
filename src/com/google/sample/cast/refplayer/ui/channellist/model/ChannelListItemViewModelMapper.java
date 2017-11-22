@@ -1,4 +1,4 @@
-package com.google.sample.cast.refplayer.ui.stationlist.model;
+package com.google.sample.cast.refplayer.ui.channellist.model;
 
 import com.google.sample.cast.refplayer.domain.model.Channel;
 

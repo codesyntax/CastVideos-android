@@ -75,7 +75,7 @@
             </intent-filter>
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.google.sample.cast.refplayer.ui.channel.view.StationActivity"/>
+                    android:value="com.google.sample.cast.refplayer.ui.channel.view.ChannelActivity"/>
         </activity>
         <activity android:name=".ui.MainActivity"
             android:screenOrientation="portrait"

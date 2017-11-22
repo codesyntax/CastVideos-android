@@ -1,9 +1,8 @@
 package com.google.sample.cast.refplayer.data.service;
 
-import com.google.sample.cast.refplayer.data.model.VideoDataModel;
-
-import java.util.List;
+import com.google.sample.cast.refplayer.data.model.CategoryDataModel;
 
 public interface VideoService {
-    List<VideoDataModel> getVideos();
+
+    CategoryDataModel getVideos(String url);
 }

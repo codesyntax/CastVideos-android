@@ -1,5 +1,7 @@
 package com.google.sample.cast.refplayer.domain.interactor;
 
+import android.util.Log;
+
 import com.google.sample.cast.refplayer.data.model.VideoDataModelMapper;
 import com.google.sample.cast.refplayer.data.service.VideoService;
 import com.google.sample.cast.refplayer.domain.model.Video;
@@ -26,12 +28,12 @@ public class GetVideosByStationInteractorImpl implements GetVideosByStationInter
     }
 
     @Override
-    public void execute(final Callback callback) {
+    public void execute(String url, final Callback callback) {
         Observable
                 .just(1L)
-                .flatMap(Long -> Observable.just(videoService.getVideos()))
-                .flatMap(videoDataModels -> Observable
-                        .just(videoDataModelMapper.map(videoDataModels)))
+                .flatMap(Long -> Observable.just(videoService.getVideos(url)))
+                .flatMap(categoryDataModel -> Observable
+                        .just(videoDataModelMapper.map(categoryDataModel)))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<List<Video>>() {
@@ -47,6 +49,7 @@ public class GetVideosByStationInteractorImpl implements GetVideosByStationInter
 
                     @Override
                     public void onError(Throwable e) {
+                        Log.d("","");
                         //TODO make error response
                     }
 

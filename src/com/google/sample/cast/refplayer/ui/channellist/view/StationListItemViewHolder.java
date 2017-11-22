@@ -1,4 +1,4 @@
-package com.google.sample.cast.refplayer.ui.stationlist.view;
+package com.google.sample.cast.refplayer.ui.channellist.view;
 
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.google.sample.cast.refplayer.R;
-import com.google.sample.cast.refplayer.ui.stationlist.model.ChannelListItemViewModel;
+import com.google.sample.cast.refplayer.ui.channellist.model.ChannelListItemViewModel;
 import com.squareup.picasso.Picasso;
 
 public class StationListItemViewHolder extends RecyclerView.ViewHolder {

@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Video {
     private String title;
+    private String videoURL;
     private Date date;
     private String description;
     private String tumbnailURL;
@@ -14,6 +15,7 @@ public class Video {
 
     private Video(Builder builder) {
         title = builder.title;
+        videoURL = builder.videoURL;
         date = builder.date;
         description = builder.description;
         tumbnailURL = builder.tumbnailURL;
@@ -25,6 +27,10 @@ public class Video {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getVideoURL() {
+        return videoURL;
     }
 
     public Date getDate() {
@@ -57,6 +63,7 @@ public class Video {
 
     public static final class Builder {
         private String title;
+        private String videoURL;
         private Date date;
         private String description;
         private String tumbnailURL;
@@ -73,6 +80,11 @@ public class Video {
             return this;
         }
 
+        public Builder videoURL(String val) {
+            videoURL = val;
+            return this;
+        }
+
         public Builder date(Date val) {
             date = val;
             return this;
@@ -83,7 +95,7 @@ public class Video {
             return this;
         }
 
-        public Builder tumbnailURL(String val) {
+        public Builder thumbnailURL(String val) {
             tumbnailURL = val;
             return this;
         }

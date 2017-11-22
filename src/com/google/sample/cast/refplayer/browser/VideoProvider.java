@@ -19,6 +19,7 @@ import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaMetadata;
 import com.google.android.gms.cast.MediaTrack;
 import com.google.android.gms.common.images.WebImage;
+import com.google.sample.cast.refplayer.ui.channel.model.VideoListItemViewModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -177,7 +178,7 @@ public class VideoProvider {
         return mediaList;
     }
 
-    private static MediaInfo buildMediaInfo(String title, String studio, String subTitle,
+    public static MediaInfo buildMediaInfo(String title, String studio, String subTitle,
             int duration, String url, String mimeType, String imgUrl, String bigImageUrl,
             List<MediaTrack> tracks) {
         MediaMetadata movieMetadata = new MediaMetadata(MediaMetadata.MEDIA_TYPE_MOVIE);

@@ -1,17 +1,21 @@
 package com.google.sample.cast.refplayer.ui.channel.presenter;
 
 import com.google.sample.cast.refplayer.domain.interactor.GetVideosByStationInteractor;
+import com.google.sample.cast.refplayer.ui.channel.model.VideoListItemViewModelMapper;
 import com.google.sample.cast.refplayer.ui.channel.view.StationView;
 
 import javax.inject.Inject;
 
-public class StationPresenterImpl implements StationPresenter {
+public class ChannelPresenterImpl implements ChannelPresenter {
     private final GetVideosByStationInteractor getVideosByStationInteractor;
+    private final VideoListItemViewModelMapper videoListItemViewModelMapper;
     private StationView view;
 
     @Inject
-    public StationPresenterImpl(GetVideosByStationInteractor getVideosByStationInteractor) {
+    public ChannelPresenterImpl(GetVideosByStationInteractor getVideosByStationInteractor,
+                                VideoListItemViewModelMapper videoListItemViewModelMapper) {
         this.getVideosByStationInteractor = getVideosByStationInteractor;
+        this.videoListItemViewModelMapper = videoListItemViewModelMapper;
     }
 
     @Override
@@ -25,11 +29,10 @@ public class StationPresenterImpl implements StationPresenter {
     }
 
     @Override
-    public void getVideos() {
-        getVideosByStationInteractor.execute(stations -> {
+    public void getVideos(String url) {
+        getVideosByStationInteractor.execute(url, videos -> {
             if (view != null) {
-                //TODO make mapper
-                //view.showVideos();
+                view.showVideos(videoListItemViewModelMapper.map(videos));
             }
         });
     }
