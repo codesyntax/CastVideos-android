@@ -94,11 +94,10 @@ public class ChannelListFragment extends Fragment
     }
 
     @Override
-    public void onItemClick(ChannelListItemViewModel channelListItemViewModel,
-                            AppCompatTextView name) {
+    public void onItemClick(ChannelListItemViewModel channelListItemViewModel) {
         channelActivityNavigator.navigate(getContext(),
                 channelListItemViewModel.getJsonURL(),
                 channelListItemViewModel.getName(),
-                name);
+                channelListItemViewModel.getCoverURL());
     }
 }

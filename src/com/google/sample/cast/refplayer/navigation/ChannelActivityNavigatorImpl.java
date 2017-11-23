@@ -13,17 +13,19 @@ public class ChannelActivityNavigatorImpl implements ChannelActivityNavigator {
     public ChannelActivityNavigatorImpl() {}
 
     @Override
-    public void navigate(Context context, String jsonURL, String title, AppCompatTextView name) {
-        Intent intent = getNavigationIntent(context, jsonURL, title);
+    public void navigate(Context context, String jsonURL, String title, String coverURL) {
+        Intent intent = getNavigationIntent(context, jsonURL, title, coverURL);
         context.startActivity(intent);
     }
 
     private Intent getNavigationIntent(Context context,
                                        String jsonURL,
-                                       String title) {
+                                       String title,
+                                       String coverURL) {
         Intent result = new Intent(context, ChannelActivity.class);
         result.putExtra(EXTRA_JSON_URL, jsonURL);
         result.putExtra(EXTRA_TITLE, title);
+        result.putExtra(EXTRA_COVER_URL, coverURL);
         return result;
     }
 }

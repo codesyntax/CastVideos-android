@@ -35,9 +35,10 @@ public class ChannelActivity extends AppCompatActivity implements DispatchKeyEve
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_channel);
         String jsonURL = getIntent().getStringExtra(ChannelActivityNavigator.EXTRA_JSON_URL);
+        String coverURL = getIntent().getStringExtra(ChannelActivityNavigator.EXTRA_COVER_URL);
         title = getIntent().getStringExtra(ChannelActivityNavigator.EXTRA_TITLE);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.container, ChannelFragment.newInstance(jsonURL, title));
+        ft.add(R.id.container, ChannelFragment.newInstance(jsonURL, title, coverURL));
         ft.commit();
     }
 

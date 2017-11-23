@@ -25,6 +25,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -51,6 +52,7 @@ import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
 import com.google.sample.cast.refplayer.settings.CastPreference;
 import com.google.sample.cast.refplayer.ui.channel.model.VideoListItemViewModel;
 import com.google.sample.cast.refplayer.ui.channel.presenter.ChannelPresenter;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -61,8 +63,10 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
         StationView {
     private static final String KEY_JSON_URL = "key_json_url";
     private static final String KEY_TITLE = "key_title";
+    private static final String KEY_COVER_URL = "key_cover_url";
     private String jsonURL;
     private String title;
+    private String coverURL;
     private CastSession castSession;
     private CastContext castContext;
     private RecyclerView recyclerView;
@@ -75,11 +79,12 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
     @Inject
     ChannelPresenter channelPresenter;
 
-    public static ChannelFragment newInstance(String jsonURL, String title) {
+    public static ChannelFragment newInstance(String jsonURL, String title, String coverURL) {
         ChannelFragment fragment = new ChannelFragment();
         Bundle args = new Bundle();
         args.putString(KEY_JSON_URL, jsonURL);
         args.putString(KEY_TITLE, title);
+        args.putString(KEY_COVER_URL, coverURL);
         fragment.setArguments(args);
         return fragment;
     }
@@ -89,6 +94,7 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
         super.onCreate(savedInstanceState);
         jsonURL = getArguments().getString(KEY_JSON_URL);
         title = getArguments().getString(KEY_TITLE);
+        coverURL = getArguments().getString(KEY_COVER_URL);
         setHasOptionsMenu(true);
         ApplicationComponent component = JarriOnApplication.getInstance().getComponent();
         DaggerChannelComponent.builder()
@@ -112,7 +118,13 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
         emptyView = getView().findViewById(R.id.empty_view);
         loadingView = getView().findViewById(R.id.progress_indicator);
         castContext = CastContext.getSharedInstance(getContext());
+        setupCoverImage();
         channelPresenter.getVideos(jsonURL);
+    }
+
+    private void setupCoverImage() {
+        AppCompatImageView coverImage = getView().findViewById(R.id.cover_image);
+        Picasso.with(getContext()).load(coverURL).fit().centerCrop().into(coverImage);
     }
 
     @Override
@@ -190,7 +202,8 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
                         ,item.getDescription()
                         ,(int) item.getDuration()
                         ,item.getVideoURL()
-                        ,null
+                        //TODO set data from server
+                        ,"video/mp4"
                         ,item.getThumbnailURL()
                         ,item.getCoverURL()
                         ,null));
