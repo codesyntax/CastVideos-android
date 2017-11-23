@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,7 +94,11 @@ public class ChannelListFragment extends Fragment
     }
 
     @Override
-    public void onItemClick(ChannelListItemViewModel channelListItemViewModel) {
-        channelActivityNavigator.navigate(getContext(), channelListItemViewModel.getJsonURL());
+    public void onItemClick(ChannelListItemViewModel channelListItemViewModel,
+                            AppCompatTextView name) {
+        channelActivityNavigator.navigate(getContext(),
+                channelListItemViewModel.getJsonURL(),
+                channelListItemViewModel.getName(),
+                name);
     }
 }

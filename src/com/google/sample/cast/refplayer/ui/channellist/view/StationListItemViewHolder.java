@@ -25,11 +25,8 @@ public class StationListItemViewHolder extends RecyclerView.ViewHolder {
                      final StationListItemClickListener stationListItemClickListener) {
         Picasso.with(cover.getContext()).load(channelListItemViewModel.getCoverURL()).into(cover);
         name.setText(channelListItemViewModel.getName());
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stationListItemClickListener.onItemClick(channelListItemViewModel);
-            }
-        });
+        itemView.setOnClickListener(v ->
+                stationListItemClickListener.onItemClick(channelListItemViewModel, name)
+        );
     }
 }

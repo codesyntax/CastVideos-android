@@ -59,8 +59,10 @@ import javax.inject.Inject;
 public class ChannelFragment extends Fragment implements VideoListAdapter.ItemClickListener,
         DispatchKeyEventListener,
         StationView {
-    private static final String KEY_JSON_URL = "jsonURL";
+    private static final String KEY_JSON_URL = "key_json_url";
+    private static final String KEY_TITLE = "key_title";
     private String jsonURL;
+    private String title;
     private CastSession castSession;
     private CastContext castContext;
     private RecyclerView recyclerView;
@@ -73,10 +75,11 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
     @Inject
     ChannelPresenter channelPresenter;
 
-    public static ChannelFragment newInstance(String jsonURL) {
+    public static ChannelFragment newInstance(String jsonURL, String title) {
         ChannelFragment fragment = new ChannelFragment();
         Bundle args = new Bundle();
         args.putString(KEY_JSON_URL, jsonURL);
+        args.putString(KEY_TITLE, title);
         fragment.setArguments(args);
         return fragment;
     }
@@ -85,6 +88,7 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         jsonURL = getArguments().getString(KEY_JSON_URL);
+        title = getArguments().getString(KEY_TITLE);
         setHasOptionsMenu(true);
         ApplicationComponent component = JarriOnApplication.getInstance().getComponent();
         DaggerChannelComponent.builder()
@@ -131,6 +135,7 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
     private void setupToolbar() {
         Toolbar toolbar = getView().findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        getActivity().setTitle(title);
     }
 
     @Override

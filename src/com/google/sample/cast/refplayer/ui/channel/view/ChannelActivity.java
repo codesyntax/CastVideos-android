@@ -27,6 +27,7 @@ import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.navigation.ChannelActivityNavigator;
 
 public class ChannelActivity extends AppCompatActivity implements DispatchKeyEventOwner {
+    private String title;
     DispatchKeyEventListener listener;
 
     @Override
@@ -34,8 +35,9 @@ public class ChannelActivity extends AppCompatActivity implements DispatchKeyEve
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_channel);
         String jsonURL = getIntent().getStringExtra(ChannelActivityNavigator.EXTRA_JSON_URL);
+        title = getIntent().getStringExtra(ChannelActivityNavigator.EXTRA_TITLE);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.container, ChannelFragment.newInstance(jsonURL));
+        ft.add(R.id.container, ChannelFragment.newInstance(jsonURL, title));
         ft.commit();
     }
 
