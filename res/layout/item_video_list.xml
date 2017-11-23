@@ -18,15 +18,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingLeft="@dimen/item_video_list_padding"
-    android:paddingRight="@dimen/item_video_list_padding"
+    android:paddingLeft="@dimen/item_channel_list_padding"
+    android:paddingRight="@dimen/item_channel_list_padding"
     android:gravity="center_vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" >
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="@dimen/item_video_list_image_width"
-        android:layout_height="@dimen/item_video_list_image_height"
+        android:layout_width="@dimen/item_channel_list_image_width"
+        android:layout_height="@dimen/item_channel_list_image_height"
         android:scaleType="centerCrop"
         android:src="@drawable/default_video" />
     <android.support.v7.widget.LinearLayoutCompat
@@ -35,8 +35,8 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:paddingLeft="@dimen/item_video_list_text_padding"
-        android:paddingRight="@dimen/item_video_list_text_padding"
+        android:paddingLeft="@dimen/item_channel_list_text_padding"
+        android:paddingRight="@dimen/item_channel_list_text_padding"
         android:orientation="vertical" >
         <TextView
             android:id="@+id/textView1"

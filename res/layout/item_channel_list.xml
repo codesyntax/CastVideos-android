@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/item_station_list_height">
+    android:layout_height="@dimen/item_channel_list_height">
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/station_cover"
         android:layout_width="match_parent"
@@ -11,7 +11,7 @@
         android:id="@+id/station_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/item_station_list_name_padding"
+        android:padding="@dimen/item_channel_list_name_padding"
         android:layout_gravity="bottom"
         android:background="@color/item_station_list_background_text_color"
         android:textColor="@android:color/white"
