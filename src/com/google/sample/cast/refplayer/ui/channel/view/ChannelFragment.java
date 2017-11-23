@@ -162,7 +162,7 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.station, menu);
+        inflater.inflate(R.menu.channel, menu);
         CastButtonFactory.setUpMediaRouteButton(getContext().getApplicationContext(), menu,
                 R.id.media_route_menu_item);
         queueMenuItem = menu.findItem(R.id.action_show_queue);
@@ -178,10 +178,7 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
-        if (item.getItemId() == R.id.action_settings) {
-            intent = new Intent(getContext(), CastPreference.class);
-            startActivity(intent);
-        } else if (item.getItemId() == R.id.action_show_queue) {
+        if (item.getItemId() == R.id.action_show_queue) {
             intent = new Intent(getContext(), QueueListViewActivity.class);
             startActivity(intent);
         }
