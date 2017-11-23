@@ -147,6 +147,7 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
     private void setupToolbar() {
         Toolbar toolbar = getView().findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getActivity().setTitle(title);
     }
 
@@ -181,6 +182,9 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
         if (item.getItemId() == R.id.action_show_queue) {
             intent = new Intent(getContext(), QueueListViewActivity.class);
             startActivity(intent);
+        } else if (item.getItemId() == android.R.id.home) {
+            getActivity().onBackPressed();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

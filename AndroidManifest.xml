@@ -39,7 +39,7 @@
         <activity
                 android:name="com.google.sample.cast.refplayer.ui.channel.view.ChannelActivity"
                 android:screenOrientation="portrait"
-                android:label="@string/app_name"/>
+            android:label="@string/app_name"/>
         <activity
                 android:name="com.google.sample.cast.refplayer.mediaplayer.LocalPlayerActivity"
                 android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|uiMode"
