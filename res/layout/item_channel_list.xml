@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/item_channel_list_height">
+    android:layout_height="@dimen/item_channel_list_height"
+    xmlns:tools="http://schemas.android.com/tools">
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/station_cover"
         android:layout_width="match_parent"
@@ -15,5 +16,7 @@
         android:layout_gravity="bottom"
         android:background="@color/item_station_list_background_text_color"
         android:textColor="@android:color/white"
-        android:text="Final aurreko elkarrizketa"/>
+        android:lines="1"
+        android:ellipsize="end"
+        tools:text="Final aurreko elkarrizketa Final aurreko elkarrizketa Final aurr"/>
 </FrameLayout>
