@@ -11,13 +11,13 @@ import com.google.sample.cast.refplayer.ui.channellist.model.ChannelListItemView
 import java.util.ArrayList;
 import java.util.List;
 
-public class StationListAdapter extends RecyclerView.Adapter<StationListItemViewHolder> {
+public class ChannelListAdapter extends RecyclerView.Adapter<ChannelListItemViewHolder> {
     private final List<ChannelListItemViewModel> stations;
-    private final StationListItemClickListener stationListItemClickListener;
+    private final ChannelListItemClickListener channelListItemClickListener;
 
-    public StationListAdapter(StationListItemClickListener stationListItemClickListener) {
+    public ChannelListAdapter(ChannelListItemClickListener channelListItemClickListener) {
         this.stations = new ArrayList<>();
-        this.stationListItemClickListener = stationListItemClickListener;
+        this.channelListItemClickListener = channelListItemClickListener;
     }
 
     public void setStations(List<ChannelListItemViewModel> stations) {
@@ -27,17 +27,17 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListItemView
     }
 
     @Override
-    public StationListItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ChannelListItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.item_channel_list, parent, false);
-        return new StationListItemViewHolder(view);
+        return new ChannelListItemViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(StationListItemViewHolder holder, int position) {
+    public void onBindViewHolder(ChannelListItemViewHolder holder, int position) {
         ChannelListItemViewModel station = stations.get(position);
-        holder.bind(station, stationListItemClickListener);
+        holder.bind(station, channelListItemClickListener);
     }
 
     @Override

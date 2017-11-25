@@ -4,7 +4,7 @@ import com.google.sample.cast.refplayer.domain.interactor.GetChannelsInteractor;
 import com.google.sample.cast.refplayer.domain.model.Channel;
 import com.google.sample.cast.refplayer.ui.channellist.model.ChannelListItemViewModel;
 import com.google.sample.cast.refplayer.ui.channellist.model.ChannelListItemViewModelMapper;
-import com.google.sample.cast.refplayer.ui.channellist.view.StationListView;
+import com.google.sample.cast.refplayer.ui.channellist.view.ChannelListView;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import javax.inject.Inject;
 public class ChannelListPresenterImpl implements ChannelListPresenter, GetChannelsInteractor.Callback {
     private final GetChannelsInteractor getChannelsInteractor;
     private final ChannelListItemViewModelMapper channelListItemViewModelMapper;
-    private StationListView view;
+    private ChannelListView view;
 
     @Inject
     public ChannelListPresenterImpl(GetChannelsInteractor getChannelsInteractor,
@@ -23,7 +23,7 @@ public class ChannelListPresenterImpl implements ChannelListPresenter, GetChanne
     }
 
     @Override
-    public void setView(StationListView view) {
+    public void setView(ChannelListView view) {
         this.view = view;
     }
 

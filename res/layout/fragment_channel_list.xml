@@ -13,5 +13,7 @@
         android:layout_height="match_parent"
         tools:listitem="@layout/item_channel_list"
         app:layoutManager="GridLayoutManager"
+        android:clipToPadding="true"
+        android:padding="@dimen/channel_list_padding"
         app:spanCount="2"/>
 </android.support.v4.widget.SwipeRefreshLayout>

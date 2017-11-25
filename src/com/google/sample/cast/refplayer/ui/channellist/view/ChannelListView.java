@@ -4,7 +4,7 @@ import com.google.sample.cast.refplayer.ui.channellist.model.ChannelListItemView
 
 import java.util.List;
 
-public interface StationListView {
+public interface ChannelListView {
     void showStations(List<ChannelListItemViewModel> stations);
 
     void hideRefresh();

@@ -1,9 +1,9 @@
 package com.google.sample.cast.refplayer.ui.channellist.presenter;
 
-import com.google.sample.cast.refplayer.ui.channellist.view.StationListView;
+import com.google.sample.cast.refplayer.ui.channellist.view.ChannelListView;
 
 public interface ChannelListPresenter {
-    void setView(StationListView view);
+    void setView(ChannelListView view);
     void removeView();
     void getStations();
 }

@@ -9,12 +9,12 @@ import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.ui.channellist.model.ChannelListItemViewModel;
 import com.squareup.picasso.Picasso;
 
-public class StationListItemViewHolder extends RecyclerView.ViewHolder {
+public class ChannelListItemViewHolder extends RecyclerView.ViewHolder {
     private View itemView;
     private AppCompatImageView cover;
     private AppCompatTextView name;
 
-    public StationListItemViewHolder(View itemView) {
+    public ChannelListItemViewHolder(View itemView) {
         super(itemView);
         this.itemView = itemView;
         cover = itemView.findViewById(R.id.station_cover);
@@ -22,11 +22,11 @@ public class StationListItemViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(final ChannelListItemViewModel channelListItemViewModel,
-                     final StationListItemClickListener stationListItemClickListener) {
+                     final ChannelListItemClickListener channelListItemClickListener) {
         Picasso.with(cover.getContext()).load(channelListItemViewModel.getCoverURL()).into(cover);
         name.setText(channelListItemViewModel.getName());
         itemView.setOnClickListener(v ->
-                stationListItemClickListener.onItemClick(channelListItemViewModel)
+                channelListItemClickListener.onItemClick(channelListItemViewModel)
         );
     }
 }

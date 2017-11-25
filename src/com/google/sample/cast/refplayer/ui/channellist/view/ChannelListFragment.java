@@ -1,11 +1,12 @@
 package com.google.sample.cast.refplayer.ui.channellist.view;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +24,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class ChannelListFragment extends Fragment
-        implements StationListView, StationListItemClickListener {
+        implements ChannelListView, ChannelListItemClickListener {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView stationsRecyclerView;
-    private StationListAdapter stationListAdapter;
+    private ChannelListAdapter channelListAdapter;
     @Inject
     ChannelListPresenter presenter;
     @Inject
@@ -79,13 +80,17 @@ public class ChannelListFragment extends Fragment
 
     private void setupRecyclerView(View view) {
         stationsRecyclerView = view.findViewById(R.id.stations_recycler_view);
-        stationListAdapter = new StationListAdapter(this);
-        stationsRecyclerView.setAdapter(stationListAdapter);
+        channelListAdapter = new ChannelListAdapter(this);
+        stationsRecyclerView.setAdapter(channelListAdapter);
+        Resources r = getResources();
+        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, r.getDisplayMetrics());
+        stationsRecyclerView.addItemDecoration(
+                new ChannelItemDecoration((int) px, 2));
     }
 
     @Override
     public void showStations(List<ChannelListItemViewModel> stations) {
-        stationListAdapter.setStations(stations);
+        channelListAdapter.setStations(stations);
     }
 
     @Override
