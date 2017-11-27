@@ -12,7 +12,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 public class VideoDataModelMapperImpl implements VideoDataModelMapper {
-    private static final String DATE_ISO_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
+    private static final String DATE_ISO_FORMAT = "yyyy-MM-dd'T'HH:mm:ssXXX";
 
     @Inject
     public VideoDataModelMapperImpl() {}
@@ -35,14 +35,17 @@ public class VideoDataModelMapperImpl implements VideoDataModelMapper {
     }
 
     private Date getDate(String date) {
-        Date result = new Date();
+        if (date == null) {
+            return null;
+        }
+        Date result = null;
         SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_ISO_FORMAT, Locale.US);
         try {
             result = dateFormat.parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return  result;
+        return result;
     }
 
     @Override

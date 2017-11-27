@@ -3,12 +3,14 @@ package com.google.sample.cast.refplayer.ui.channel.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Date;
+
 public class VideoListItemViewModel implements Parcelable {
     private String title;
     private String description;
     private String thumbnailURL;
     private String coverURL;
-    private String date;
+    private Date date;
     private long duration;
     private String videoURL;
     private String studio;
@@ -29,10 +31,11 @@ public class VideoListItemViewModel implements Parcelable {
         description = in.readString();
         thumbnailURL = in.readString();
         coverURL = in.readString();
-        date = in.readString();
+        date = (Date) in.readSerializable();
         duration = in.readLong();
         videoURL = in.readString();
         studio = in.readString();
+
     }
 
     public static final Creator<VideoListItemViewModel> CREATOR = new Creator<VideoListItemViewModel>() {
@@ -63,7 +66,7 @@ public class VideoListItemViewModel implements Parcelable {
         return coverURL;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
@@ -90,7 +93,7 @@ public class VideoListItemViewModel implements Parcelable {
         parcel.writeString(description);
         parcel.writeString(thumbnailURL);
         parcel.writeString(coverURL);
-        parcel.writeString(date);
+        parcel.writeSerializable(date);
         parcel.writeLong(duration);
         parcel.writeString(videoURL);
         parcel.writeString(studio);
@@ -102,7 +105,7 @@ public class VideoListItemViewModel implements Parcelable {
         private String description;
         private String thumbnailURL;
         private String coverURL;
-        private String date;
+        private Date date;
         private long duration;
         private String videoURL;
         private String studio;
@@ -130,7 +133,7 @@ public class VideoListItemViewModel implements Parcelable {
             return this;
         }
 
-        public Builder date(String val) {
+        public Builder date(Date val) {
             date = val;
             return this;
         }
