@@ -63,7 +63,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListItemViewHold
             String date = getFormattedDate(video.getDate(), viewHolder.itemView.getContext());
             viewHolder.setDatetime(date);
         }
-        viewHolder.setImage(video.getCoverURL());
+        viewHolder.setImage(video.getThumbnailURL());
         int duration = (int) (video.getDuration() / 1000);
         if (duration >= 60) {
             duration = duration / 60;
