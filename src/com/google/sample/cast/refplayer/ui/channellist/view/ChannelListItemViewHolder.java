@@ -23,7 +23,7 @@ public class ChannelListItemViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(final ChannelListItemViewModel channelListItemViewModel,
                      final ChannelListItemClickListener channelListItemClickListener) {
-        Picasso.with(cover.getContext()).load(channelListItemViewModel.getCoverURL()).into(cover);
+        Picasso.with(cover.getContext()).load(channelListItemViewModel.getMosaicCoverURL()).into(cover);
         name.setText(channelListItemViewModel.getName());
         itemView.setOnClickListener(v ->
                 channelListItemClickListener.onItemClick(channelListItemViewModel)

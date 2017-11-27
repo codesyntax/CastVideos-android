@@ -17,7 +17,8 @@ public class ChannelListItemViewModelMapperImpl implements ChannelListItemViewMo
         return new ChannelListItemViewModel.Builder()
                 .id(source.getId())
                 .name(source.getName())
-                .coverURL(source.getMosaicCoverURL())
+                .coverURL(source.getCoverURL())
+                .mosaicCoverURL(source.getMosaicCoverURL())
                 .jsonURL(source.getJsonURL())
                 .build();
     }

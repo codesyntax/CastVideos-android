@@ -14,10 +14,10 @@ public class ChannelDataModelMapperImpl implements ChannelDataModelMapper {
 
     @Override
     public Channel map(ChannelDataModel source) {
-        String mosaicURL = source.getMosaicURL();
         return new Channel.Builder()
                 .name(source.getTitle())
-                .mosaicCoverURL(mosaicURL)
+                .mosaicCoverURL(source.getMosaicURL())
+                .coverURL(source.getDisplayURL())
                 .jsonURL(source.getSourceJsonURL())
                 .build();
     }

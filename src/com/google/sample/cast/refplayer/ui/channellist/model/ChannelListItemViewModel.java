@@ -4,6 +4,7 @@ public class ChannelListItemViewModel {
     private int id;
     private String name;
     private String coverURL;
+    private String mosaicCoverURL;
     private String jsonURL;
 
     public int getId() {
@@ -22,10 +23,15 @@ public class ChannelListItemViewModel {
         return jsonURL;
     }
 
+    public String getMosaicCoverURL() {
+        return mosaicCoverURL;
+    }
+
     private ChannelListItemViewModel(Builder builder) {
         id = builder.id;
         name = builder.name;
         coverURL = builder.coverURL;
+        mosaicCoverURL = builder.mosaicCoverURL;
         jsonURL = builder.jsonURL;
     }
 
@@ -33,6 +39,7 @@ public class ChannelListItemViewModel {
         private int id;
         private String name;
         private String coverURL;
+        private String mosaicCoverURL;
         private String jsonURL;
 
         public Builder() {
@@ -50,6 +57,11 @@ public class ChannelListItemViewModel {
 
         public Builder coverURL(String val) {
             coverURL = val;
+            return this;
+        }
+
+        public Builder mosaicCoverURL(String val) {
+            mosaicCoverURL = val;
             return this;
         }
 

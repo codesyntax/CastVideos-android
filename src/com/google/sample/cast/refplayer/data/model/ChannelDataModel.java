@@ -47,4 +47,20 @@ public class ChannelDataModel {
         }
         return result;
     }
+
+    public String getDisplayURL() {
+        String result = "";
+        if (image != null) {
+            List<ImageSizeDataModel> sizes = image.getSizes();
+            if (sizes != null) {
+                for (ImageSizeDataModel size : sizes) {
+                    if (ImageSizeDataModel.DISPLAY_NAME.equals(size.getName())) {
+                        result = size.getUrl();
+                        break;
+                    }
+                }
+            }
+        }
+        return result;
+    }
 }
