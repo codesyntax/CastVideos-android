@@ -73,6 +73,8 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListItemViewHold
         }
         viewHolder.setOnClickListener(
                 view -> mClickListener.itemClicked(viewHolder.getImageView(), video));
+        viewHolder.getPlayButton().setOnClickListener(
+                view -> mClickListener.itemClicked(viewHolder.getImageView(), video));
     }
 
     private String getFormattedDate(Date date, Context context) {

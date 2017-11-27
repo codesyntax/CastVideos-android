@@ -38,6 +38,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.framework.CastButtonFactory;
 import com.google.android.gms.cast.framework.CastContext;
 import com.google.android.gms.cast.framework.CastSession;
@@ -49,9 +50,9 @@ import com.google.sample.cast.refplayer.di.component.ApplicationComponent;
 import com.google.sample.cast.refplayer.di.component.DaggerChannelComponent;
 import com.google.sample.cast.refplayer.mediaplayer.LocalPlayerActivity;
 import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
-import com.google.sample.cast.refplayer.settings.CastPreference;
 import com.google.sample.cast.refplayer.ui.channel.model.VideoListItemViewModel;
 import com.google.sample.cast.refplayer.ui.channel.presenter.ChannelPresenter;
+import com.google.sample.cast.refplayer.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -173,7 +174,11 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.action_show_queue).setVisible(
-                (castSession != null) && castSession.isConnected());
+                isConnectedToChromecast());
+    }
+
+    private boolean isConnectedToChromecast() {
+        return (castSession != null) && castSession.isConnected();
     }
 
     @Override
@@ -191,13 +196,24 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
 
     @Override
     public void itemClicked(ImageView imageView, VideoListItemViewModel item) {
-        String transitionName = getString(R.string.transition_image);
-        Pair<View, String> imagePair = Pair
-                .create(imageView, transitionName);
-        ActivityOptionsCompat options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(getActivity(), imagePair);
-        Intent intent = new Intent(getActivity(), LocalPlayerActivity.class);
-        intent.putExtra("media", VideoProvider
+        MediaInfo mediaInfo = getMediaInfo(item);
+        if (isConnectedToChromecast()) {
+            Utils.showQueuePopup(getContext(), imageView, mediaInfo);
+        } else {
+            String transitionName = getString(R.string.transition_image);
+            Pair<View, String> imagePair = Pair
+                    .create(imageView, transitionName);
+            ActivityOptionsCompat options = ActivityOptionsCompat
+                    .makeSceneTransitionAnimation(getActivity(), imagePair);
+            Intent intent = new Intent(getActivity(), LocalPlayerActivity.class);
+            intent.putExtra("media", mediaInfo);
+            intent.putExtra("shouldStart", false);
+            ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
+        }
+    }
+
+    private MediaInfo getMediaInfo(VideoListItemViewModel item) {
+        return VideoProvider
                 .buildMediaInfo(item.getTitle()
                         ,item.getStudio()
                         ,item.getDescription()
@@ -207,9 +223,7 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
                         ,"video/mp4"
                         ,item.getThumbnailURL()
                         ,item.getCoverURL()
-                        ,null));
-        intent.putExtra("shouldStart", false);
-        ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
+                        ,null);
     }
 
     @Override
@@ -230,7 +244,7 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
         }
         if (queueMenuItem != null) {
             queueMenuItem.setVisible(
-                    (castSession != null) && castSession.isConnected());
+                    isConnectedToChromecast());
         }
     }
 

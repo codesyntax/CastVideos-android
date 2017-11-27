@@ -1,5 +1,6 @@
 package com.google.sample.cast.refplayer.ui.channel.view;
 
+import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
@@ -16,27 +17,29 @@ public class VideoListItemViewHolder extends RecyclerView.ViewHolder {
     private final AppCompatTextView datetime;
     private final AppCompatTextView duration;
     private final AppCompatImageView image;
+    private final AppCompatImageButton play;
 
     public static VideoListItemViewHolder newInstance(View parent) {
         AppCompatImageView image = parent.findViewById(R.id.imageView1);
         AppCompatTextView title = parent.findViewById(R.id.textView1);
         AppCompatTextView datetime = parent.findViewById(R.id.datetime);
         AppCompatTextView duration = parent.findViewById(R.id.duration);
-        View menu = parent.findViewById(R.id.menu);
+        AppCompatImageButton play = parent.findViewById(R.id.play);
         View textContainer = parent.findViewById(R.id.text_container);
         return new VideoListItemViewHolder(parent, image, textContainer,
-                title, datetime, menu, duration);
+                title, datetime, play, duration);
     }
 
     private VideoListItemViewHolder(View parent, AppCompatImageView image, View textContainer,
                                     AppCompatTextView title, AppCompatTextView datetime,
-                                    View menu, AppCompatTextView duration) {
+                                    AppCompatImageButton play, AppCompatTextView duration) {
         super(parent);
         this.parent = parent;
         this.image = image;
         this.title = title;
         this.datetime = datetime;
         this.duration = duration;
+        this.play = play;
     }
 
     public void setTitle(String title) {
@@ -57,6 +60,10 @@ public class VideoListItemViewHolder extends RecyclerView.ViewHolder {
 
     public ImageView getImageView() {
         return image;
+    }
+
+    public AppCompatImageButton getPlayButton() {
+        return play;
     }
 
     public void setMinutes(String duration) {
