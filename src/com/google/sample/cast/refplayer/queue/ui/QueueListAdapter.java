@@ -30,6 +30,7 @@ import com.androidquery.AQuery;
 
 import android.content.Context;
 import android.support.annotation.IntDef;
+import android.support.annotation.NonNull;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -138,7 +139,9 @@ public class QueueListAdapter extends RecyclerView.Adapter<QueueListAdapter.Queu
         MediaInfo info = item.getMedia();
         MediaMetadata metaData = info.getMetadata();
         holder.mTitleView.setText(metaData.getString(MediaMetadata.KEY_TITLE));
-        holder.mDescriptionView.setText(metaData.getString(MediaMetadata.KEY_SUBTITLE));
+        String secondRowText = metaData.getString(MediaMetadata.KEY_SUBTITLE);
+        String duration = getDuration((int) info.getStreamDuration(), holder.mDescriptionView.getContext());
+        holder.mDescriptionView.setText(secondRowText.concat(" / ").concat(duration));
         AQuery aq = new AQuery(holder.itemView);
         if (!metaData.getImages().isEmpty()) {
             aq.id(holder.mImageView).width(IMAGE_THUMBNAIL_WIDTH)
@@ -166,6 +169,19 @@ public class QueueListAdapter extends RecyclerView.Adapter<QueueListAdapter.Queu
             holder.mPlayPause.setVisibility(View.GONE);
         }
 
+    }
+
+    @NonNull
+    private String getDuration(int duration, Context context) {
+        String result;
+        duration = duration / 1000;
+        if (duration >= 60) {
+            duration = duration / 60;
+            result = context.getString(R.string.video_list_item_duration_minutes, String.valueOf(duration));
+        } else {
+            result = context.getString(R.string.video_list_item_duration_seconds, String.valueOf(duration));
+        }
+        return result;
     }
 
     private void updatePlayPauseButtonImageResource(ImageButton button) {
