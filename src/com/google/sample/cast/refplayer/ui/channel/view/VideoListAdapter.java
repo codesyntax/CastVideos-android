@@ -64,6 +64,13 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListItemViewHold
             viewHolder.setDatetime(date);
         }
         viewHolder.setImage(video.getCoverURL());
+        int duration = (int) (video.getDuration() / 1000);
+        if (duration >= 60) {
+            duration = duration / 60;
+            viewHolder.setMinutes(String.valueOf(duration));
+        } else {
+            viewHolder.setSeconds(String.valueOf(duration));
+        }
         viewHolder.setOnClickListener(
                 view -> mClickListener.itemClicked(viewHolder.getImageView(), video));
     }
@@ -88,8 +95,8 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListItemViewHold
 
     @NonNull
     private String getMonthString(Date date, Context context) {
-        String result;SimpleDateFormat yesterdayDateFormat
-                = new SimpleDateFormat(DAY_FORMAT, Locale.US);
+        String result;
+        SimpleDateFormat yesterdayDateFormat = new SimpleDateFormat(DAY_FORMAT, Locale.US);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         int month = calendar.get(Calendar.MONTH);

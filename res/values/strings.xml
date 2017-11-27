@@ -105,6 +105,8 @@
     <string name="video_list_item_date_today">GAUR %s</string>
     <string name="video_list_item_date_yesterday">ATZO, %s</string>
     <string name="video_list_item_month_and_day">%1$s %2$s</string>
+    <string name="video_list_item_duration_minutes">%s min</string>
+    <string name="video_list_item_duration_seconds">%s seg</string>
 
     <!-- months -->
     <string-array name="months">
