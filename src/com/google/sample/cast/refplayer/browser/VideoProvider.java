@@ -34,9 +34,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URLConnection;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -72,6 +75,7 @@ public class VideoProvider {
     private static final String TAG_TITLE = "title";
 
     public static final String KEY_DESCRIPTION = "description";
+    public static final String KEY_DATE = "date";
 
     private static final String TARGET_FORMAT = TAG_MP4;
     private static List<MediaInfo> mediaList;
@@ -170,7 +174,7 @@ public class VideoProvider {
                             }
                         }
                         mediaList.add(buildMediaInfo(title, studio, subTitle, duration, videoUrl,
-                                mimeType, imageUrl, bigImageUrl, tracks));
+                                mimeType, imageUrl, bigImageUrl, tracks, null));
                     }
                 }
             }
@@ -180,7 +184,7 @@ public class VideoProvider {
 
     public static MediaInfo buildMediaInfo(String title, String studio, String subTitle,
             int duration, String url, String mimeType, String imgUrl, String bigImageUrl,
-            List<MediaTrack> tracks) {
+            List<MediaTrack> tracks, Date date) {
         MediaMetadata movieMetadata = new MediaMetadata(MediaMetadata.MEDIA_TYPE_MOVIE);
 
         movieMetadata.putString(MediaMetadata.KEY_SUBTITLE, studio);
@@ -188,9 +192,13 @@ public class VideoProvider {
         movieMetadata.addImage(new WebImage(Uri.parse(imgUrl)));
         movieMetadata.addImage(new WebImage(Uri.parse(bigImageUrl)));
         JSONObject jsonObj = null;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX", Locale.US);
         try {
             jsonObj = new JSONObject();
             jsonObj.put(KEY_DESCRIPTION, subTitle);
+            if (date != null) {
+                jsonObj.put(KEY_DATE, simpleDateFormat.format(date));
+            }
         } catch (JSONException e) {
             Log.e(TAG, "Failed to add description to the json object", e);
         }
@@ -200,7 +208,7 @@ public class VideoProvider {
                 .setContentType(mimeType)
                 .setMetadata(movieMetadata)
                 .setMediaTracks(tracks)
-                .setStreamDuration(duration * 1000)
+                .setStreamDuration(duration)
                 .setCustomData(jsonObj)
                 .build();
     }

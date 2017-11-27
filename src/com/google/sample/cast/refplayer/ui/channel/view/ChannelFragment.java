@@ -214,16 +214,17 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
 
     private MediaInfo getMediaInfo(VideoListItemViewModel item) {
         return VideoProvider
-                .buildMediaInfo(item.getTitle()
-                        ,item.getStudio()
-                        ,item.getDescription()
-                        ,(int) item.getDuration()
-                        ,item.getVideoURL()
+                .buildMediaInfo(item.getTitle(),
+                        item.getStudio(),
+                        item.getDescription(),
+                        (int) item.getDuration(),
+                        item.getVideoURL(),
                         //TODO set data from server
-                        ,"video/mp4"
-                        ,item.getThumbnailURL()
-                        ,item.getCoverURL()
-                        ,null);
+                        "video/mp4",
+                        item.getThumbnailURL(),
+                        item.getCoverURL(),
+                        null,
+                        item.getDate());
     }
 
     @Override

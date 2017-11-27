@@ -156,6 +156,17 @@
         android:lines="1"
         android:textSize="15sp" />
 
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/dateAndTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/titleTextView"
+        android:layout_alignRight="@+id/titleTextView"
+        android:layout_below="@+id/authorTextView"
+        android:layout_marginTop="2dp"
+        android:lines="1"
+        android:textSize="15sp" />
+
     <TextView
         android:id="@+id/descriptionTextView"
         android:layout_width="match_parent"
@@ -163,7 +174,7 @@
         android:layout_above="@+id/cast_mini_controller"
         android:layout_alignLeft="@+id/titleTextView"
         android:layout_alignRight="@+id/titleTextView"
-        android:layout_below="@+id/authorTextView"
+        android:layout_below="@+id/dateAndTime"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="10dp"
         android:fontFamily="sans-serif-light"

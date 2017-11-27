@@ -29,9 +29,5 @@
         app:actionProviderClass="android.support.v7.app.MediaRouteActionProvider"
         android:orderInCategory="101"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
 
 </menu>
