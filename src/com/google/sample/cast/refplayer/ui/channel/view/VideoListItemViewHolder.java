@@ -1,57 +1,57 @@
 package com.google.sample.cast.refplayer.ui.channel.view;
 
+import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.androidquery.AQuery;
 import com.google.sample.cast.refplayer.R;
 import com.squareup.picasso.Picasso;
 
 public class VideoListItemViewHolder extends RecyclerView.ViewHolder {
-    private final View mParent;
-    private TextView mTitleView;
-    private TextView mDescriptionView;
-    private ImageView mImgView;
+    private final View parent;
+    private final AppCompatTextView title;
+    private final AppCompatTextView datetime;
+    private final AppCompatImageView image;
 
     public static VideoListItemViewHolder newInstance(View parent) {
-        ImageView imgView = parent.findViewById(R.id.imageView1);
-        TextView titleView = parent.findViewById(R.id.textView1);
-        TextView descriptionView = parent.findViewById(R.id.textView2);
+        AppCompatImageView image = parent.findViewById(R.id.imageView1);
+        AppCompatTextView title = parent.findViewById(R.id.textView1);
+        AppCompatTextView datetime = parent.findViewById(R.id.datetime);
         View menu = parent.findViewById(R.id.menu);
         View textContainer = parent.findViewById(R.id.text_container);
-        AQuery aQuery = new AQuery(parent);
-        return new VideoListItemViewHolder(parent, imgView, textContainer, titleView, descriptionView, menu,
-                aQuery);
+        return new VideoListItemViewHolder(parent, image, textContainer, title, datetime, menu);
     }
 
-    private VideoListItemViewHolder(View parent, ImageView imgView, View textContainer, TextView titleView,
-                       TextView descriptionView, View menu, AQuery aQuery) {
+    private VideoListItemViewHolder(View parent, AppCompatImageView image, View textContainer,
+                                    AppCompatTextView title, AppCompatTextView datetime,
+                                    View menu) {
         super(parent);
-        mParent = parent;
-        mImgView = imgView;
-        mTitleView = titleView;
-        mDescriptionView = descriptionView;
+        this.parent = parent;
+        this.image = image;
+        this.title = title;
+        this.datetime = datetime;
     }
 
     public void setTitle(String title) {
-        mTitleView.setText(title);
+        this.title.setText(title);
     }
 
-    public void setDescription(String description) {
-        mDescriptionView.setText(description);
+    public void setDatetime(String datetime) {
+        this.datetime.setText(datetime);
     }
 
     public void setImage(String imgUrl) {
-        Picasso.with(mImgView.getContext()).load(imgUrl).into(mImgView);
+        Picasso.with(image.getContext()).load(imgUrl).into(image);
     }
 
     public void setOnClickListener(View.OnClickListener listener) {
-        mParent.setOnClickListener(listener);
+        parent.setOnClickListener(listener);
     }
 
     public ImageView getImageView() {
-        return mImgView;
+        return image;
     }
 }

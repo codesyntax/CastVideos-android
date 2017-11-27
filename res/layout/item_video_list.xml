@@ -23,7 +23,7 @@
     android:gravity="center_vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" >
-    <ImageView
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/imageView1"
         android:layout_width="@dimen/item_channel_list_image_width"
         android:layout_height="@dimen/item_channel_list_image_height"
@@ -38,7 +38,7 @@
         android:paddingLeft="@dimen/item_channel_list_text_padding"
         android:paddingRight="@dimen/item_channel_list_text_padding"
         android:orientation="vertical" >
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:id="@+id/textView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,8 +46,8 @@
             android:maxLines="2"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:textSize="18sp" />
-        <TextView
-            android:id="@+id/textView2"
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/datetime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical">
-        <ImageButton
+        <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/menu"
             android:layout_width="32dp"
             android:layout_height="32dp"

@@ -15,6 +15,7 @@ public class VideoDataModel {
     private String thumb;
     private String studio;
     private List<SourceDataModel> sources;
+    private String date;
 
     public String getTitle() {
         return title;
@@ -46,5 +47,9 @@ public class VideoDataModel {
 
     public List<SourceDataModel> getSources() {
         return sources;
+    }
+
+    public String getDate() {
+        return date;
     }
 }

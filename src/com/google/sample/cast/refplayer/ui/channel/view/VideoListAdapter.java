@@ -24,7 +24,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
-import com.google.android.gms.cast.MediaInfo;
 import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.ui.channel.model.VideoListItemViewModel;
 
@@ -52,7 +51,8 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListItemViewHold
     public void onBindViewHolder(final VideoListItemViewHolder viewHolder, final int position) {
         final VideoListItemViewModel video = videos.get(position);
         viewHolder.setTitle(video.getTitle());
-        viewHolder.setDescription(video.getDescription());
+        //TODO set date to right format
+        viewHolder.setDatetime(video.getDate());
         viewHolder.setImage(video.getCoverURL());
         viewHolder.setOnClickListener(
                 view -> mClickListener.itemClicked(viewHolder.getImageView(), video));

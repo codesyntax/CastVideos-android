@@ -22,6 +22,7 @@ public class VideoListItemViewModelMapperImpl implements VideoListItemViewModelM
                 .videoURL(source.getVideoURL())
                 .studio(source.getStudio())
                 .duration(source.getDuration())
+                .date(source.getDate().toString())
                 .build();
     }
 
