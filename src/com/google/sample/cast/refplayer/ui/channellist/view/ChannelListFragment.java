@@ -74,12 +74,12 @@ public class ChannelListFragment extends Fragment
     }
 
     private void setupRefreshLayout(View view) {
-        swipeRefreshLayout = view.findViewById(R.id.swiperefresh);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
         swipeRefreshLayout.setOnRefreshListener(() -> presenter.getStations());
     }
 
     private void setupRecyclerView(View view) {
-        stationsRecyclerView = view.findViewById(R.id.stations_recycler_view);
+        stationsRecyclerView = (RecyclerView) view.findViewById(R.id.stations_recycler_view);
         channelListAdapter = new ChannelListAdapter(this);
         stationsRecyclerView.setAdapter(channelListAdapter);
         Resources r = getResources();

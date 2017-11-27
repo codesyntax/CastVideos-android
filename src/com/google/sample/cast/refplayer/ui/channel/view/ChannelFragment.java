@@ -124,7 +124,7 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
     }
 
     private void setupCoverImage() {
-        AppCompatImageView coverImage = getView().findViewById(R.id.cover_image);
+        AppCompatImageView coverImage = (AppCompatImageView) getView().findViewById(R.id.cover_image);
         Picasso.with(getContext()).load(coverURL).fit().centerCrop().into(coverImage);
     }
 
@@ -137,7 +137,7 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
     }
 
     private void setupRecyclerView() {
-        recyclerView = getView().findViewById(R.id.list);
+        recyclerView = (RecyclerView) getView().findViewById(R.id.list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         adapter = new VideoListAdapter(this);
@@ -146,7 +146,7 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
     }
 
     private void setupToolbar() {
-        Toolbar toolbar = getView().findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) getView().findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getActivity().setTitle(title);

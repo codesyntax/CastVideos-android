@@ -20,11 +20,11 @@ public class VideoListItemViewHolder extends RecyclerView.ViewHolder {
     private final AppCompatImageButton play;
 
     public static VideoListItemViewHolder newInstance(View parent) {
-        AppCompatImageView image = parent.findViewById(R.id.imageView1);
-        AppCompatTextView title = parent.findViewById(R.id.textView1);
-        AppCompatTextView datetime = parent.findViewById(R.id.datetime);
-        AppCompatTextView duration = parent.findViewById(R.id.duration);
-        AppCompatImageButton play = parent.findViewById(R.id.play);
+        AppCompatImageView image = (AppCompatImageView) parent.findViewById(R.id.imageView1);
+        AppCompatTextView title = (AppCompatTextView) parent.findViewById(R.id.textView1);
+        AppCompatTextView datetime = (AppCompatTextView) parent.findViewById(R.id.datetime);
+        AppCompatTextView duration = (AppCompatTextView) parent.findViewById(R.id.duration);
+        AppCompatImageButton play = (AppCompatImageButton) parent.findViewById(R.id.play);
         View textContainer = parent.findViewById(R.id.text_container);
         return new VideoListItemViewHolder(parent, image, textContainer,
                 title, datetime, play, duration);

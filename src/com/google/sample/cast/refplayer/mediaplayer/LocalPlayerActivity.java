@@ -799,23 +799,23 @@ public class LocalPlayerActivity extends AppCompatActivity {
     }
 
     private void loadViews() {
-        mVideoView = findViewById(R.id.videoView1);
-        mTitleView = findViewById(R.id.titleTextView);
-        mDescriptionView = findViewById(R.id.descriptionTextView);
+        mVideoView = (VideoView) findViewById(R.id.videoView1);
+        mTitleView = (TextView) findViewById(R.id.titleTextView);
+        mDescriptionView = (TextView) findViewById(R.id.descriptionTextView);
         mDescriptionView.setMovementMethod(new ScrollingMovementMethod());
-        mAuthorView = findViewById(R.id.authorTextView);
-        mStartText = findViewById(R.id.startText);
+        mAuthorView = (TextView) findViewById(R.id.authorTextView);
+        mStartText = (TextView) findViewById(R.id.startText);
         mStartText.setText(Utils.formatMillis(0));
-        mEndText = findViewById(R.id.endText);
-        mSeekbar = findViewById(R.id.seekBar1);
-        mPlayPause = findViewById(R.id.playPauseImageView);
-        mLoading = findViewById(R.id.progressBar1);
+        mEndText = (TextView) findViewById(R.id.endText);
+        mSeekbar = (SeekBar) findViewById(R.id.seekBar1);
+        mPlayPause = (ImageView) findViewById(R.id.playPauseImageView);
+        mLoading = (ProgressBar) findViewById(R.id.progressBar1);
         mControllers = findViewById(R.id.controllers);
         mContainer = findViewById(R.id.container);
-        mCoverArt = findViewById(R.id.coverArtView);
+        mCoverArt = (ImageView) findViewById(R.id.coverArtView);
         ViewCompat.setTransitionName(mCoverArt, getString(R.string.transition_image));
-        mPlayCircle = findViewById(R.id.play_circle);
+        mPlayCircle = (ImageButton) findViewById(R.id.play_circle);
         mPlayCircle.setOnClickListener(v -> togglePlayback());
-        dateAndTimeTextView = findViewById(R.id.dateAndTime);
+        dateAndTimeTextView = (AppCompatTextView) findViewById(R.id.dateAndTime);
     }
 }

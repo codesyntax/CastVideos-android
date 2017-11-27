@@ -17,8 +17,8 @@ public class ChannelListItemViewHolder extends RecyclerView.ViewHolder {
     public ChannelListItemViewHolder(View itemView) {
         super(itemView);
         this.itemView = itemView;
-        cover = itemView.findViewById(R.id.station_cover);
-        name = itemView.findViewById(R.id.station_name);
+        cover = (AppCompatImageView) itemView.findViewById(R.id.station_cover);
+        name = (AppCompatTextView) itemView.findViewById(R.id.station_name);
     }
 
     public void bind(final ChannelListItemViewModel channelListItemViewModel,
