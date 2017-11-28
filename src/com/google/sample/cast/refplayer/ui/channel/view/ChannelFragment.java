@@ -17,6 +17,7 @@
 package com.google.sample.cast.refplayer.ui.channel.view;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,9 +27,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -50,6 +53,7 @@ import com.google.sample.cast.refplayer.di.component.ApplicationComponent;
 import com.google.sample.cast.refplayer.di.component.DaggerChannelComponent;
 import com.google.sample.cast.refplayer.mediaplayer.LocalPlayerActivity;
 import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
+import com.google.sample.cast.refplayer.ui.VerticalSpaceItemDecoration;
 import com.google.sample.cast.refplayer.ui.channel.model.VideoListItemViewModel;
 import com.google.sample.cast.refplayer.ui.channel.presenter.ChannelPresenter;
 import com.google.sample.cast.refplayer.utils.Utils;
@@ -143,6 +147,9 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
         adapter = new VideoListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
+        Resources r = getResources();
+        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, r.getDisplayMetrics());
+        recyclerView.addItemDecoration(new VerticalSpaceItemDecoration((int) px));
     }
 
     private void setupToolbar() {
