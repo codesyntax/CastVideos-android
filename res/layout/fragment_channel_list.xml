@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/swiperefresh"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <android.support.v7.widget.RecyclerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/stations_recycler_view"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/item_channel_list"
-        app:layoutManager="GridLayoutManager"
-        android:clipToPadding="true"
-        android:padding="@dimen/channel_list_padding"
-        app:spanCount="2"/>
-</android.support.v4.widget.SwipeRefreshLayout>
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/stations_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_channel_list"
+            app:layoutManager="GridLayoutManager"
+            android:clipToPadding="true"
+            android:padding="@dimen/channel_list_padding"
+            app:spanCount="2"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+    <fragment
+        android:id="@+id/cast_mini_controller"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:visibility="gone"
+        app:castShowImageThumbnail="true"
+        app:castProgressBarColor="?attr/colorPrimary"
+        class="com.google.android.gms.cast.framework.media.widget.MiniControllerFragment" />
+</FrameLayout>
