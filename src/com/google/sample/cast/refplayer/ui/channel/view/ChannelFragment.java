@@ -252,8 +252,10 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
     @Override
     public void onPause() {
         super.onPause();
-        castContext.getSessionManager().removeSessionManagerListener(
-                sessionManagerListener, CastSession.class);
+        if (castContext != null) {
+            castContext.getSessionManager().removeSessionManagerListener(
+                    sessionManagerListener, CastSession.class);
+        }
     }
 
     @Override
@@ -265,7 +267,11 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
 
     @Override
     public boolean dispatchKeyEvent(@NonNull KeyEvent event) {
-        return castContext.onDispatchVolumeKeyEventBeforeJellyBean(event);
+        if (castContext != null) {
+            return castContext.onDispatchVolumeKeyEventBeforeJellyBean(event);
+        } else {
+            return false;
+        }
     }
 
     @Override
