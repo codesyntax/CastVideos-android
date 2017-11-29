@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.cast.framework.CastButtonFactory;
 import com.google.android.gms.cast.framework.CastContext;
 import com.google.android.gms.cast.framework.CastState;
@@ -17,6 +18,8 @@ import com.google.android.gms.cast.framework.Session;
 import com.google.android.gms.cast.framework.SessionManager;
 import com.google.android.gms.cast.framework.SessionManagerListener;
 import com.google.sample.cast.refplayer.R;
+
+import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
     private CastContext castContext;
@@ -32,14 +35,12 @@ public class MainActivity extends AppCompatActivity {
         sessionManager = castContext.getSessionManager();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Fabric.with(this, new Crashlytics());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        castStateListener = new CastStateListener() {
-            @Override
-            public void onCastStateChanged(int newState) {
-                if (newState != CastState.NO_DEVICES_AVAILABLE) {
-                    showIntroductoryOverlay();
-                }
+        castStateListener = newState -> {
+            if (newState != CastState.NO_DEVICES_AVAILABLE) {
+                showIntroductoryOverlay();
             }
         };
     }
@@ -74,24 +75,16 @@ public class MainActivity extends AppCompatActivity {
             introductoryOverlay.remove();
         }
         if ((castMenuItem != null) && castMenuItem.isVisible()) {
-            new Handler().post(new Runnable() {
-                @Override
-                public void run() {
-                    introductoryOverlay = new IntroductoryOverlay.Builder(
-                            MainActivity.this, castMenuItem)
-                            .setTitleText(getString(R.string.introducing_cast))
-                            .setOverlayColor(R.color.primary)
-                            .setSingleTime()
-                            .setOnOverlayDismissedListener(
-                                    new IntroductoryOverlay.OnOverlayDismissedListener() {
-                                        @Override
-                                        public void onOverlayDismissed() {
-                                            introductoryOverlay = null;
-                                        }
-                                    })
-                            .build();
-                    introductoryOverlay.show();
-                }
+            new Handler().post(() -> {
+                introductoryOverlay = new IntroductoryOverlay.Builder(
+                        MainActivity.this, castMenuItem)
+                        .setTitleText(getString(R.string.introducing_cast))
+                        .setOverlayColor(R.color.primary)
+                        .setSingleTime()
+                        .setOnOverlayDismissedListener(
+                                () -> introductoryOverlay = null)
+                        .build();
+                introductoryOverlay.show();
             });
         }
     }

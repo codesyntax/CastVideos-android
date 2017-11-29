@@ -1,16 +1,18 @@
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 
 task wrapper(type: Wrapper) {
     gradleVersion = '4.1'
 }
-
 buildscript {
     repositories {
         jcenter()
         google()
+        maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.0'
+        classpath 'io.fabric.tools:gradle:1.+'
     }
 }
 
@@ -19,6 +21,7 @@ repositories {
     jcenter()
     mavenLocal()
     google()
+    maven { url 'https://maven.fabric.io/public' }
 }
 
 android {
@@ -64,4 +67,7 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.android.support:design:25.4.0'
+    compile('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
+        transitive = true;
+    }
 }
