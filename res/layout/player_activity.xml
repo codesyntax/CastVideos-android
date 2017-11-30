@@ -145,24 +145,13 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/authorTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/titleTextView"
-        android:layout_alignRight="@+id/titleTextView"
-        android:layout_below="@+id/titleTextView"
-        android:layout_marginTop="2dp"
-        android:lines="1"
-        android:textSize="15sp" />
-
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/dateAndTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/titleTextView"
         android:layout_alignRight="@+id/titleTextView"
-        android:layout_below="@+id/authorTextView"
+        android:layout_below="@+id/titleTextView"
         android:layout_marginTop="2dp"
         android:lines="1"
         android:textSize="15sp" />

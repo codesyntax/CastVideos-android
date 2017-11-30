@@ -16,25 +16,6 @@
 
 package com.google.sample.cast.refplayer.mediaplayer;
 
-import com.google.android.gms.cast.MediaInfo;
-import com.google.android.gms.cast.MediaMetadata;
-import com.google.android.gms.cast.framework.CastButtonFactory;
-import com.google.android.gms.cast.framework.CastContext;
-import com.google.android.gms.cast.framework.CastSession;
-import com.google.android.gms.cast.framework.SessionManagerListener;
-import com.google.android.gms.cast.framework.media.MediaUtils;
-import com.google.android.gms.cast.framework.media.RemoteMediaClient;
-import com.google.sample.cast.refplayer.R;
-import com.google.sample.cast.refplayer.browser.VideoProvider;
-import com.google.sample.cast.refplayer.expandedcontrols.ExpandedControlsActivity;
-import com.google.sample.cast.refplayer.navigation.LocalPlayerActivityNavigator;
-import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
-import com.google.sample.cast.refplayer.settings.CastPreference;
-import com.google.sample.cast.refplayer.ui.DateFormatter;
-import com.google.sample.cast.refplayer.utils.Utils;
-
-import com.androidquery.AQuery;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -72,9 +53,26 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.androidquery.AQuery;
+import com.google.android.gms.cast.MediaInfo;
+import com.google.android.gms.cast.MediaMetadata;
+import com.google.android.gms.cast.framework.CastButtonFactory;
+import com.google.android.gms.cast.framework.CastContext;
+import com.google.android.gms.cast.framework.CastSession;
+import com.google.android.gms.cast.framework.SessionManagerListener;
+import com.google.android.gms.cast.framework.media.MediaUtils;
+import com.google.android.gms.cast.framework.media.RemoteMediaClient;
+import com.google.sample.cast.refplayer.R;
+import com.google.sample.cast.refplayer.browser.VideoProvider;
+import com.google.sample.cast.refplayer.expandedcontrols.ExpandedControlsActivity;
+import com.google.sample.cast.refplayer.navigation.LocalPlayerActivityNavigator;
+import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
+import com.google.sample.cast.refplayer.settings.CastPreference;
+import com.google.sample.cast.refplayer.ui.DateFormatter;
+import com.google.sample.cast.refplayer.utils.Utils;
+
 import org.json.JSONException;
 
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -105,7 +103,6 @@ public class LocalPlayerActivity extends AppCompatActivity {
     private MediaInfo selectedMedia;
     private boolean mControllersVisible;
     private int mDuration;
-    private TextView mAuthorView;
     private ImageButton mPlayCircle;
     private CastContext mCastContext;
     private CastSession mCastSession;
@@ -733,7 +730,6 @@ public class LocalPlayerActivity extends AppCompatActivity {
         if (!visible) {
             mDescriptionView.setVisibility(View.GONE);
             mTitleView.setVisibility(View.GONE);
-            mAuthorView.setVisibility(View.GONE);
             displaySize = Utils.getDisplaySize(this);
             RelativeLayout.LayoutParams lp = new
                     RelativeLayout.LayoutParams(displaySize.x,
@@ -746,10 +742,8 @@ public class LocalPlayerActivity extends AppCompatActivity {
             mDescriptionView.setText(selectedMedia.getCustomData().optString(
                     VideoProvider.KEY_DESCRIPTION));
             mTitleView.setText(mm.getString(MediaMetadata.KEY_TITLE));
-            mAuthorView.setText(mm.getString(MediaMetadata.KEY_SUBTITLE));
             mDescriptionView.setVisibility(View.VISIBLE);
             mTitleView.setVisibility(View.VISIBLE);
-            mAuthorView.setVisibility(View.VISIBLE);
             displaySize = Utils.getDisplaySize(this);
             RelativeLayout.LayoutParams lp = new
                     RelativeLayout.LayoutParams(displaySize.x,
@@ -794,7 +788,7 @@ public class LocalPlayerActivity extends AppCompatActivity {
 
     private void setupActionBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(selectedMedia.getMetadata().getString(MediaMetadata.KEY_TITLE));
+        toolbar.setTitle(selectedMedia.getMetadata().getString(MediaMetadata.KEY_SUBTITLE));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -804,7 +798,6 @@ public class LocalPlayerActivity extends AppCompatActivity {
         mTitleView = (TextView) findViewById(R.id.titleTextView);
         mDescriptionView = (TextView) findViewById(R.id.descriptionTextView);
         mDescriptionView.setMovementMethod(new ScrollingMovementMethod());
-        mAuthorView = (TextView) findViewById(R.id.authorTextView);
         mStartText = (TextView) findViewById(R.id.startText);
         mStartText.setText(Utils.formatMillis(0));
         mEndText = (TextView) findViewById(R.id.endText);
