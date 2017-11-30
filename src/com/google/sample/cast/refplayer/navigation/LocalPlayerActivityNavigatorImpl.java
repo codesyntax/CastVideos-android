@@ -10,21 +10,24 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.google.android.gms.cast.MediaInfo;
-import com.google.sample.cast.refplayer.browser.VideoProvider;
 import com.google.sample.cast.refplayer.mediaplayer.LocalPlayerActivity;
+import com.google.sample.cast.refplayer.ui.channel.model.MediaInfoMapper;
 import com.google.sample.cast.refplayer.ui.channel.model.VideoListItemViewModel;
 
 import javax.inject.Inject;
 
 public class LocalPlayerActivityNavigatorImpl implements LocalPlayerActivityNavigator {
+    private final MediaInfoMapper mediaInfoMapper;
 
     @Inject
-    public LocalPlayerActivityNavigatorImpl() {}
+    public LocalPlayerActivityNavigatorImpl(MediaInfoMapper mediaInfoMapper) {
+        this.mediaInfoMapper = mediaInfoMapper;
+    }
 
     @Override
     public void navigate(Activity context, VideoListItemViewModel item,
                          boolean shouldStart, ImageView imageView) {
-        MediaInfo mediaInfo = buildMediaInfo(item);
+        MediaInfo mediaInfo = mediaInfoMapper.map(item);
         Intent intent = getNavigationIntent(context, mediaInfo, shouldStart);
         ActivityOptionsCompat options = getOptions(context, imageView);
         ActivityCompat.startActivity(context, intent, options.toBundle());
@@ -42,20 +45,5 @@ public class LocalPlayerActivityNavigatorImpl implements LocalPlayerActivityNavi
         intent.putExtra(EXTRA_MEDIA_INFO, mediaInfo);
         intent.putExtra(EXTRA_SHOULD_START, shouldStart);
         return intent;
-    }
-
-    private MediaInfo buildMediaInfo(VideoListItemViewModel item) {
-        return VideoProvider
-                .buildMediaInfo(item.getTitle(),
-                        item.getStudio(),
-                        item.getDescription(),
-                        (int) item.getDuration(),
-                        item.getVideoURL(),
-                        //TODO set data from server
-                        "video/mp4",
-                        item.getThumbnailURL(),
-                        item.getCoverURL(),
-                        null,
-                        item.getDate());
     }
 }

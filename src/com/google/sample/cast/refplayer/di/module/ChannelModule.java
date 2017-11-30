@@ -5,6 +5,8 @@ import com.google.sample.cast.refplayer.domain.interactor.GetVideosByStationInte
 import com.google.sample.cast.refplayer.domain.interactor.GetVideosByStationInteractorImpl;
 import com.google.sample.cast.refplayer.navigation.LocalPlayerActivityNavigator;
 import com.google.sample.cast.refplayer.navigation.LocalPlayerActivityNavigatorImpl;
+import com.google.sample.cast.refplayer.ui.channel.model.MediaInfoMapper;
+import com.google.sample.cast.refplayer.ui.channel.model.MediaInfoMapperImpl;
 import com.google.sample.cast.refplayer.ui.channel.model.VideoListItemViewModelMapper;
 import com.google.sample.cast.refplayer.ui.channel.model.VideoListItemViewModelMapperImpl;
 import com.google.sample.cast.refplayer.ui.channel.presenter.ChannelPresenter;
@@ -38,5 +40,11 @@ public class ChannelModule {
     @Provides
     public LocalPlayerActivityNavigator provideLocalPlayerActivityNavigator(LocalPlayerActivityNavigatorImpl navigator) {
         return navigator;
+    }
+
+    @FragmentScope
+    @Provides
+    public MediaInfoMapper provideMediaInfoMapper(MediaInfoMapperImpl mapper) {
+        return mapper;
     }
 }
