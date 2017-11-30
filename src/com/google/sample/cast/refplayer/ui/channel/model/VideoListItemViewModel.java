@@ -14,6 +14,7 @@ public class VideoListItemViewModel implements Parcelable {
     private long duration;
     private String videoURL;
     private String studio;
+    private String mimetype;
 
     private VideoListItemViewModel(Builder builder) {
         title = builder.title;
@@ -24,6 +25,7 @@ public class VideoListItemViewModel implements Parcelable {
         duration = builder.duration;
         videoURL = builder.videoURL;
         studio = builder.studio;
+        mimetype = builder.mimetype;
     }
 
     protected VideoListItemViewModel(Parcel in) {
@@ -35,7 +37,7 @@ public class VideoListItemViewModel implements Parcelable {
         duration = in.readLong();
         videoURL = in.readString();
         studio = in.readString();
-
+        mimetype = in.readString();
     }
 
     public static final Creator<VideoListItemViewModel> CREATOR = new Creator<VideoListItemViewModel>() {
@@ -82,6 +84,10 @@ public class VideoListItemViewModel implements Parcelable {
         return studio;
     }
 
+    public String getMimetype() {
+        return mimetype;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -97,6 +103,7 @@ public class VideoListItemViewModel implements Parcelable {
         parcel.writeLong(duration);
         parcel.writeString(videoURL);
         parcel.writeString(studio);
+        parcel.writeString(mimetype);
     }
 
 
@@ -109,6 +116,7 @@ public class VideoListItemViewModel implements Parcelable {
         private long duration;
         private String videoURL;
         private String studio;
+        private String mimetype;
 
         public Builder() {
         }
@@ -150,6 +158,11 @@ public class VideoListItemViewModel implements Parcelable {
 
         public Builder studio(String val) {
             studio = val;
+            return this;
+        }
+
+        public Builder mimetype(String val) {
+            mimetype = val;
             return this;
         }
 

@@ -18,8 +18,7 @@ public class MediaInfoMapperImpl implements MediaInfoMapper {
                         source.getDescription(),
                         (int) source.getDuration(),
                         source.getVideoURL(),
-                        //TODO set data from server
-                        "video/mp4",
+                        source.getMimetype(),
                         source.getThumbnailURL(),
                         source.getCoverURL(),
                         null,

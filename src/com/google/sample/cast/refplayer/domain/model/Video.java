@@ -12,6 +12,7 @@ public class Video {
     private String smallCoverURL;
     private String bigCoverURL;
     private String studio;
+    private String mimeType;
 
     private Video(Builder builder) {
         title = builder.title;
@@ -23,6 +24,7 @@ public class Video {
         smallCoverURL = builder.smallCoverURL;
         bigCoverURL = builder.bigCoverURL;
         studio = builder.studio;
+        mimeType = builder.mimeType;
     }
 
     public String getTitle() {
@@ -61,6 +63,10 @@ public class Video {
         return studio;
     }
 
+    public String getMimeType() {
+        return mimeType;
+    }
+
     public static final class Builder {
         private String title;
         private String videoURL;
@@ -71,6 +77,7 @@ public class Video {
         private String smallCoverURL;
         private String bigCoverURL;
         private String studio;
+        private String mimeType;
 
         public Builder() {
         }
@@ -92,6 +99,11 @@ public class Video {
 
         public Builder description(String val) {
             description = val;
+            return this;
+        }
+
+        public Builder tumbnailURL(String val) {
+            tumbnailURL = val;
             return this;
         }
 
@@ -117,6 +129,11 @@ public class Video {
 
         public Builder studio(String val) {
             studio = val;
+            return this;
+        }
+
+        public Builder mimeType(String val) {
+            mimeType = val;
             return this;
         }
 

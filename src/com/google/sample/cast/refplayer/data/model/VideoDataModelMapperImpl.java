@@ -31,6 +31,7 @@ public class VideoDataModelMapperImpl implements VideoDataModelMapper {
                 .studio(source.getStudio())
                 .duration(source.getDuration())
                 .date(getDate(source.getDate()))
+                .mimeType(source.getSources().get(0).getMime())
                 .build();
     }
 
