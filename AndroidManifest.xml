@@ -94,7 +94,7 @@
                 android:value="com.google.sample.cast.refplayer.CastOptionsProvider"/>
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="CRASHLYTICS_KEY"
+            android:value="64b7481d0296829bad11374cfd13d4440a02bed0"
             />
     </application>
 

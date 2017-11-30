@@ -1,19 +1,14 @@
 package com.google.sample.cast.refplayer.ui;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
 
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.cast.framework.CastButtonFactory;
 import com.google.android.gms.cast.framework.CastContext;
-import com.google.android.gms.cast.framework.CastState;
-import com.google.android.gms.cast.framework.CastStateListener;
-import com.google.android.gms.cast.framework.IntroductoryOverlay;
 import com.google.android.gms.cast.framework.Session;
 import com.google.android.gms.cast.framework.SessionManager;
 import com.google.android.gms.cast.framework.SessionManagerListener;
@@ -23,12 +18,10 @@ import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
     private CastContext castContext;
-    private CastStateListener castStateListener;
-    private MenuItem castMenuItem;
     private SessionManager sessionManager;
     private final SessionManagerListener sessionManagerListener
             = new MainSessionManagerListener();
-    private IntroductoryOverlay introductoryOverlay;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         castContext = CastContext.getSharedInstance(this);
@@ -38,24 +31,17 @@ public class MainActivity extends AppCompatActivity {
         Fabric.with(this, new Crashlytics());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        castStateListener = newState -> {
-            if (newState != CastState.NO_DEVICES_AVAILABLE) {
-                showIntroductoryOverlay();
-            }
-        };
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        castContext.addCastStateListener(castStateListener);
         sessionManager.addSessionManagerListener(sessionManagerListener);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        castContext.removeCastStateListener(castStateListener);
         sessionManager.removeSessionManagerListener(sessionManagerListener);
     }
 
@@ -63,30 +49,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.main, menu);
-        castMenuItem = CastButtonFactory.setUpMediaRouteButton(getApplicationContext(),
-                                                menu,
-                                                R.id.media_route_menu_item);
-        showIntroductoryOverlay();
+        CastButtonFactory.setUpMediaRouteButton(getApplicationContext(),
+                menu,
+                R.id.media_route_menu_item);
         return true;
-    }
-
-    private void showIntroductoryOverlay() {
-        if (introductoryOverlay != null) {
-            introductoryOverlay.remove();
-        }
-        if ((castMenuItem != null) && castMenuItem.isVisible()) {
-            new Handler().post(() -> {
-                introductoryOverlay = new IntroductoryOverlay.Builder(
-                        MainActivity.this, castMenuItem)
-                        .setTitleText(getString(R.string.introducing_cast))
-                        .setOverlayColor(R.color.primary)
-                        .setSingleTime()
-                        .setOnOverlayDismissedListener(
-                                () -> introductoryOverlay = null)
-                        .build();
-                introductoryOverlay.show();
-            });
-        }
     }
 
     private class MainSessionManagerListener implements SessionManagerListener {
