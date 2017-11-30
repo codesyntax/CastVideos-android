@@ -91,7 +91,6 @@
     <!-- Queue -->
     <string name="show_queue">Show Queue</string>
     <string name="queue_list">Queue</string>
-    <string name="transition_image">transition-image</string>
     <string name="queue_empty">Queue is empty!</string>
     <string name="queue_tag_item">queue-tag-item</string>
     <string name="play_now">Play Now</string>

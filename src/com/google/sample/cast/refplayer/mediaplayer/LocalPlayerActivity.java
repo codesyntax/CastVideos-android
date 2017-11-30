@@ -27,6 +27,7 @@ import com.google.android.gms.cast.framework.media.RemoteMediaClient;
 import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.browser.VideoProvider;
 import com.google.sample.cast.refplayer.expandedcontrols.ExpandedControlsActivity;
+import com.google.sample.cast.refplayer.navigation.LocalPlayerActivityNavigator;
 import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
 import com.google.sample.cast.refplayer.settings.CastPreference;
 import com.google.sample.cast.refplayer.ui.DateFormatter;
@@ -140,9 +141,9 @@ public class LocalPlayerActivity extends AppCompatActivity {
         // see what we need to play and where
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            selectedMedia = getIntent().getParcelableExtra("media");
+            selectedMedia = getIntent().getParcelableExtra(LocalPlayerActivityNavigator.EXTRA_MEDIA_INFO);
             setupActionBar();
-            boolean shouldStartPlayback = bundle.getBoolean("shouldStart");
+            boolean shouldStartPlayback = bundle.getBoolean(LocalPlayerActivityNavigator.EXTRA_SHOULD_START);
             int startPosition = bundle.getInt("startPosition", 0);
             mVideoView.setVideoURI(Uri.parse(selectedMedia.getContentId()));
             Log.d(TAG, "Setting url of the VideoView to: " + selectedMedia.getContentId());
@@ -813,7 +814,7 @@ public class LocalPlayerActivity extends AppCompatActivity {
         mControllers = findViewById(R.id.controllers);
         mContainer = findViewById(R.id.container);
         mCoverArt = (ImageView) findViewById(R.id.coverArtView);
-        ViewCompat.setTransitionName(mCoverArt, getString(R.string.transition_image));
+        ViewCompat.setTransitionName(mCoverArt, LocalPlayerActivityNavigator.TRANSITION_IMAGE);
         mPlayCircle = (ImageButton) findViewById(R.id.play_circle);
         mPlayCircle.setOnClickListener(v -> togglePlayback());
         dateAndTimeTextView = (AppCompatTextView) findViewById(R.id.dateAndTime);
