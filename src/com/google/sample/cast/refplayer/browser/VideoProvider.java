@@ -15,18 +15,18 @@
  */
 package com.google.sample.cast.refplayer.browser;
 
+import android.net.Uri;
+import android.util.Log;
+
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaMetadata;
 import com.google.android.gms.cast.MediaTrack;
 import com.google.android.gms.common.images.WebImage;
-import com.google.sample.cast.refplayer.ui.channel.model.VideoListItemViewModel;
+import com.google.gson.internal.bind.util.ISO8601Utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import android.net.Uri;
-import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -34,12 +34,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URLConnection;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -192,12 +190,11 @@ public class VideoProvider {
         movieMetadata.addImage(new WebImage(Uri.parse(imgUrl)));
         movieMetadata.addImage(new WebImage(Uri.parse(bigImageUrl)));
         JSONObject jsonObj = null;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX", Locale.US);
         try {
             jsonObj = new JSONObject();
             jsonObj.put(KEY_DESCRIPTION, subTitle);
             if (date != null) {
-                jsonObj.put(KEY_DATE, simpleDateFormat.format(date));
+                jsonObj.put(KEY_DATE, ISO8601Utils.format(date));
             }
         } catch (JSONException e) {
             Log.e(TAG, "Failed to add description to the json object", e);

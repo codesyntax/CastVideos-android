@@ -3,24 +3,25 @@ package com.google.sample.cast.refplayer.ui;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.google.gson.internal.bind.util.ISO8601Utils;
 import com.google.sample.cast.refplayer.R;
 
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 public class DateFormatter {
-    private static final String DATE_ISO_FORMAT = "yyyy-MM-dd'T'HH:mm:ssXXX";
     private static final String HOUR_FORMAT = "HH:mm";
     private static final String DAY_FORMAT = "dd";
 
     public static String format(String stringDate, Context context) {
         Date date = Calendar.getInstance().getTime();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_ISO_FORMAT, Locale.US);
+        ParsePosition parsePosition = new ParsePosition(0);
         try {
-            date = simpleDateFormat.parse(stringDate);
+            date = ISO8601Utils.parse(stringDate, parsePosition);
         } catch (ParseException e) {
             e.printStackTrace();
         }

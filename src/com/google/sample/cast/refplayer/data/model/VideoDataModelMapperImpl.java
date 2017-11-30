@@ -1,18 +1,17 @@
 package com.google.sample.cast.refplayer.data.model;
 
+import com.google.gson.internal.bind.util.ISO8601Utils;
 import com.google.sample.cast.refplayer.domain.model.Video;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.text.ParsePosition;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.inject.Inject;
 
 public class VideoDataModelMapperImpl implements VideoDataModelMapper {
-    private static final String DATE_ISO_FORMAT = "yyyy-MM-dd'T'HH:mm:ssXXX";
 
     @Inject
     public VideoDataModelMapperImpl() {}
@@ -40,9 +39,9 @@ public class VideoDataModelMapperImpl implements VideoDataModelMapper {
             return null;
         }
         Date result = null;
-        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_ISO_FORMAT, Locale.US);
+        ParsePosition parsePosition = new ParsePosition(0);
         try {
-            result = dateFormat.parse(date);
+            result = ISO8601Utils.parse(date, parsePosition);
         } catch (ParseException e) {
             e.printStackTrace();
         }
