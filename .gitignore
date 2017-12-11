@@ -33,3 +33,6 @@ proguard-project.txt
 .idea
 
 .DS_Store
+
+# Firebase
+google-services.json
