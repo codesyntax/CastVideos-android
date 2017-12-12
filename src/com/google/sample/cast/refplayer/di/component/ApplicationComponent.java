@@ -1,5 +1,6 @@
 package com.google.sample.cast.refplayer.di.component;
 
+import com.codesyntax.jarrion.data.service.TokenService;
 import com.google.sample.cast.refplayer.JarriOnApplication;
 import com.google.sample.cast.refplayer.data.api.CategoryApi;
 import com.google.sample.cast.refplayer.data.api.JarriOnApi;
@@ -24,6 +25,7 @@ public interface ApplicationComponent {
     //SERVICES
     VideoService getVideoService();
     ChannelService getChannelService();
+    TokenService getTokenService();
     //MAPPERS
     VideoDataModelMapper getVideoDataModelMapper();
     ChannelDataModelMapper getChannelDataModelMapper();
