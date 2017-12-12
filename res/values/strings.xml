@@ -122,4 +122,7 @@
         <item>NOV</item>
         <item>DIC</item>
     </string-array>
+
+    <!-- preferences -->
+    <string name="key_shared_preferences">jarrionsharedpreferences</string>
 </resources>
