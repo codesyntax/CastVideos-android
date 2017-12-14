@@ -73,8 +73,8 @@
 
     <!-- JarriOn -->
     <color name="item_station_list_background_text_color">#A00015ff</color>
-    <color name="primary">#f8453b</color>
-    <color name="primary_dark">#c51107</color>
+    <color name="primary">#1E3DC1</color>
+    <color name="primary_dark">#172b82</color>
     <color name="drawer_item_value">#747474</color>
 
 </resources>
