@@ -2,9 +2,12 @@ package com.google.sample.cast.refplayer.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,10 +21,12 @@ import com.google.android.gms.cast.framework.Session;
 import com.google.android.gms.cast.framework.SessionManager;
 import com.google.android.gms.cast.framework.SessionManagerListener;
 import com.google.sample.cast.refplayer.R;
+import com.google.sample.cast.refplayer.ui.channellist.ChannelListListener;
+import com.google.sample.cast.refplayer.ui.channellist.view.ChannelListFragment;
 
 import io.fabric.sdk.android.Fabric;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ChannelListListener {
     private CastContext castContext;
     private SessionManager sessionManager;
     private final SessionManagerListener sessionManagerListener
@@ -29,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private LinearLayout drawerMenu;
+    private LinearLayout channelsDrawerItem;
+    private AppCompatTextView channelsDrawerItemValue;
+    private LinearLayout queueDrawerItem;
+    private LinearLayout notificationsDrawerItem;
+    private LinearLayout aboutDrawerItem;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +50,22 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setupDrawerLayout();
+        setupDrawerItems();
+        setupFragment();
+    }
+
+    private void setupFragment() {
+        FragmentManager f = getSupportFragmentManager();
+        ChannelListFragment channelListFragment = (ChannelListFragment) f.findFragmentById(R.id.fragment_station_list);
+        if (channelListFragment != null) {
+            channelListFragment.setChannelListListener(this);
+        }
+    }
+
+    private void setupDrawerItems() {
+        channelsDrawerItem = (LinearLayout) findViewById(R.id.drawer_item_channels);
+        channelsDrawerItemValue = (AppCompatTextView) findViewById(R.id.drawer_item_channels_value);
+        channelsDrawerItem.setOnClickListener(v -> drawerLayout.closeDrawer(drawerMenu));
     }
 
     private void setupDrawerLayout() {
@@ -98,6 +124,11 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         super.onBackPressed();
+    }
+
+    @Override
+    public void onNumChannelsChanged(int numChannels) {
+        channelsDrawerItemValue.setText(String.valueOf(numChannels));
     }
 
     private class MainSessionManagerListener implements SessionManagerListener {

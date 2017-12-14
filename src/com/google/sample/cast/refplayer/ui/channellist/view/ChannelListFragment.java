@@ -16,6 +16,7 @@ import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.di.component.ApplicationComponent;
 import com.google.sample.cast.refplayer.di.component.DaggerChannelListComponent;
 import com.google.sample.cast.refplayer.navigation.ChannelActivityNavigator;
+import com.google.sample.cast.refplayer.ui.channellist.ChannelListListener;
 import com.google.sample.cast.refplayer.ui.channellist.model.ChannelListItemViewModel;
 import com.google.sample.cast.refplayer.ui.channellist.presenter.ChannelListPresenter;
 
@@ -32,6 +33,7 @@ public class ChannelListFragment extends Fragment
     ChannelListPresenter presenter;
     @Inject
     ChannelActivityNavigator channelActivityNavigator;
+    private ChannelListListener channelListListener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,6 +93,13 @@ public class ChannelListFragment extends Fragment
     @Override
     public void showStations(List<ChannelListItemViewModel> stations) {
         channelListAdapter.setStations(stations);
+        if (channelListListener != null) {
+            channelListListener.onNumChannelsChanged(stations.size());
+        }
+    }
+
+    public void setChannelListListener(ChannelListListener channelListListener) {
+        this.channelListListener = channelListListener;
     }
 
     @Override
