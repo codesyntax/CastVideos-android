@@ -12,12 +12,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.codesyntax.jarrion.data.preferences.DevicePreferences;
 import com.codesyntax.jarrion.di.component.DaggerMainComponent;
+import com.codesyntax.jarrion.navigation.WebviewActivityNavigator;
 import com.codesyntax.jarrion.ui.main.presenter.MainPresenter;
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.cast.MediaQueueItem;
@@ -43,6 +43,7 @@ import javax.inject.Inject;
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity implements ChannelListListener {
+    private static final String ABOUT_URL = "https://mendiak.eus/info/honi-buruz/";
     private CastContext castContext;
     private SessionManager sessionManager;
     private final SessionManagerListener sessionManagerListener
@@ -62,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements ChannelListListen
     DevicePreferences devicePreferences;
     @Inject
     MainPresenter mainPresenter;
+    @Inject
+    WebviewActivityNavigator webviewActivityNavigator;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -104,6 +107,13 @@ public class MainActivity extends AppCompatActivity implements ChannelListListen
         notificationsDrawerItemSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             mainPresenter.setNoitificationsEnabled(isChecked);
         });
+        aboutDrawerItem = (LinearLayout) findViewById(R.id.drawer_item_about);
+        aboutDrawerItem.setOnClickListener(v -> goToAbout());
+    }
+
+    private void goToAbout() {
+        drawerLayout.closeDrawer(drawerMenu);
+        webviewActivityNavigator.navigate(MainActivity.this, ABOUT_URL);
     }
 
     private void goToQueue() {

@@ -88,6 +88,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name="com.codesyntax.jarrion.ui.webview.WebviewActivity"
+            android:screenOrientation="portrait" />
 
         <service
             android:name="com.codesyntax.jarrion.service.messaging.JarrionMessagingService">
