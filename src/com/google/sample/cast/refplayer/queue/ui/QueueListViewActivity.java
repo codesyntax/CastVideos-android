@@ -198,9 +198,6 @@ public class QueueListViewActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                startActivity(new Intent(QueueListViewActivity.this, CastPreference.class));
-                break;
             case R.id.action_clear_queue:
                 QueueDataProvider.getInstance(getApplicationContext()).removeAll();
                 break;
