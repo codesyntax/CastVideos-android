@@ -76,29 +76,16 @@
     <string name="prefs_volume_default">device</string>
     <string name="title_activity_test">TestActivity</string>
 
-    <!-- Tabs -->
-    <string name="tab_videos_title">Videos</string>
-    <string name="tab_music_title">Songs</string>
-    <string name="tab_photos_title">Photos</string>
-
-    <!-- ShowCaseView -->
-    <string name="touch_to_cast">Touch to cast videos to your TV</string>
-
-    <!-- Captions -->
-    <string name="captions_settings">Captions Settings</string>
-    <string name="captions">Captions</string>
-
     <!-- Queue -->
-    <string name="show_queue">Show Queue</string>
-    <string name="queue_list">Queue</string>
-    <string name="queue_empty">Queue is empty!</string>
+    <string name="queue_list">Ilara</string>
+    <string name="queue_empty">Ilara hutsik duzu, gehitu bideo gehiago!</string>
     <string name="queue_tag_item">queue-tag-item</string>
-    <string name="play_now">Play Now</string>
-    <string name="play_next">Play Next</string>
-    <string name="add_to_queue">Add to Queue</string>
-    <string name="action_clear_queue">Clear Queue</string>
-    <string name="queue_item_added_to_play_next">An item was added to play next</string>
-    <string name="queue_item_added_to_queue">An item was added to the queue</string>
+    <string name="play_now">Ikusi orain</string>
+    <string name="play_next">Ikusi jarraian</string>
+    <string name="add_to_queue">Ilarara gehitu</string>
+    <string name="action_clear_queue">Ilara hustu</string>
+    <string name="queue_item_added_to_play_next">Bideoa jarraian ikusiko da</string>
+    <string name="queue_item_added_to_queue">Bideoa gehitu duzu ilarara</string>
 
     <!-- Video list -->
     <string name="video_list_item_date_today">GAUR %s</string>
@@ -109,18 +96,18 @@
 
     <!-- months -->
     <string-array name="months">
-        <item>ENE</item>
-        <item>FEB</item>
+        <item>URT</item>
+        <item>OTS</item>
         <item>MAR</item>
-        <item>ABR</item>
-        <item>MAY</item>
-        <item>JUN</item>
-        <item>JUL</item>
-        <item>AGO</item>
-        <item>SEP</item>
-        <item>OCT</item>
-        <item>NOV</item>
-        <item>DIC</item>
+        <item>API</item>
+        <item>MAI</item>
+        <item>EKA</item>
+        <item>UZT</item>
+        <item>ABU</item>
+        <item>IRA</item>
+        <item>URR</item>
+        <item>AZA</item>
+        <item>ABE</item>
     </string-array>
 
     <!-- preferences -->
