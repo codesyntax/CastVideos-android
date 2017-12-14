@@ -1,10 +1,5 @@
 package com.google.sample.cast.refplayer.di.module;
 
-import com.codesyntax.jarrion.di.scope.ServiceScope;
-import com.codesyntax.jarrion.domain.interactor.RegisterTokenInteractor;
-import com.codesyntax.jarrion.domain.interactor.RegisterTokenInteractorImpl;
-import com.codesyntax.jarrion.domain.interactor.UpdateTokenInteractor;
-import com.codesyntax.jarrion.domain.interactor.UpdateTokenInteractorImpl;
 import com.google.sample.cast.refplayer.di.scope.FragmentScope;
 import com.google.sample.cast.refplayer.domain.interactor.GetChannelsInteractor;
 import com.google.sample.cast.refplayer.domain.interactor.GetChannelsInteractorImpl;

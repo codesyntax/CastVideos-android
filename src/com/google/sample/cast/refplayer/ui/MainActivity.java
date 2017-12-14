@@ -2,9 +2,14 @@ package com.google.sample.cast.refplayer.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.cast.framework.CastButtonFactory;
@@ -21,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     private SessionManager sessionManager;
     private final SessionManagerListener sessionManagerListener
             = new MainSessionManagerListener();
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle drawerToggle;
+    private LinearLayout drawerMenu;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,6 +39,26 @@ public class MainActivity extends AppCompatActivity {
         Fabric.with(this, new Crashlytics());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setupDrawerLayout();
+    }
+
+    private void setupDrawerLayout() {
+        drawerMenu = (LinearLayout) findViewById(R.id.drawer);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close){
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+        };
+        drawerLayout.addDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     @Override
@@ -53,6 +81,23 @@ public class MainActivity extends AppCompatActivity {
                 menu,
                 R.id.media_route_menu_item);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(drawerMenu)) {
+            drawerLayout.closeDrawer(drawerMenu);
+            return;
+        }
+        super.onBackPressed();
     }
 
     private class MainSessionManagerListener implements SessionManagerListener {
