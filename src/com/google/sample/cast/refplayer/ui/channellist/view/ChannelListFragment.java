@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.codesyntax.jarrion.domain.interactor.RegisterTokenInteractor;
 import com.google.sample.cast.refplayer.JarriOnApplication;
 import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.di.component.ApplicationComponent;
@@ -32,6 +33,8 @@ public class ChannelListFragment extends Fragment
     ChannelListPresenter presenter;
     @Inject
     ChannelActivityNavigator channelActivityNavigator;
+    @Inject
+    RegisterTokenInteractor interactor;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

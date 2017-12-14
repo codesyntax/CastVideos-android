@@ -1,5 +1,6 @@
 package com.google.sample.cast.refplayer.di.module;
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.sample.cast.refplayer.data.api.CategoryApi;
 import com.google.sample.cast.refplayer.data.api.JarriOnApi;
 
@@ -8,6 +9,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -34,6 +36,7 @@ public class ApiModule {
         return new Retrofit.Builder()
                 .baseUrl(baseURL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(new OkHttpClient.Builder().addNetworkInterceptor(new StethoInterceptor()).build())
                 .build();
     }
 

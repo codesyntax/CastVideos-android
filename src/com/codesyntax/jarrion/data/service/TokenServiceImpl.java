@@ -1,10 +1,16 @@
 package com.codesyntax.jarrion.data.service;
 
 import com.google.sample.cast.refplayer.data.api.JarriOnApi;
+import com.google.sample.cast.refplayer.data.model.RegisterDeviceRequestBody;
+import com.google.sample.cast.refplayer.data.model.RegisterDeviceResponse;
+import com.google.sample.cast.refplayer.data.model.UpdateDeviceRequestBody;
+import com.google.sample.cast.refplayer.data.model.UpdateDeviceResponse;
 
 import java.io.IOException;
 
 import javax.inject.Inject;
+
+import retrofit2.Response;
 
 public class TokenServiceImpl implements TokenService {
     private final JarriOnApi jarriOnApi;
@@ -18,7 +24,12 @@ public class TokenServiceImpl implements TokenService {
     public String registerToken(String token) {
         String result = null;
         try {
-            result = jarriOnApi.registerToken(token).execute().body();
+            RegisterDeviceRequestBody body = new RegisterDeviceRequestBody.Builder()
+                    .pwtoken(token).build();
+            RegisterDeviceResponse responseBody = jarriOnApi.registerDevice(body).execute().body();
+            if (responseBody != null) {
+                result = responseBody.getDeviceId();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -26,10 +37,18 @@ public class TokenServiceImpl implements TokenService {
     }
 
     @Override
-    public String updateToken(String deviceId, String token) {
-        String result = null;
+    public boolean updateToken(String token, String deviceId, boolean notificationStatus) {
+        boolean result = false;
         try {
-            result = jarriOnApi.updateToken(deviceId, token).execute().body();
+            UpdateDeviceRequestBody body = new UpdateDeviceRequestBody.Builder()
+                    .pwtoken(token)
+                    .uuid(deviceId)
+                    .notificationStatus(notificationStatus)
+                    .build();
+            UpdateDeviceResponse responseBody = jarriOnApi.updateDevice(body).execute().body();
+            if (responseBody != null) {
+                result = responseBody.isUpdated();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

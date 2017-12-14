@@ -2,6 +2,7 @@ package com.google.sample.cast.refplayer;
 
 import android.app.Application;
 
+import com.facebook.stetho.Stetho;
 import com.google.sample.cast.refplayer.di.component.ApplicationComponent;
 import com.google.sample.cast.refplayer.di.component.DaggerApplicationComponent;
 
@@ -19,6 +20,7 @@ public class JarriOnApplication extends Application {
         instance = this;
         component = DaggerApplicationComponent.builder().build();
         component.inject(this);
+        Stetho.initializeWithDefaults(this);
     }
 
     public ApplicationComponent getComponent() {

@@ -19,12 +19,7 @@ public class RegisterTokenInteractorImpl implements RegisterTokenInteractor {
 
     @Override
     public void execute(String token, Callback callback) {
-        String deviceId = devicePreferences.getJarrionDeviceId();
-        if (TextUtils.isEmpty(deviceId)) {
-            deviceId = tokenService.registerToken(token);
-        } else {
-            deviceId = tokenService.updateToken(deviceId, token);
-        }
+        String deviceId = tokenService.registerToken(token);
         if (!TextUtils.isEmpty(deviceId)) {
             devicePreferences.setJarrionDeviceId(deviceId);
             callback.onSuccess(deviceId);
