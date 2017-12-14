@@ -1,7 +1,7 @@
 package com.google.sample.cast.refplayer.di.component;
 
 import com.google.sample.cast.refplayer.di.module.ChannelModule;
-import com.google.sample.cast.refplayer.di.scope.FragmentScope;
+import com.codesyntax.jarrion.di.scope.FragmentScope;
 import com.google.sample.cast.refplayer.ui.channel.view.ChannelFragment;
 
 import dagger.Component;

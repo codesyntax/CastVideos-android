@@ -1,6 +1,6 @@
 package com.google.sample.cast.refplayer.di.module;
 
-import com.google.sample.cast.refplayer.di.scope.FragmentScope;
+import com.codesyntax.jarrion.di.scope.FragmentScope;
 import com.google.sample.cast.refplayer.domain.interactor.GetChannelsInteractor;
 import com.google.sample.cast.refplayer.domain.interactor.GetChannelsInteractorImpl;
 import com.google.sample.cast.refplayer.navigation.ChannelActivityNavigator;

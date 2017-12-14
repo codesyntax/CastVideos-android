@@ -1,0 +1,1240 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 533200896 bytes for committing reserved memory.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   In 32 bit mode, the process size limit was hit
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Use 64 bit Java on a 64 bit OS
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_linux.cpp:2640), pid=32627, tid=0x00007f9c62ac9700
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0_144-b01) (build 1.8.0_144-b01)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.144-b01 mixed mode linux-amd64 compressed oops)
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f9cb4091800):  VMThread [stack: 0x00007f9c629c9000,0x00007f9c62aca000] [id=32646]
+
+Stack: [0x00007f9c629c9000,0x00007f9c62aca000],  sp=0x00007f9c62ac80a0,  free space=1020k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0xacb18a]  VMError::report_and_die()+0x2ba
+V  [libjvm.so+0x4ff4db]  report_vm_out_of_memory(char const*, int, unsigned long, VMErrorType, char const*)+0x8b
+V  [libjvm.so+0x927d23]  os::Linux::commit_memory_impl(char*, unsigned long, bool)+0x103
+V  [libjvm.so+0x928279]  os::pd_commit_memory(char*, unsigned long, unsigned long, bool)+0x29
+V  [libjvm.so+0x92249a]  os::commit_memory(char*, unsigned long, unsigned long, bool)+0x2a
+V  [libjvm.so+0x996ff3]  PSVirtualSpace::expand_by(unsigned long)+0x53
+V  [libjvm.so+0x9878b0]  PSOldGen::expand(unsigned long)+0x170
+V  [libjvm.so+0x987abb]  PSOldGen::resize(unsigned long)+0x1cb
+V  [libjvm.so+0x98f7c1]  PSParallelCompact::invoke_no_policy(bool)+0x991
+V  [libjvm.so+0x99511d]  PSScavenge::invoke()+0x1ad
+V  [libjvm.so+0x94bce0]  ParallelScavengeHeap::failed_mem_allocate(unsigned long)+0x70
+V  [libjvm.so+0xaccba7]  VM_ParallelGCFailedAllocation::doit()+0x97
+V  [libjvm.so+0xad4685]  VM_Operation::evaluate()+0x55
+V  [libjvm.so+0xad2a5a]  VMThread::evaluate_operation(VM_Operation*)+0xba
+V  [libjvm.so+0xad2dde]  VMThread::loop()+0x1ce
+V  [libjvm.so+0xad3250]  VMThread::run()+0x70
+V  [libjvm.so+0x92a338]  java_start(Thread*)+0x108
+
+VM_Operation (0x00007f9cba735ad0): ParallelGCFailedAllocation, mode: safepoint, requested by thread 0x00007f9cb4011000
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00007f9cb46c9800 JavaThread "Jack reporter" [_thread_blocked, id=32664, stack(0x00007f9c600b6000,0x00007f9c601b7000)]
+  0x00007f9cb40fe800 JavaThread "Service Thread" daemon [_thread_blocked, id=32662, stack(0x00007f9c60ffa000,0x00007f9c610fb000)]
+  0x00007f9cb40f3000 JavaThread "C1 CompilerThread11" daemon [_thread_blocked, id=32661, stack(0x00007f9c610fb000,0x00007f9c611fc000)]
+  0x00007f9cb40f1000 JavaThread "C1 CompilerThread10" daemon [_thread_blocked, id=32660, stack(0x00007f9c611fc000,0x00007f9c612fd000)]
+  0x00007f9cb40ef000 JavaThread "C1 CompilerThread9" daemon [_thread_blocked, id=32659, stack(0x00007f9c612fd000,0x00007f9c613fe000)]
+  0x00007f9cb40ec800 JavaThread "C1 CompilerThread8" daemon [_thread_blocked, id=32658, stack(0x00007f9c613fe000,0x00007f9c614ff000)]
+  0x00007f9cb40ea800 JavaThread "C2 CompilerThread7" daemon [_thread_blocked, id=32657, stack(0x00007f9c614ff000,0x00007f9c61600000)]
+  0x00007f9cb40e8800 JavaThread "C2 CompilerThread6" daemon [_thread_blocked, id=32656, stack(0x00007f9c61600000,0x00007f9c61701000)]
+  0x00007f9cb40e6800 JavaThread "C2 CompilerThread5" daemon [_thread_blocked, id=32655, stack(0x00007f9c61701000,0x00007f9c61802000)]
+  0x00007f9cb40dc000 JavaThread "C2 CompilerThread4" daemon [_thread_blocked, id=32654, stack(0x00007f9c61802000,0x00007f9c61903000)]
+  0x00007f9cb40da000 JavaThread "C2 CompilerThread3" daemon [_thread_blocked, id=32653, stack(0x00007f9c61903000,0x00007f9c61a04000)]
+  0x00007f9cb40d8000 JavaThread "C2 CompilerThread2" daemon [_thread_blocked, id=32652, stack(0x00007f9c61a04000,0x00007f9c61b05000)]
+  0x00007f9cb40d6000 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=32651, stack(0x00007f9c61b05000,0x00007f9c61c06000)]
+  0x00007f9cb40d3000 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=32650, stack(0x00007f9c61c06000,0x00007f9c61d07000)]
+  0x00007f9cb40d1800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=32649, stack(0x00007f9c61d07000,0x00007f9c61e08000)]
+  0x00007f9cb409d800 JavaThread "Finalizer" daemon [_thread_blocked, id=32648, stack(0x00007f9c627c7000,0x00007f9c628c8000)]
+  0x00007f9cb4099000 JavaThread "Reference Handler" daemon [_thread_blocked, id=32647, stack(0x00007f9c628c8000,0x00007f9c629c9000)]
+  0x00007f9cb4011000 JavaThread "main" [_thread_blocked, id=32632, stack(0x00007f9cba637000,0x00007f9cba738000)]
+
+Other Threads:
+=>0x00007f9cb4091800 VMThread [stack: 0x00007f9c629c9000,0x00007f9c62aca000] [id=32646]
+  0x00007f9cb4101000 WatcherThread [stack: 0x00007f9c60ef9000,0x00007f9c60ffa000] [id=32663]
+
+VM state:at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00007f9cb400cf30] ExpandHeap_lock - owner thread: 0x00007f9cb4091800
+[0x00007f9cb400d5b0] Threads_lock - owner thread: 0x00007f9cb4091800
+[0x00007f9cb400dab0] Heap_lock - owner thread: 0x00007f9cb4011000
+
+Heap:
+ PSYoungGen      total 931840K, used 0K [0x000000076ab00000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 465920K, 0% used [0x000000076ab00000,0x000000076ab00000,0x0000000787200000)
+  from space 465920K, 0% used [0x0000000787200000,0x0000000787200000,0x00000007a3900000)
+  to   space 465920K, 0% used [0x00000007a3900000,0x00000007a3900000,0x00000007c0000000)
+ ParOldGen       total 1240064K, used 1199458K [0x00000006c0000000, 0x000000070bb00000, 0x000000076ab00000)
+  object space 1240064K, 96% used [0x00000006c0000000,0x00000007093588e8,0x000000070bb00000)
+ Metaspace       used 41119K, capacity 42002K, committed 42328K, reserved 1087488K
+  class space    used 4870K, capacity 5082K, committed 5208K, reserved 1048576K
+
+Card table byte_map: [0x00007f9ca39e4000,0x00007f9ca41e5000] byte_map_base: 0x00007f9ca03e4000
+
+Marking Bits: (ParMarkBitMap*) 0x00007f9cb9b05dc0
+ Begin Bits: [0x00007f9c64000000, 0x00007f9c68000000)
+ End Bits:   [0x00007f9c68000000, 0x00007f9c6c000000)
+
+Polling page: 0x00007f9cba756000
+
+CodeCache: size=245760Kb used=39141Kb max_used=39170Kb free=206618Kb
+ bounds [0x00007f9ca45a5000, 0x00007f9ca6c25000, 0x00007f9cb35a5000]
+ total_blobs=10780 nmethods=10340 adapters=347
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 17,104 Thread 0x00007f9cb40f3000 13058       3       sun.util.calendar.AbstractCalendar::getCalendarDate (217 bytes)
+Event: 17,105 Thread 0x00007f9cb40f3000 nmethod 13058 0x00007f9ca6bc3210 code [0x00007f9ca6bc3440, 0x00007f9ca6bc43d8]
+Event: 17,116 Thread 0x00007f9cb40f1000 13059       3       sun.util.calendar.AbstractCalendar::setTimeOfDay (116 bytes)
+Event: 17,117 Thread 0x00007f9cb40f1000 nmethod 13059 0x00007f9ca6bf2750 code [0x00007f9ca6bf2920, 0x00007f9ca6bf33c8]
+Event: 17,176 Thread 0x00007f9cb40ea800 13060       4       java.io.FileInputStream::read (9 bytes)
+Event: 17,177 Thread 0x00007f9cb40ea800 nmethod 13060 0x00007f9ca6bcda50 code [0x00007f9ca6bcdba0, 0x00007f9ca6bcdc48]
+Event: 17,186 Thread 0x00007f9cb40da000 13061       4       sun.util.calendar.ZoneInfo::getOffsets (276 bytes)
+Event: 17,188 Thread 0x00007f9cb40da000 nmethod 13061 0x00007f9ca6bc15d0 code [0x00007f9ca6bc1740, 0x00007f9ca6bc1a58]
+Event: 17,426 Thread 0x00007f9cb40d8000 13062       4       sun.util.calendar.CalendarDate::<init> (16 bytes)
+Event: 17,427 Thread 0x00007f9cb40d8000 nmethod 13062 0x00007f9ca54a7590 code [0x00007f9ca54a76e0, 0x00007f9ca54a7758]
+
+GC Heap History (10 events):
+Event: 11,345 GC heap after
+Heap after GC invocations=18 (full 5):
+ PSYoungGen      total 1122304K, used 161533K [0x000000076ab00000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 846848K, 0% used [0x000000076ab00000,0x000000076ab00000,0x000000079e600000)
+  from space 275456K, 58% used [0x000000079e600000,0x00000007a83bf6e8,0x00000007af300000)
+  to   space 275456K, 0% used [0x00000007af300000,0x00000007af300000,0x00000007c0000000)
+ ParOldGen       total 1136640K, used 746336K [0x00000006c0000000, 0x0000000705600000, 0x000000076ab00000)
+  object space 1136640K, 65% used [0x00000006c0000000,0x00000006ed8d81a8,0x0000000705600000)
+ Metaspace       used 36739K, capacity 37644K, committed 37976K, reserved 1083392K
+  class space    used 4431K, capacity 4633K, committed 4696K, reserved 1048576K
+}
+Event: 11,789 GC heap before
+{Heap before GC invocations=19 (full 5):
+ PSYoungGen      total 1122304K, used 1008381K [0x000000076ab00000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 846848K, 100% used [0x000000076ab00000,0x000000079e600000,0x000000079e600000)
+  from space 275456K, 58% used [0x000000079e600000,0x00000007a83bf6e8,0x00000007af300000)
+  to   space 275456K, 0% used [0x00000007af300000,0x00000007af300000,0x00000007c0000000)
+ ParOldGen       total 1136640K, used 746358K [0x00000006c0000000, 0x0000000705600000, 0x000000076ab00000)
+  object space 1136640K, 65% used [0x00000006c0000000,0x00000006ed8ddaf0,0x0000000705600000)
+ Metaspace       used 36748K, capacity 37644K, committed 37976K, reserved 1083392K
+  class space    used 4431K, capacity 4633K, committed 4696K, reserved 1048576K
+Event: 12,022 GC heap after
+Heap after GC invocations=19 (full 5):
+ PSYoungGen      total 916480K, used 222327K [0x000000076ab00000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 641024K, 0% used [0x000000076ab00000,0x000000076ab00000,0x0000000791d00000)
+  from space 275456K, 80% used [0x00000007af300000,0x00000007bcc1df10,0x00000007c0000000)
+  to   space 378368K, 0% used [0x0000000791d00000,0x0000000791d00000,0x00000007a8e80000)
+ ParOldGen       total 1136640K, used 908253K [0x00000006c0000000, 0x0000000705600000, 0x000000076ab00000)
+  object space 1136640K, 79% used [0x00000006c0000000,0x00000006f76f7528,0x0000000705600000)
+ Metaspace       used 36748K, capacity 37644K, committed 37976K, reserved 1083392K
+  class space    used 4431K, capacity 4633K, committed 4696K, reserved 1048576K
+}
+Event: 13,049 GC heap before
+{Heap before GC invocations=20 (full 5):
+ PSYoungGen      total 916480K, used 863351K [0x000000076ab00000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 641024K, 100% used [0x000000076ab00000,0x0000000791d00000,0x0000000791d00000)
+  from space 275456K, 80% used [0x00000007af300000,0x00000007bcc1df10,0x00000007c0000000)
+  to   space 378368K, 0% used [0x0000000791d00000,0x0000000791d00000,0x00000007a8e80000)
+ ParOldGen       total 1136640K, used 908255K [0x00000006c0000000, 0x0000000705600000, 0x000000076ab00000)
+  object space 1136640K, 79% used [0x00000006c0000000,0x00000006f76f7e40,0x0000000705600000)
+ Metaspace       used 39314K, capacity 40202K, committed 40408K, reserved 1085440K
+  class space    used 4770K, capacity 4990K, committed 5080K, reserved 1048576K
+Event: 13,156 GC heap after
+Heap after GC invocations=20 (full 5):
+ PSYoungGen      total 973824K, used 332591K [0x000000076ab00000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 641024K, 0% used [0x000000076ab00000,0x000000076ab00000,0x0000000791d00000)
+  from space 332800K, 99% used [0x0000000791d00000,0x00000007a61cbe98,0x00000007a6200000)
+  to   space 423936K, 0% used [0x00000007a6200000,0x00000007a6200000,0x00000007c0000000)
+ ParOldGen       total 1136640K, used 908255K [0x00000006c0000000, 0x0000000705600000, 0x000000076ab00000)
+  object space 1136640K, 79% used [0x00000006c0000000,0x00000006f76f7e40,0x0000000705600000)
+ Metaspace       used 39314K, capacity 40202K, committed 40408K, reserved 1085440K
+  class space    used 4770K, capacity 4990K, committed 5080K, reserved 1048576K
+}
+Event: 14,859 GC heap before
+{Heap before GC invocations=21 (full 5):
+ PSYoungGen      total 973824K, used 973615K [0x000000076ab00000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 641024K, 100% used [0x000000076ab00000,0x0000000791d00000,0x0000000791d00000)
+  from space 332800K, 99% used [0x0000000791d00000,0x00000007a61cbe98,0x00000007a6200000)
+  to   space 423936K, 0% used [0x00000007a6200000,0x00000007a6200000,0x00000007c0000000)
+ ParOldGen       total 1136640K, used 908255K [0x00000006c0000000, 0x0000000705600000, 0x000000076ab00000)
+  object space 1136640K, 79% used [0x00000006c0000000,0x00000006f76f7e40,0x0000000705600000)
+ Metaspace       used 40590K, capacity 41450K, committed 41688K, reserved 1085440K
+  class space    used 4825K, capacity 5022K, committed 5080K, reserved 1048576K
+Event: 15,003 GC heap after
+Heap after GC invocations=21 (full 5):
+ PSYoungGen      total 889856K, used 423921K [0x000000076ab00000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 465920K, 0% used [0x000000076ab00000,0x000000076ab00000,0x0000000787200000)
+  from space 423936K, 99% used [0x00000007a6200000,0x00000007bfffc5d8,0x00000007c0000000)
+  to   space 465920K, 0% used [0x0000000787200000,0x0000000787200000,0x00000007a3900000)
+ ParOldGen       total 1136640K, used 930563K [0x00000006c0000000, 0x0000000705600000, 0x000000076ab00000)
+  object space 1136640K, 81% used [0x00000006c0000000,0x00000006f8cc0c88,0x0000000705600000)
+ Metaspace       used 40590K, capacity 41450K, committed 41688K, reserved 1085440K
+  class space    used 4825K, capacity 5022K, committed 5080K, reserved 1048576K
+}
+Event: 17,608 GC heap before
+{Heap before GC invocations=22 (full 5):
+ PSYoungGen      total 889856K, used 889841K [0x000000076ab00000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 465920K, 100% used [0x000000076ab00000,0x0000000787200000,0x0000000787200000)
+  from space 423936K, 99% used [0x00000007a6200000,0x00000007bfffc5d8,0x00000007c0000000)
+  to   space 465920K, 0% used [0x0000000787200000,0x0000000787200000,0x00000007a3900000)
+ ParOldGen       total 1136640K, used 930563K [0x00000006c0000000, 0x0000000705600000, 0x000000076ab00000)
+  object space 1136640K, 81% used [0x00000006c0000000,0x00000006f8cc0c88,0x0000000705600000)
+ Metaspace       used 41134K, capacity 42026K, committed 42328K, reserved 1087488K
+  class space    used 4872K, capacity 5086K, committed 5208K, reserved 1048576K
+Event: 17,845 GC heap after
+Heap after GC invocations=22 (full 5):
+ PSYoungGen      total 931840K, used 23150K [0x000000076ab00000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 465920K, 0% used [0x000000076ab00000,0x000000076ab00000,0x0000000787200000)
+  from space 465920K, 4% used [0x0000000787200000,0x000000078889ba18,0x00000007a3900000)
+  to   space 465920K, 0% used [0x00000007a3900000,0x00000007a3900000,0x00000007c0000000)
+ ParOldGen       total 1240064K, used 1239902K [0x00000006c0000000, 0x000000070bb00000, 0x000000076ab00000)
+  object space 1240064K, 99% used [0x00000006c0000000,0x000000070bad7ac8,0x000000070bb00000)
+ Metaspace       used 41134K, capacity 42026K, committed 42328K, reserved 1087488K
+  class space    used 4872K, capacity 5086K, committed 5208K, reserved 1048576K
+}
+Event: 17,846 GC heap before
+{Heap before GC invocations=23 (full 6):
+ PSYoungGen      total 931840K, used 23150K [0x000000076ab00000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 465920K, 0% used [0x000000076ab00000,0x000000076ab00000,0x0000000787200000)
+  from space 465920K, 4% used [0x0000000787200000,0x000000078889ba18,0x00000007a3900000)
+  to   space 465920K, 0% used [0x00000007a3900000,0x00000007a3900000,0x00000007c0000000)
+ ParOldGen       total 1240064K, used 1239902K [0x00000006c0000000, 0x000000070bb00000, 0x000000076ab00000)
+  object space 1240064K, 99% used [0x00000006c0000000,0x000000070bad7ac8,0x000000070bb00000)
+ Metaspace       used 41134K, capacity 42026K, committed 42328K, reserved 1087488K
+  class space    used 4872K, capacity 5086K, committed 5208K, reserved 1048576K
+
+Deoptimization events (10 events):
+Event: 16,719 Thread 0x00007f9cb4011000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f9ca61dd96c method=java.util.zip.DeflaterOutputStream.deflate()V @ 32
+Event: 16,719 Thread 0x00007f9cb4011000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f9ca61dd96c method=java.util.zip.DeflaterOutputStream.deflate()V @ 32
+Event: 16,719 Thread 0x00007f9cb4011000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f9ca61dd96c method=java.util.zip.DeflaterOutputStream.deflate()V @ 32
+Event: 16,719 Thread 0x00007f9cb4011000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f9ca61dd96c method=java.util.zip.DeflaterOutputStream.deflate()V @ 32
+Event: 16,789 Thread 0x00007f9cb4011000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f9ca6b61194 method=com.android.sched.vfs.BaseVFile.getOutputStream()Ljava/io/OutputStream; @ 2
+Event: 16,789 Thread 0x00007f9cb4011000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f9ca6b61194 method=com.android.sched.vfs.BaseVFile.getOutputStream()Ljava/io/OutputStream; @ 2
+Event: 16,789 Thread 0x00007f9cb4011000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f9ca6b61194 method=com.android.sched.vfs.BaseVFile.getOutputStream()Ljava/io/OutputStream; @ 2
+Event: 16,790 Thread 0x00007f9cb4011000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f9ca6b61194 method=com.android.sched.vfs.BaseVFile.getOutputStream()Ljava/io/OutputStream; @ 2
+Event: 17,103 Thread 0x00007f9cb4011000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f9ca6bbfe6c method=sun.util.calendar.CalendarDate.setMillis(I)Lsun/util/calendar/CalendarDate; @ 5
+Event: 17,103 Thread 0x00007f9cb4011000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f9ca6ba77d8 method=sun.util.calendar.CalendarDate.setMillis(I)Lsun/util/calendar/CalendarDate; @ 5
+
+Internal exceptions (10 events):
+Event: 5,794 Thread 0x00007f9cb4870800 Implicit null exception at 0x00007f9ca5889311 to 0x00007f9ca58893d1
+Event: 5,818 Thread 0x00007f9cb4870800 Implicit null exception at 0x00007f9ca4e9eaf4 to 0x00007f9ca4e9eb4d
+Event: 6,212 Thread 0x00007f9cb41b4000 Implicit null exception at 0x00007f9ca5e110e0 to 0x00007f9ca5e123a5
+Event: 6,212 Thread 0x00007f9cb41af800 Implicit null exception at 0x00007f9ca5e110e0 to 0x00007f9ca5e123a5
+Event: 6,222 Thread 0x00007f9cb517c800 Implicit null exception at 0x00007f9ca5e0e0e0 to 0x00007f9ca5e0f3a5
+Event: 6,785 Thread 0x00007f9cb41b5000 Implicit null exception at 0x00007f9ca5ec9e3b to 0x00007f9ca5ed0969
+Event: 6,941 Thread 0x00007f9cb41b1800 Implicit null exception at 0x00007f9ca5f1cac0 to 0x00007f9ca5f2442d
+Event: 12,881 Thread 0x00007f9cb517d000 Implicit null exception at 0x00007f9ca4eaf49e to 0x00007f9ca4eb0d2d
+Event: 13,201 Thread 0x00007f9cb517f800 Implicit null exception at 0x00007f9ca4eb32b2 to 0x00007f9ca4eb4aad
+Event: 16,291 Thread 0x00007f9cb5180800 Implicit null exception at 0x00007f9ca6af918a to 0x00007f9ca6afaeb9
+
+Events (10 events):
+Event: 16,790 Thread 0x00007f9cb4011000 Uncommon trap: trap_request=0xffffffde fr.pc=0x00007f9ca6b61194
+Event: 16,790 Thread 0x00007f9cb4011000 DEOPT PACKING pc=0x00007f9ca6b61194 sp=0x00007f9cba735e20
+Event: 16,790 Thread 0x00007f9cb4011000 DEOPT UNPACKING pc=0x00007f9ca45aa229 sp=0x00007f9cba735dd0 mode 2
+Event: 17,103 Thread 0x00007f9cb4011000 Uncommon trap: trap_request=0xffffff65 fr.pc=0x00007f9ca6bbfe6c
+Event: 17,103 Thread 0x00007f9cb4011000 DEOPT PACKING pc=0x00007f9ca6bbfe6c sp=0x00007f9cba735c00
+Event: 17,103 Thread 0x00007f9cb4011000 DEOPT UNPACKING pc=0x00007f9ca45aa229 sp=0x00007f9cba735aa8 mode 2
+Event: 17,103 Thread 0x00007f9cb4011000 Uncommon trap: trap_request=0xffffff65 fr.pc=0x00007f9ca6ba77d8
+Event: 17,103 Thread 0x00007f9cb4011000 DEOPT PACKING pc=0x00007f9ca6ba77d8 sp=0x00007f9cba735b40
+Event: 17,103 Thread 0x00007f9cb4011000 DEOPT UNPACKING pc=0x00007f9ca45aa229 sp=0x00007f9cba735a98 mode 2
+Event: 17,607 Executing VM operation: ParallelGCFailedAllocation
+
+
+Dynamic libraries:
+00400000-00401000 r-xp 00000000 103:06 462126                            /usr/lib/jvm/java-8-oracle/bin/java
+00600000-00601000 rw-p 00000000 103:06 462126                            /usr/lib/jvm/java-8-oracle/bin/java
+00748000-00769000 rw-p 00000000 00:00 0                                  [heap]
+6c0000000-70bb00000 rw-p 00000000 00:00 0 
+72b780000-76ab00000 ---p 00000000 00:00 0 
+76ab00000-7c0000000 rw-p 00000000 00:00 0 
+7c0000000-7c0516000 rw-p 00000000 00:00 0 
+7c0516000-800000000 ---p 00000000 00:00 0 
+7f9bb4000000-7f9bb7c71000 rw-p 00000000 00:00 0 
+7f9bb7c71000-7f9bb8000000 ---p 00000000 00:00 0 
+7f9bbc000000-7f9bc3ffa000 rw-p 00000000 00:00 0 
+7f9bc3ffa000-7f9bc4000000 ---p 00000000 00:00 0 
+7f9bc4000000-7f9bc7f1c000 rw-p 00000000 00:00 0 
+7f9bc7f1c000-7f9bc8000000 ---p 00000000 00:00 0 
+7f9bc8000000-7f9bca1cb000 rw-p 00000000 00:00 0 
+7f9bca1cb000-7f9bcc000000 ---p 00000000 00:00 0 
+7f9bcc000000-7f9bce490000 rw-p 00000000 00:00 0 
+7f9bce490000-7f9bd0000000 ---p 00000000 00:00 0 
+7f9bd0000000-7f9bd3ffe000 rw-p 00000000 00:00 0 
+7f9bd3ffe000-7f9bd4000000 ---p 00000000 00:00 0 
+7f9bd4000000-7f9bd5b57000 rw-p 00000000 00:00 0 
+7f9bd5b57000-7f9bd8000000 ---p 00000000 00:00 0 
+7f9bd8000000-7f9bd9d05000 rw-p 00000000 00:00 0 
+7f9bd9d05000-7f9bdc000000 ---p 00000000 00:00 0 
+7f9bdc000000-7f9bddd4c000 rw-p 00000000 00:00 0 
+7f9bddd4c000-7f9be0000000 ---p 00000000 00:00 0 
+7f9be0000000-7f9be224e000 rw-p 00000000 00:00 0 
+7f9be224e000-7f9be4000000 ---p 00000000 00:00 0 
+7f9be4000000-7f9be5e79000 rw-p 00000000 00:00 0 
+7f9be5e79000-7f9be8000000 ---p 00000000 00:00 0 
+7f9be8000000-7f9bebfff000 rw-p 00000000 00:00 0 
+7f9bebfff000-7f9bec000000 ---p 00000000 00:00 0 
+7f9bec000000-7f9bedc1b000 rw-p 00000000 00:00 0 
+7f9bedc1b000-7f9bf0000000 ---p 00000000 00:00 0 
+7f9bf0000000-7f9bf2224000 rw-p 00000000 00:00 0 
+7f9bf2224000-7f9bf4000000 ---p 00000000 00:00 0 
+7f9bf4000000-7f9bf614c000 rw-p 00000000 00:00 0 
+7f9bf614c000-7f9bf8000000 ---p 00000000 00:00 0 
+7f9bf8000000-7f9bfa18c000 rw-p 00000000 00:00 0 
+7f9bfa18c000-7f9bfc000000 ---p 00000000 00:00 0 
+7f9bfc000000-7f9bfe2ed000 rw-p 00000000 00:00 0 
+7f9bfe2ed000-7f9c00000000 ---p 00000000 00:00 0 
+7f9c00000000-7f9c01e7f000 rw-p 00000000 00:00 0 
+7f9c01e7f000-7f9c04000000 ---p 00000000 00:00 0 
+7f9c04000000-7f9c05ea8000 rw-p 00000000 00:00 0 
+7f9c05ea8000-7f9c08000000 ---p 00000000 00:00 0 
+7f9c080fa000-7f9c0813a000 rw-p 00000000 00:00 0 
+7f9c0813a000-7f9c082fa000 ---p 00000000 00:00 0 
+7f9c082fa000-7f9c084fa000 rw-p 00000000 00:00 0 
+7f9c084fa000-7f9c086fa000 rw-p 00000000 00:00 0 
+7f9c086fa000-7f9c086fd000 ---p 00000000 00:00 0 
+7f9c086fd000-7f9c088fb000 rw-p 00000000 00:00 0 
+7f9c088fb000-7f9c088fe000 ---p 00000000 00:00 0 
+7f9c088fe000-7f9c08afc000 rw-p 00000000 00:00 0 
+7f9c08afc000-7f9c08aff000 ---p 00000000 00:00 0 
+7f9c08aff000-7f9c08cfd000 rw-p 00000000 00:00 0 
+7f9c08cfd000-7f9c08d00000 ---p 00000000 00:00 0 
+7f9c08d00000-7f9c0beff000 rw-p 00000000 00:00 0 
+7f9c0c000000-7f9c0e02d000 rw-p 00000000 00:00 0 
+7f9c0e02d000-7f9c10000000 ---p 00000000 00:00 0 
+7f9c1018f000-7f9c10192000 ---p 00000000 00:00 0 
+7f9c10192000-7f9c10390000 rw-p 00000000 00:00 0 
+7f9c10390000-7f9c10393000 ---p 00000000 00:00 0 
+7f9c10393000-7f9c10591000 rw-p 00000000 00:00 0 
+7f9c10591000-7f9c10594000 ---p 00000000 00:00 0 
+7f9c10594000-7f9c10792000 rw-p 00000000 00:00 0 
+7f9c10792000-7f9c10795000 ---p 00000000 00:00 0 
+7f9c10795000-7f9c10993000 rw-p 00000000 00:00 0 
+7f9c10993000-7f9c10996000 ---p 00000000 00:00 0 
+7f9c10996000-7f9c10b94000 rw-p 00000000 00:00 0 
+7f9c10b94000-7f9c10b97000 ---p 00000000 00:00 0 
+7f9c10b97000-7f9c10d95000 rw-p 00000000 00:00 0 
+7f9c10d95000-7f9c10d98000 ---p 00000000 00:00 0 
+7f9c10d98000-7f9c10f96000 rw-p 00000000 00:00 0 
+7f9c10f96000-7f9c10f99000 ---p 00000000 00:00 0 
+7f9c10f99000-7f9c11197000 rw-p 00000000 00:00 0 
+7f9c11197000-7f9c1119a000 ---p 00000000 00:00 0 
+7f9c1119a000-7f9c11398000 rw-p 00000000 00:00 0 
+7f9c11398000-7f9c1139b000 ---p 00000000 00:00 0 
+7f9c1139b000-7f9c11599000 rw-p 00000000 00:00 0 
+7f9c11599000-7f9c1159c000 ---p 00000000 00:00 0 
+7f9c1159c000-7f9c1179a000 rw-p 00000000 00:00 0 
+7f9c1179a000-7f9c1179d000 ---p 00000000 00:00 0 
+7f9c1179d000-7f9c11b9b000 rw-p 00000000 00:00 0 
+7f9c11b9b000-7f9c11d9b000 rw-p 00000000 00:00 0 
+7f9c11d9b000-7f9c11f9b000 rw-p 00000000 00:00 0 
+7f9c11f9b000-7f9c1219b000 rw-p 00000000 00:00 0 
+7f9c1219b000-7f9c1239b000 rw-p 00000000 00:00 0 
+7f9c1239b000-7f9c123b1000 r-xp 00000000 103:06 461902                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnet.so
+7f9c123b1000-7f9c125b1000 ---p 00016000 103:06 461902                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnet.so
+7f9c125b1000-7f9c125b2000 rw-p 00016000 103:06 461902                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnet.so
+7f9c125b2000-7f9c125c3000 r-xp 00000000 103:06 461927                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnio.so
+7f9c125c3000-7f9c127c2000 ---p 00011000 103:06 461927                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnio.so
+7f9c127c2000-7f9c127c3000 rw-p 00010000 103:06 461927                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnio.so
+7f9c127c3000-7f9c129c3000 rw-p 00000000 00:00 0 
+7f9c129c3000-7f9c12bc3000 rw-p 00000000 00:00 0 
+7f9c12bc3000-7f9c12bf2000 r--s 00239000 103:07 1578954                   /home/quique/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/21.0/3a3d111be1be1b745edfa7d91678a12d7ed38709/guava-21.0.jar
+7f9c12bf2000-7f9c12df2000 rw-p 00000000 00:00 0 
+7f9c12df2000-7f9c12ff2000 rw-p 00000000 00:00 0 
+7f9c12ff2000-7f9c12ff5000 ---p 00000000 00:00 0 
+7f9c12ff5000-7f9c130f3000 rw-p 00000000 00:00 0 
+7f9c132f5000-7f9c132f8000 ---p 00000000 00:00 0 
+7f9c132f8000-7f9c133f6000 rw-p 00000000 00:00 0 
+7f9c136f9000-7f9c136fc000 ---p 00000000 00:00 0 
+7f9c136fc000-7f9c137fa000 rw-p 00000000 00:00 0 
+7f9c137fa000-7f9c137fd000 ---p 00000000 00:00 0 
+7f9c137fd000-7f9c138fb000 rw-p 00000000 00:00 0 
+7f9c138fb000-7f9c138fe000 ---p 00000000 00:00 0 
+7f9c138fe000-7f9c139fc000 rw-p 00000000 00:00 0 
+7f9c139fc000-7f9c139ff000 ---p 00000000 00:00 0 
+7f9c139ff000-7f9c13afd000 rw-p 00000000 00:00 0 
+7f9c13bfe000-7f9c13c01000 ---p 00000000 00:00 0 
+7f9c13c01000-7f9c13cff000 rw-p 00000000 00:00 0 
+7f9c13e00000-7f9c14000000 rw-p 00000000 00:00 0 
+7f9c14000000-7f9c14021000 rw-p 00000000 00:00 0 
+7f9c14021000-7f9c18000000 ---p 00000000 00:00 0 
+7f9c18000000-7f9c18021000 rw-p 00000000 00:00 0 
+7f9c18021000-7f9c1c000000 ---p 00000000 00:00 0 
+7f9c1c000000-7f9c1c560000 rw-p 00000000 00:00 0 
+7f9c1c560000-7f9c20000000 ---p 00000000 00:00 0 
+7f9c20000000-7f9c20021000 rw-p 00000000 00:00 0 
+7f9c20021000-7f9c24000000 ---p 00000000 00:00 0 
+7f9c24000000-7f9c2455d000 rw-p 00000000 00:00 0 
+7f9c2455d000-7f9c28000000 ---p 00000000 00:00 0 
+7f9c28000000-7f9c28736000 rw-p 00000000 00:00 0 
+7f9c28736000-7f9c2c000000 ---p 00000000 00:00 0 
+7f9c2c000000-7f9c2cf4d000 rw-p 00000000 00:00 0 
+7f9c2cf4d000-7f9c30000000 ---p 00000000 00:00 0 
+7f9c30000000-7f9c308a4000 rw-p 00000000 00:00 0 
+7f9c308a4000-7f9c34000000 ---p 00000000 00:00 0 
+7f9c34000000-7f9c350e3000 rw-p 00000000 00:00 0 
+7f9c350e3000-7f9c38000000 ---p 00000000 00:00 0 
+7f9c38000000-7f9c398ea000 rw-p 00000000 00:00 0 
+7f9c398ea000-7f9c3c000000 ---p 00000000 00:00 0 
+7f9c3c000000-7f9c3d86e000 rw-p 00000000 00:00 0 
+7f9c3d86e000-7f9c40000000 ---p 00000000 00:00 0 
+7f9c40000000-7f9c41695000 rw-p 00000000 00:00 0 
+7f9c41695000-7f9c44000000 ---p 00000000 00:00 0 
+7f9c44000000-7f9c44dbb000 rw-p 00000000 00:00 0 
+7f9c44dbb000-7f9c48000000 ---p 00000000 00:00 0 
+7f9c48000000-7f9c48fcf000 rw-p 00000000 00:00 0 
+7f9c48fcf000-7f9c4c000000 ---p 00000000 00:00 0 
+7f9c4c000000-7f9c4c021000 rw-p 00000000 00:00 0 
+7f9c4c021000-7f9c50000000 ---p 00000000 00:00 0 
+7f9c50000000-7f9c50e9c000 rw-p 00000000 00:00 0 
+7f9c50e9c000-7f9c54000000 ---p 00000000 00:00 0 
+7f9c54000000-7f9c54021000 rw-p 00000000 00:00 0 
+7f9c54021000-7f9c58000000 ---p 00000000 00:00 0 
+7f9c58000000-7f9c58021000 rw-p 00000000 00:00 0 
+7f9c58021000-7f9c5c000000 ---p 00000000 00:00 0 
+7f9c5c000000-7f9c5c299000 rw-p 00000000 00:00 0 
+7f9c5c299000-7f9c60000000 ---p 00000000 00:00 0 
+7f9c60027000-7f9c60028000 r--s 00000000 103:07 2366742                   /home/quique/.gradle/caches/modules-2/files-2.1/org.reactivestreams/reactive-streams/1.0.1/1b1c911686eb40179219466e6a59b634b9d7a748/reactive-streams-1.0.1.jar
+7f9c60028000-7f9c6002b000 r--s 00013000 103:07 786705                    /home/quique/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.1.0/2de7cd8b95b7021b1d597f049bcb422055119f2c/retrofit-2.1.0.jar
+7f9c6002b000-7f9c60030000 r--s 00034000 103:07 1314951                   /home/quique/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.7/751f548c85fa49f330cecbb1875893f971b33c4e/gson-2.7.jar
+7f9c60030000-7f9c60032000 r--s 00003000 103:07 1706818                   /home/quique/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.1/f7be08ec23c21485b9b5a1cf1654c2ec8c58168d/jsr305-3.0.1.jar
+7f9c60032000-7f9c60034000 r--s 00009000 103:07 787361                    /home/quique/.gradle/caches/modules-2/files-2.1/commons-cli/commons-cli/1.2/2bf96b7aa8b611c177d329452af1dc933e14501c/commons-cli-1.2.jar
+7f9c60034000-7f9c60036000 r--s 00017000 103:07 5512489                   /home/quique/.gradle/caches/modules-2/files-2.1/com.googlecode.android-query/android-query/0.25.9/fff82e4e1e56b60d6eb1d5487dbd3d3b526b635f/android-query-0.25.9.jar
+7f9c60036000-7f9c60037000 r--s 00001000 103:07 786709                    /home/quique/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-gson/2.1.0/aa557d71ead91cbf26e0c316a0f593d168303309/converter-gson-2.1.0.jar
+7f9c60037000-7f9c60065000 r--s 001e4000 103:07 2366963                   /home/quique/.gradle/caches/modules-2/files-2.1/io.reactivex.rxjava2/rxjava/2.1.6/596a6b4752ca6ec511a167e92b6387654f32023b/rxjava-2.1.6.jar
+7f9c60065000-7f9c60067000 r--s 00015000 103:07 6165223                   /home/quique/.gradle/caches/modules-2/files-2.1/com.squareup/javapoet/1.8.0/e858dc62ef484048540d27d36f3ec2177a3fa9b1/javapoet-1.8.0.jar
+7f9c60067000-7f9c60092000 r--s 0028a000 103:07 5251211                   /home/quique/.gradle/caches/modules-2/files-2.1/com.google.errorprone/javac-shaded/9-dev-r4023-3/72b688efd290280a0afde5f9892b0fde6f362d1d/javac-shaded-9-dev-r4023-3.jar
+7f9c60092000-7f9c60096000 r--s 00033000 103:07 1980632                   /home/quique/.gradle/caches/modules-2/files-2.1/com.google.googlejavaformat/google-java-format/1.4/c2f8925850e17caa6da0ed1891a9e9de9414c062/google-java-format-1.4.jar
+7f9c60096000-7f9c60098000 r--s 00011000 103:07 2229710                   /home/quique/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.9.0/f824591a0016efbaeddb8300bee54832a1398cfa/okio-1.9.0.jar
+7f9c60098000-7f9c6009a000 r--s 00004000 103:07 3538993                   /home/quique/.gradle/caches/modules-2/files-2.1/com.android.support/support-annotations/25.4.0/f6a2fc748ae3769633dea050563e1613e93c135e/support-annotations-25.4.0.jar
+7f9c6009a000-7f9c6009b000 r--s 00000000 103:07 786717                    /home/quique/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar
+7f9c6009b000-7f9c600a1000 r--s 0004f000 103:07 2229715                   /home/quique/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.4.2/ccde00f7ccc77af5a6d5752e2cb21f6d8998289f/okhttp-3.4.2.jar
+7f9c600a1000-7f9c600a2000 r--s 00001000 103:07 2098063                   /home/quique/.gradle/caches/modules-2/files-2.1/javax.annotation/jsr250-api/1.0/5025422767732a1ab45d93abfea846513d742dcf/jsr250-api-1.0.jar
+7f9c600a2000-7f9c600a4000 r--s 00008000 103:07 1185285                   /home/quique/.gradle/caches/modules-2/files-2.1/com.google.dagger/dagger/2.12/df1adf9e06a0d439acd3b0847fe19f6f524f9d35/dagger-2.12.jar
+7f9c600a4000-7f9c600a7000 r--s 0001b000 103:07 2098065                   /home/quique/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar
+7f9c600a7000-7f9c600aa000 r--s 0000e000 103:07 2236455                   /home/quique/.gradle/caches/modules-2/files-2.1/com.google.dagger/dagger-producers/2.12/c7f1f2664c4ea66a2c420691fcadb787f30e33c6/dagger-producers-2.12.jar
+7f9c600aa000-7f9c600b6000 r--s 000ac000 103:07 1311756                   /home/quique/.gradle/caches/modules-2/files-2.1/com.google.dagger/dagger-compiler/2.12/c3ac230a066f977d7a2eb6c2ec64927f53f1a0d0/dagger-compiler-2.12.jar
+7f9c600b6000-7f9c600b9000 ---p 00000000 00:00 0 
+7f9c600b9000-7f9c603b7000 rw-p 00000000 00:00 0 
+7f9c603b7000-7f9c603c2000 r--s 0006e000 103:07 2631647                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackRuntimeLibraries/debug/jars/8000/40/org.apache.http.legacy-b2de37e37c8a14c68c81f88bc11c429f57eec8f8.jar
+7f9c603c2000-7f9c6041a000 r--s 0053e000 103:07 2631646                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackRuntimeLibraries/debug/jars/8000/40/android-e4c09924f89e84e3d2c8af41831956288a9c97d7.jar
+7f9c6041a000-7f9c60424000 r--s 0010d000 103:07 2631611                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/okhttp-3.4.2-c299916ebc83c70b5e7c7f2d4cf12d99d062df80.jar
+7f9c60424000-7f9c6042c000 r--s 0007d000 103:07 2631606                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-23bae329b3fbd54e93107881ce05c80d1ca624f1.jar
+7f9c6042c000-7f9c6042e000 r--s 00024000 103:07 2631588                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-234834ecfc56b5323e5dfa653001f8ce6d0c16a2.jar
+7f9c6042e000-7f9c60439000 r--s 000aa000 103:07 2631624                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-a30bc9fa6e7afe9af41dd0bf8576efce0748ed45.jar
+7f9c60439000-7f9c60443000 r--s 00137000 103:07 2631621                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-71c22c6a0f2d0519f5e6ce4e9ee092d2a52e81a8.jar
+7f9c60443000-7f9c60456000 r--s 000f7000 103:07 2631618                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-75bdd6f2dfa50a4368fd0c2b824be554dab0eca4.jar
+7f9c60456000-7f9c6045b000 r--s 0003d000 103:07 2631594                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/retrofit-2.1.0-8f75b14e029aec2ddf473c0ba50f38184a13a3e8.jar
+7f9c6045b000-7f9c6045d000 r--s 00003000 103:07 2631597                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-8cc1b9eb00352415502e7e9a2827046cab953c75.jar
+7f9c6045d000-7f9c60460000 r--s 0000d000 103:07 2631630                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/support-annotations-25.4.0-b77e22e8fdd0e3151840e90782278d714f95f625.jar
+7f9c60460000-7f9c60462000 r--s 0000c000 103:07 2631607                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-e057ba9b0f285da75e5cf3dbf6bab6ce8c9cd929.jar
+7f9c60462000-7f9c6048c000 r--s 00210000 103:07 2631609                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-0ed06d0553c03dbad7c2ab2340ff5a7b52d0f563.jar
+7f9c6048c000-7f9c60490000 r--s 00031000 103:07 2631627                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-dc309b070c9ad1334399b565b5034f8d3f237261.jar
+7f9c60490000-7f9c604a5000 r--s 00212000 103:07 2631617                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-e1071918548f30f6ddef791782deef38b6ac4fad.jar
+7f9c604a5000-7f9c604a8000 r--s 0001b000 103:07 2631615                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/commons-cli-1.2-bac94ae30fb95249a1e8cb98d455819f5d41b321.jar
+7f9c604a8000-7f9c604a9000 r--s 00000000 103:07 2631634                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-91f1f9f0dfff439cbd2e0ef724e756aa461c32f9.jar
+7f9c604a9000-7f9c604c8000 r--s 00156000 103:07 2631586                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-64158854314e332b22c03acbf94a87b7df849827.jar
+7f9c604c8000-7f9c604ca000 r--s 00012000 103:07 2631631                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-755c9195d349b6175c5409ac44c44ae0a6f25015.jar
+7f9c604ca000-7f9c604cb000 r--s 00001000 103:07 2631619                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/reactive-streams-1.0.1-9eddaf3f173a78dbd5b9f798a42c1bf378b97c4b.jar
+7f9c604cb000-7f9c604cd000 r--s 0001b000 103:07 2631636                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-e78acc5a4d3099ebb3876999a6f649f6cf65745b.jar
+7f9c604cd000-7f9c604ce000 r--s 00000000 103:07 2631603                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-9416ec160aac7f5163699672059f421d65df1701.jar
+7f9c604ce000-7f9c604d0000 r--s 0000a000 103:07 2631639                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/jsr305-2.0.1-bb9552b2313a4a01fc4d982fe2a80b0367769ec6.jar
+7f9c604d0000-7f9c604d3000 r--s 00021000 103:07 2631613                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-f60cd7778848bc9f645b33dcd6a45cc9fe9b1d52.jar
+7f9c604d3000-7f9c604d4000 r--s 00000000 103:07 2631610                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-f4e0fbeaa4158a062a09fb66c101218bf52ec7ee.jar
+7f9c604d4000-7f9c604e1000 r--s 00108000 103:07 2631623                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-229be3577778f0543e026d7712fed059eb163df8.jar
+7f9c604e1000-7f9c604e6000 r--s 00056000 103:07 2631595                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/picasso-2.5.2-0b7939d1c5bf6f12bcb5ee0073e176fc1c8bb9cb.jar
+7f9c604e6000-7f9c604e8000 r--s 00007000 103:07 2631589                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-f7201e423d4789bfc37dc539a11091a6d21adaa9.jar
+7f9c604e8000-7f9c604e9000 r--s 00000000 103:07 2631605                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-a63633831a9ac5b46272ad7d1632ea4ed28bfc3f.jar
+7f9c604e9000-7f9c604ee000 r--s 0004c000 103:07 2631638                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-911bb161b25c0a51a7db361ac0f510e83314706c.jar
+7f9c604ee000-7f9c6054e000 r--s 0060b000 103:07 2631614                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/rxjava-2.1.6-62d07086d972f715ae422315046c22c29eaeb8be.jar
+7f9c6054e000-7f9c60551000 r--s 0001d000 103:07 2631626                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-f5945befd61b4984e545adfc65f0d8ab0e4b9c38.jar
+7f9c60551000-7f9c60565000 r--s 000ff000 103:07 2631637                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-e84536e4bca4b0604f27cff7d06bca11cb9e7463.jar
+7f9c60565000-7f9c6056a000 r--s 00093000 103:07 2631599                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-70853a3b91d5e120537dacce592f3a3d31227b47.jar
+7f9c6056a000-7f9c6056c000 r--s 00006000 103:07 2631612                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-668d9675896b72ff224e96e7d07a435290356ca7.jar
+7f9c6056c000-7f9c6056d000 r--s 00000000 103:07 2631592                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-2770995c307f459227db7c1a646f4b1440ac936b.jar
+7f9c6056d000-7f9c6056e000 r--s 00002000 103:07 2631629                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/javax.inject-1-fea3996d63daf22fc73ea47c108aa2d34d19eb4c.jar
+7f9c6056e000-7f9c6056f000 r--s 00000000 103:07 2631593                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-133a1e7d32ebf23f4d48632b45deae2097efd623.jar
+7f9c6056f000-7f9c60573000 r--s 00017000 103:07 2631585                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/dagger-2.12-d240dcea6a2c4d9458d17cc31b5a36765b8a3f80.jar
+7f9c60573000-7f9c60581000 r--s 000a1000 103:07 2631628                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-34b74cf6a58a01e35ed857448c74fe7a6a91f815.jar
+7f9c60581000-7f9c60583000 r--s 00002000 103:07 2631600                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/converter-gson-2.1.0-e40bf899364927e9b19eaca012cf01a98d3a0618.jar
+7f9c60583000-7f9c60593000 r--s 000df000 103:07 2631584                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-3996176167f5cb42514a9dbeaca66242c185afcb.jar
+7f9c60593000-7f9c60596000 r--s 00045000 103:07 2631587                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/okio-1.9.0-e2e22a1b1505812fdb717e8f1815bca560d8a235.jar
+7f9c60596000-7f9c605a0000 r--s 000a9000 103:07 2631602                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/gson-2.7-6b236ca7dece3988b9d1366647bc931edf864c52.jar
+7f9c605a0000-7f9c605a9000 r--s 000c5000 103:07 2631583                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-cd8a0ebbcde3c256ef3c4cad44478b425ca7c8e6.jar
+7f9c605a9000-7f9c605b2000 r-xp 00000000 103:06 461938                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libmanagement.so
+7f9c605b2000-7f9c607b1000 ---p 00009000 103:06 461938                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libmanagement.so
+7f9c607b1000-7f9c607b2000 rw-p 00008000 103:06 461938                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libmanagement.so
+7f9c607b2000-7f9c609b2000 rw-p 00000000 00:00 0 
+7f9c609b2000-7f9c609c8000 r-xp 00000000 103:06 1056324                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f9c609c8000-7f9c60bc7000 ---p 00016000 103:06 1056324                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f9c60bc7000-7f9c60bc8000 rw-p 00015000 103:06 1056324                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f9c60bc8000-7f9c60bc9000 r--s 00000000 103:07 2631622                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-bebd2c40beeade0ebbf1c573a40536e67a7540e3.jar
+7f9c60bc9000-7f9c60bca000 r--s 00000000 103:07 2631596                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-e476dcfc5836f6fe4d32770975454dc27d505309.jar
+7f9c60bca000-7f9c60bcf000 r--s 0004c000 103:07 2631598                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-feff83bdb388ac6ea9f5a09d4be57031e9910cc9.jar
+7f9c60bcf000-7f9c60bd0000 r--s 00000000 103:07 2631620                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-b0be1a8cb3c867936e50f66e5439b1f5140605af.jar
+7f9c60bd0000-7f9c60bd8000 r--s 000d9000 103:07 2631625                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-e810e6f1340b271ce38aa7f72349951a7b377684.jar
+7f9c60bd8000-7f9c60be3000 r--s 00098000 103:07 2631591                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-137ccf8fae6881252a04a03d43d6bd1a8455cb15.jar
+7f9c60be3000-7f9c60c15000 r-xp 00000000 103:06 461910                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libsunec.so
+7f9c60c15000-7f9c60e14000 ---p 00032000 103:06 461910                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libsunec.so
+7f9c60e14000-7f9c60e1a000 rw-p 00031000 103:06 461910                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libsunec.so
+7f9c60e1a000-7f9c60e2a000 rw-p 00000000 00:00 0 
+7f9c60e2a000-7f9c60ef9000 r--s 00aee000 103:07 5248465                   /home/quique/Android/Sdk/build-tools/25.0.3/jack.jar
+7f9c60ef9000-7f9c60efa000 ---p 00000000 00:00 0 
+7f9c60efa000-7f9c60ffa000 rw-p 00000000 00:00 0 
+7f9c60ffa000-7f9c60ffd000 ---p 00000000 00:00 0 
+7f9c60ffd000-7f9c610fb000 rw-p 00000000 00:00 0 
+7f9c610fb000-7f9c610fe000 ---p 00000000 00:00 0 
+7f9c610fe000-7f9c611fc000 rw-p 00000000 00:00 0 
+7f9c611fc000-7f9c611ff000 ---p 00000000 00:00 0 
+7f9c611ff000-7f9c612fd000 rw-p 00000000 00:00 0 
+7f9c612fd000-7f9c61300000 ---p 00000000 00:00 0 
+7f9c61300000-7f9c613fe000 rw-p 00000000 00:00 0 
+7f9c613fe000-7f9c61401000 ---p 00000000 00:00 0 
+7f9c61401000-7f9c614ff000 rw-p 00000000 00:00 0 
+7f9c614ff000-7f9c61502000 ---p 00000000 00:00 0 
+7f9c61502000-7f9c61600000 rw-p 00000000 00:00 0 
+7f9c61600000-7f9c61603000 ---p 00000000 00:00 0 
+7f9c61603000-7f9c61701000 rw-p 00000000 00:00 0 
+7f9c61701000-7f9c61704000 ---p 00000000 00:00 0 
+7f9c61704000-7f9c61802000 rw-p 00000000 00:00 0 
+7f9c61802000-7f9c61805000 ---p 00000000 00:00 0 
+7f9c61805000-7f9c61903000 rw-p 00000000 00:00 0 
+7f9c61903000-7f9c61906000 ---p 00000000 00:00 0 
+7f9c61906000-7f9c61a04000 rw-p 00000000 00:00 0 
+7f9c61a04000-7f9c61a07000 ---p 00000000 00:00 0 
+7f9c61a07000-7f9c61b05000 rw-p 00000000 00:00 0 
+7f9c61b05000-7f9c61b08000 ---p 00000000 00:00 0 
+7f9c61b08000-7f9c61c06000 rw-p 00000000 00:00 0 
+7f9c61c06000-7f9c61c09000 ---p 00000000 00:00 0 
+7f9c61c09000-7f9c61d07000 rw-p 00000000 00:00 0 
+7f9c61d07000-7f9c61d0a000 ---p 00000000 00:00 0 
+7f9c61d0a000-7f9c61e08000 rw-p 00000000 00:00 0 
+7f9c61e08000-7f9c627c7000 r--p 00000000 103:06 796604                    /usr/lib/locale/locale-archive
+7f9c627c7000-7f9c627ca000 ---p 00000000 00:00 0 
+7f9c627ca000-7f9c628c8000 rw-p 00000000 00:00 0 
+7f9c628c8000-7f9c628cb000 ---p 00000000 00:00 0 
+7f9c628cb000-7f9c629c9000 rw-p 00000000 00:00 0 
+7f9c629c9000-7f9c629ca000 ---p 00000000 00:00 0 
+7f9c629ca000-7f9c6c000000 rw-p 00000000 00:00 0 
+7f9c6c000000-7f9c6c021000 rw-p 00000000 00:00 0 
+7f9c6c021000-7f9c70000000 ---p 00000000 00:00 0 
+7f9c70000000-7f9c70021000 rw-p 00000000 00:00 0 
+7f9c70021000-7f9c74000000 ---p 00000000 00:00 0 
+7f9c74000000-7f9c74021000 rw-p 00000000 00:00 0 
+7f9c74021000-7f9c78000000 ---p 00000000 00:00 0 
+7f9c78000000-7f9c78021000 rw-p 00000000 00:00 0 
+7f9c78021000-7f9c7c000000 ---p 00000000 00:00 0 
+7f9c7c000000-7f9c7c021000 rw-p 00000000 00:00 0 
+7f9c7c021000-7f9c80000000 ---p 00000000 00:00 0 
+7f9c80000000-7f9c80021000 rw-p 00000000 00:00 0 
+7f9c80021000-7f9c84000000 ---p 00000000 00:00 0 
+7f9c84000000-7f9c84021000 rw-p 00000000 00:00 0 
+7f9c84021000-7f9c88000000 ---p 00000000 00:00 0 
+7f9c88000000-7f9c88021000 rw-p 00000000 00:00 0 
+7f9c88021000-7f9c8c000000 ---p 00000000 00:00 0 
+7f9c8c000000-7f9c8c021000 rw-p 00000000 00:00 0 
+7f9c8c021000-7f9c90000000 ---p 00000000 00:00 0 
+7f9c90000000-7f9c90021000 rw-p 00000000 00:00 0 
+7f9c90021000-7f9c94000000 ---p 00000000 00:00 0 
+7f9c94000000-7f9c94021000 rw-p 00000000 00:00 0 
+7f9c94021000-7f9c98000000 ---p 00000000 00:00 0 
+7f9c98000000-7f9c98021000 rw-p 00000000 00:00 0 
+7f9c98021000-7f9c9c000000 ---p 00000000 00:00 0 
+7f9c9c000000-7f9c9c021000 rw-p 00000000 00:00 0 
+7f9c9c021000-7f9ca0000000 ---p 00000000 00:00 0 
+7f9ca0000000-7f9ca0003000 r--s 00056000 103:07 2631633                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/android-query-0.25.9-80f4f38c5c49c036ebd682577efcc34e3f4bed7a.jar
+7f9ca0003000-7f9ca0004000 r--s 00006000 103:07 2631616                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-c097383eadb61d32fd185830a9868cdfda3a75cd.jar
+7f9ca0004000-7f9ca0005000 r--s 00012000 103:07 2631635                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-a094538b46f34cffb3de32e8882cd7c66500525b.jar
+7f9ca0005000-7f9ca0007000 r--s 00004000 103:07 2631632                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-a498c80b537997017ea41838d156d5863f0e917f.jar
+7f9ca0007000-7f9ca16a8000 rw-p 00000000 00:00 0 
+7f9ca16a8000-7f9ca1882000 r--s 03d4d000 103:06 461847                    /usr/lib/jvm/java-8-oracle/jre/lib/rt.jar
+7f9ca1882000-7f9ca2882000 rw-p 00000000 00:00 0 
+7f9ca2882000-7f9ca2883000 ---p 00000000 00:00 0 
+7f9ca2883000-7f9ca2983000 rw-p 00000000 00:00 0 
+7f9ca2983000-7f9ca2984000 ---p 00000000 00:00 0 
+7f9ca2984000-7f9ca2a84000 rw-p 00000000 00:00 0 
+7f9ca2a84000-7f9ca2a85000 ---p 00000000 00:00 0 
+7f9ca2a85000-7f9ca2b85000 rw-p 00000000 00:00 0 
+7f9ca2b85000-7f9ca2b86000 ---p 00000000 00:00 0 
+7f9ca2b86000-7f9ca2c86000 rw-p 00000000 00:00 0 
+7f9ca2c86000-7f9ca2c87000 ---p 00000000 00:00 0 
+7f9ca2c87000-7f9ca2d87000 rw-p 00000000 00:00 0 
+7f9ca2d87000-7f9ca2d88000 ---p 00000000 00:00 0 
+7f9ca2d88000-7f9ca2e88000 rw-p 00000000 00:00 0 
+7f9ca2e88000-7f9ca2e89000 ---p 00000000 00:00 0 
+7f9ca2e89000-7f9ca2f89000 rw-p 00000000 00:00 0 
+7f9ca2f89000-7f9ca2f8a000 ---p 00000000 00:00 0 
+7f9ca2f8a000-7f9ca308a000 rw-p 00000000 00:00 0 
+7f9ca308a000-7f9ca308b000 ---p 00000000 00:00 0 
+7f9ca308b000-7f9ca318b000 rw-p 00000000 00:00 0 
+7f9ca318b000-7f9ca318c000 ---p 00000000 00:00 0 
+7f9ca318c000-7f9ca328c000 rw-p 00000000 00:00 0 
+7f9ca328c000-7f9ca328d000 ---p 00000000 00:00 0 
+7f9ca328d000-7f9ca338d000 rw-p 00000000 00:00 0 
+7f9ca338d000-7f9ca338e000 ---p 00000000 00:00 0 
+7f9ca338e000-7f9ca36ec000 rw-p 00000000 00:00 0 
+7f9ca36ec000-7f9ca39e4000 ---p 00000000 00:00 0 
+7f9ca39e4000-7f9ca3c42000 rw-p 00000000 00:00 0 
+7f9ca3c42000-7f9ca3f39000 ---p 00000000 00:00 0 
+7f9ca3f39000-7f9ca41e4000 rw-p 00000000 00:00 0 
+7f9ca41e4000-7f9ca427f000 rw-p 00000000 00:00 0 
+7f9ca427f000-7f9ca45a5000 ---p 00000000 00:00 0 
+7f9ca45a5000-7f9ca6c25000 rwxp 00000000 00:00 0 
+7f9ca6c25000-7f9cb35a5000 ---p 00000000 00:00 0 
+7f9cb35a5000-7f9cb35bf000 r-xp 00000000 103:06 461925                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libzip.so
+7f9cb35bf000-7f9cb37bf000 ---p 0001a000 103:06 461925                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libzip.so
+7f9cb37bf000-7f9cb37c0000 rw-p 0001a000 103:06 461925                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libzip.so
+7f9cb37c0000-7f9cb37cb000 r-xp 00000000 103:06 1056385                   /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f9cb37cb000-7f9cb39ca000 ---p 0000b000 103:06 1056385                   /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f9cb39ca000-7f9cb39cb000 r--p 0000a000 103:06 1056385                   /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f9cb39cb000-7f9cb39cc000 rw-p 0000b000 103:06 1056385                   /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f9cb39cc000-7f9cb39d2000 rw-p 00000000 00:00 0 
+7f9cb39d2000-7f9cb39dd000 r-xp 00000000 103:06 1056395                   /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7f9cb39dd000-7f9cb3bdc000 ---p 0000b000 103:06 1056395                   /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7f9cb3bdc000-7f9cb3bdd000 r--p 0000a000 103:06 1056395                   /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7f9cb3bdd000-7f9cb3bde000 rw-p 0000b000 103:06 1056395                   /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7f9cb3bde000-7f9cb3bf4000 r-xp 00000000 103:06 1056379                   /lib/x86_64-linux-gnu/libnsl-2.23.so
+7f9cb3bf4000-7f9cb3df3000 ---p 00016000 103:06 1056379                   /lib/x86_64-linux-gnu/libnsl-2.23.so
+7f9cb3df3000-7f9cb3df4000 r--p 00015000 103:06 1056379                   /lib/x86_64-linux-gnu/libnsl-2.23.so
+7f9cb3df4000-7f9cb3df5000 rw-p 00016000 103:06 1056379                   /lib/x86_64-linux-gnu/libnsl-2.23.so
+7f9cb3df5000-7f9cb3df7000 rw-p 00000000 00:00 0 
+7f9cb3df7000-7f9cb3dff000 r-xp 00000000 103:06 1056381                   /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7f9cb3dff000-7f9cb3ffe000 ---p 00008000 103:06 1056381                   /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7f9cb3ffe000-7f9cb3fff000 r--p 00007000 103:06 1056381                   /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7f9cb3fff000-7f9cb4000000 rw-p 00008000 103:06 1056381                   /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7f9cb4000000-7f9cb8000000 rw-p 00000000 00:00 0 
+7f9cb8000000-7f9cb8009000 r--s 000a8000 103:07 2631601                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-e64d460d5cc4ce082fb33f5266c8790568c2b087.jar
+7f9cb8009000-7f9cb80ef000 rw-p 00000000 00:00 0 
+7f9cb80ef000-7f9cb80f0000 ---p 00000000 00:00 0 
+7f9cb80f0000-7f9cb81f0000 rw-p 00000000 00:00 0 
+7f9cb81f0000-7f9cb821b000 r-xp 00000000 103:06 461950                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libjava.so
+7f9cb821b000-7f9cb841a000 ---p 0002b000 103:06 461950                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libjava.so
+7f9cb841a000-7f9cb841c000 rw-p 0002a000 103:06 461950                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libjava.so
+7f9cb841c000-7f9cb8429000 r-xp 00000000 103:06 461903                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libverify.so
+7f9cb8429000-7f9cb8629000 ---p 0000d000 103:06 461903                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libverify.so
+7f9cb8629000-7f9cb862b000 rw-p 0000d000 103:06 461903                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libverify.so
+7f9cb862b000-7f9cb8632000 r-xp 00000000 103:06 1056440                   /lib/x86_64-linux-gnu/librt-2.23.so
+7f9cb8632000-7f9cb8831000 ---p 00007000 103:06 1056440                   /lib/x86_64-linux-gnu/librt-2.23.so
+7f9cb8831000-7f9cb8832000 r--p 00006000 103:06 1056440                   /lib/x86_64-linux-gnu/librt-2.23.so
+7f9cb8832000-7f9cb8833000 rw-p 00007000 103:06 1056440                   /lib/x86_64-linux-gnu/librt-2.23.so
+7f9cb8833000-7f9cb893b000 r-xp 00000000 103:06 1056356                   /lib/x86_64-linux-gnu/libm-2.23.so
+7f9cb893b000-7f9cb8b3a000 ---p 00108000 103:06 1056356                   /lib/x86_64-linux-gnu/libm-2.23.so
+7f9cb8b3a000-7f9cb8b3b000 r--p 00107000 103:06 1056356                   /lib/x86_64-linux-gnu/libm-2.23.so
+7f9cb8b3b000-7f9cb8b3c000 rw-p 00108000 103:06 1056356                   /lib/x86_64-linux-gnu/libm-2.23.so
+7f9cb8b3c000-7f9cb980f000 r-xp 00000000 103:06 461960                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/server/libjvm.so
+7f9cb980f000-7f9cb9a0e000 ---p 00cd3000 103:06 461960                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/server/libjvm.so
+7f9cb9a0e000-7f9cb9ae8000 rw-p 00cd2000 103:06 461960                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/server/libjvm.so
+7f9cb9ae8000-7f9cb9b33000 rw-p 00000000 00:00 0 
+7f9cb9b33000-7f9cb9cf3000 r-xp 00000000 103:06 1056286                   /lib/x86_64-linux-gnu/libc-2.23.so
+7f9cb9cf3000-7f9cb9ef3000 ---p 001c0000 103:06 1056286                   /lib/x86_64-linux-gnu/libc-2.23.so
+7f9cb9ef3000-7f9cb9ef7000 r--p 001c0000 103:06 1056286                   /lib/x86_64-linux-gnu/libc-2.23.so
+7f9cb9ef7000-7f9cb9ef9000 rw-p 001c4000 103:06 1056286                   /lib/x86_64-linux-gnu/libc-2.23.so
+7f9cb9ef9000-7f9cb9efd000 rw-p 00000000 00:00 0 
+7f9cb9efd000-7f9cb9f00000 r-xp 00000000 103:06 1056310                   /lib/x86_64-linux-gnu/libdl-2.23.so
+7f9cb9f00000-7f9cba0ff000 ---p 00003000 103:06 1056310                   /lib/x86_64-linux-gnu/libdl-2.23.so
+7f9cba0ff000-7f9cba100000 r--p 00002000 103:06 1056310                   /lib/x86_64-linux-gnu/libdl-2.23.so
+7f9cba100000-7f9cba101000 rw-p 00003000 103:06 1056310                   /lib/x86_64-linux-gnu/libdl-2.23.so
+7f9cba101000-7f9cba116000 r-xp 00000000 103:06 460948                    /usr/lib/jvm/java-8-oracle/lib/amd64/jli/libjli.so
+7f9cba116000-7f9cba316000 ---p 00015000 103:06 460948                    /usr/lib/jvm/java-8-oracle/lib/amd64/jli/libjli.so
+7f9cba316000-7f9cba317000 rw-p 00015000 103:06 460948                    /usr/lib/jvm/java-8-oracle/lib/amd64/jli/libjli.so
+7f9cba317000-7f9cba32f000 r-xp 00000000 103:06 1056432                   /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f9cba32f000-7f9cba52e000 ---p 00018000 103:06 1056432                   /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f9cba52e000-7f9cba52f000 r--p 00017000 103:06 1056432                   /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f9cba52f000-7f9cba530000 rw-p 00018000 103:06 1056432                   /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f9cba530000-7f9cba534000 rw-p 00000000 00:00 0 
+7f9cba534000-7f9cba55a000 r-xp 00000000 103:06 1056258                   /lib/x86_64-linux-gnu/ld-2.23.so
+7f9cba55a000-7f9cba55e000 r--s 00025000 103:07 2631608                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-b8dd26f79cc25ff30ec9594defb24416c7e095a0.jar
+7f9cba55e000-7f9cba564000 r--s 0003f000 103:06 461970                    /usr/lib/jvm/java-8-oracle/jre/lib/ext/sunjce_provider.jar
+7f9cba564000-7f9cba637000 rw-p 00000000 00:00 0 
+7f9cba637000-7f9cba63a000 ---p 00000000 00:00 0 
+7f9cba63a000-7f9cba73c000 rw-p 00000000 00:00 0 
+7f9cba73c000-7f9cba73d000 r--s 00001000 103:07 2631590                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-16fc4a13b008cbbb9e391e9fca8f39fee34e8e3c.jar
+7f9cba73d000-7f9cba73e000 r--s 00000000 103:07 2631604                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-5ea516c6305f8d5925d23ca9ba1a9e7ca4b17f4f.jar
+7f9cba73e000-7f9cba73f000 r--s 00000000 103:07 2631640                   /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-a606fd87f418c8d0eba47f757f2aa021bcf4d36e.jar
+7f9cba73f000-7f9cba741000 r--s 00009000 103:06 461969                    /usr/lib/jvm/java-8-oracle/jre/lib/ext/sunec.jar
+7f9cba741000-7f9cba745000 r--s 0003a000 103:06 461967                    /usr/lib/jvm/java-8-oracle/jre/lib/ext/sunpkcs11.jar
+7f9cba745000-7f9cba748000 r--s 0001a000 103:06 461870                    /usr/lib/jvm/java-8-oracle/jre/lib/jce.jar
+7f9cba748000-7f9cba74d000 r--s 0009a000 103:06 461842                    /usr/lib/jvm/java-8-oracle/jre/lib/jsse.jar
+7f9cba74d000-7f9cba755000 rw-s 00000000 103:06 563511                    /tmp/hsperfdata_quique/32627
+7f9cba755000-7f9cba756000 rw-p 00000000 00:00 0 
+7f9cba756000-7f9cba757000 ---p 00000000 00:00 0 
+7f9cba757000-7f9cba759000 rw-p 00000000 00:00 0 
+7f9cba759000-7f9cba75a000 r--p 00025000 103:06 1056258                   /lib/x86_64-linux-gnu/ld-2.23.so
+7f9cba75a000-7f9cba75b000 rw-p 00026000 103:06 1056258                   /lib/x86_64-linux-gnu/ld-2.23.so
+7f9cba75b000-7f9cba75c000 rw-p 00000000 00:00 0 
+7ffeb3dbd000-7ffeb3de2000 rw-p 00000000 00:00 0                          [stack]
+7ffeb3deb000-7ffeb3ded000 r--p 00000000 00:00 0                          [vvar]
+7ffeb3ded000-7ffeb3def000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+VM Arguments:
+jvm_args: -Djava.awt.headless=true -Xmx4g -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant 
+java_command: com.android.jack.Main -D jack.dex.optimize=true -D jack.reporter=sdk -D jack.dex.debug.vars=true --classpath /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackRuntimeLibraries/debug/jars/8000/40/android-e4c09924f89e84e3d2c8af41831956288a9c97d7.jar:/home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackRuntimeLibraries/debug/jars/8000/40/org.apache.http.legacy-b2de37e37c8a14c68c81f88bc11c429f57eec8f8.jar --import /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-137ccf8fae6881252a04a03d43d6bd1a8455cb15.jar --import /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-b8dd26f79cc25ff30ec9594defb24416c7e095a0.jar --import /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-e64d460d5cc4ce082fb33f5266c8790568c2b087.jar --import /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-e810e6f1340b271ce38aa7f72349951a7b377684.jar --import /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-a606fd87f418c8d0eba47f757f2aa021bcf4d36e.jar --import /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-5ea516c6305f8d5925d23ca9ba1a9e7ca4b17f4f.jar --import /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-a498c80b537997017ea41838d156d5863f0e917f.jar --import /home/quique/Development/codesyntax/jarrion/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-16fc4a13b008cbbb9e391e9fca8f39fee34e8e3c.jar --import /home/quique/Development/codesyntax/jarrion/build/intermediat
+java_class_path (initial): /home/quique/Android/Sdk/build-tools/25.0.3/jack.jar
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=/usr/lib/jvm/java-8-oracle
+PATH=/home/quique/bin:/home/quique/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin
+USERNAME=quique
+SHELL=/usr/bin/zsh
+DISPLAY=:1
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0xacba10], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGBUS: [libjvm.so+0xacba10], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGFPE: [libjvm.so+0x924ba0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGPIPE: [libjvm.so+0x924ba0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGXFSZ: [libjvm.so+0x924ba0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGILL: [libjvm.so+0x924ba0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGUSR1: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGUSR2: [libjvm.so+0x9263e0], sa_mask[0]=00100000000000000000000000000000, sa_flags=SA_RESTART|SA_SIGINFO
+SIGHUP: [libjvm.so+0x9277e0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGINT: [libjvm.so+0x9277e0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGTERM: [libjvm.so+0x9277e0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGQUIT: [libjvm.so+0x9277e0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+
+
+---------------  S Y S T E M  ---------------
+
+OS:DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=16.04
+DISTRIB_CODENAME=xenial
+DISTRIB_DESCRIPTION="Ubuntu 16.04.3 LTS"
+
+uname:Linux 4.10.0-42-generic #46~16.04.1-Ubuntu SMP Mon Dec 4 15:57:59 UTC 2017 x86_64
+libc:glibc 2.23 NPTL 2.23 
+rlimit: STACK 8192k, CORE 0k, NPROC 63166, NOFILE 1048576, AS infinity
+load average:3,81 1,86 1,28
+
+/proc/meminfo:
+MemTotal:       16445004 kB
+MemFree:          181700 kB
+MemAvailable:     108748 kB
+Buffers:            6728 kB
+Cached:           927336 kB
+SwapCached:         7224 kB
+Active:         14283060 kB
+Inactive:        1344484 kB
+Active(anon):   14230164 kB
+Inactive(anon):  1293748 kB
+Active(file):      52896 kB
+Inactive(file):    50736 kB
+Unevictable:         496 kB
+Mlocked:             496 kB
+SwapTotal:        499708 kB
+SwapFree:          58640 kB
+Dirty:              4968 kB
+Writeback:             0 kB
+AnonPages:      14688384 kB
+Mapped:          1003248 kB
+Shmem:            829320 kB
+Slab:             205556 kB
+SReclaimable:      85008 kB
+SUnreclaim:       120548 kB
+KernelStack:       31040 kB
+PageTables:       144556 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     8722208 kB
+Committed_AS:   31830664 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:           0 kB
+VmallocChunk:          0 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:   4700160 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+CmaTotal:              0 kB
+CmaFree:               0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:      545948 kB
+DirectMap2M:    16181248 kB
+DirectMap1G:     1048576 kB
+
+
+CPU:total 16 (initial active 16) (16 cores per cpu, 1 threads per core) family 23 model 1 stepping 1, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, mmxext, 3dnowpref, lzcnt, sse4a, tsc, tscinvbit, tscinv, bmi1
+
+/proc/cpuinfo:
+processor	: 0
+vendor_id	: AuthenticAMD
+cpu family	: 23
+model		: 1
+model name	: AMD Ryzen 7 1700 Eight-Core Processor
+stepping	: 1
+microcode	: 0x8001126
+cpu MHz		: 1550.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 16
+core id		: 0
+cpu cores	: 8
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_l2 mwaitx hw_pstate vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 xsaves clzero irperf arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic overflow_recov succor smca
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 5987.55
+TLB size	: 2560 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate eff_freq_ro [13] [14]
+
+processor	: 1
+vendor_id	: AuthenticAMD
+cpu family	: 23
+model		: 1
+model name	: AMD Ryzen 7 1700 Eight-Core Processor
+stepping	: 1
+microcode	: 0x8001126
+cpu MHz		: 1550.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 16
+core id		: 0
+cpu cores	: 8
+apicid		: 1
+initial apicid	: 1
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_l2 mwaitx hw_pstate vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 xsaves clzero irperf arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic overflow_recov succor smca
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 5987.55
+TLB size	: 2560 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate eff_freq_ro [13] [14]
+
+processor	: 2
+vendor_id	: AuthenticAMD
+cpu family	: 23
+model		: 1
+model name	: AMD Ryzen 7 1700 Eight-Core Processor
+stepping	: 1
+microcode	: 0x8001126
+cpu MHz		: 3000.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 16
+core id		: 1
+cpu cores	: 8
+apicid		: 2
+initial apicid	: 2
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_l2 mwaitx hw_pstate vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 xsaves clzero irperf arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic overflow_recov succor smca
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 5987.55
+TLB size	: 2560 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate eff_freq_ro [13] [14]
+
+processor	: 3
+vendor_id	: AuthenticAMD
+cpu family	: 23
+model		: 1
+model name	: AMD Ryzen 7 1700 Eight-Core Processor
+stepping	: 1
+microcode	: 0x8001126
+cpu MHz		: 1550.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 16
+core id		: 1
+cpu cores	: 8
+apicid		: 3
+initial apicid	: 3
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_l2 mwaitx hw_pstate vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 xsaves clzero irperf arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic overflow_recov succor smca
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 5987.55
+TLB size	: 2560 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate eff_freq_ro [13] [14]
+
+processor	: 4
+vendor_id	: AuthenticAMD
+cpu family	: 23
+model		: 1
+model name	: AMD Ryzen 7 1700 Eight-Core Processor
+stepping	: 1
+microcode	: 0x8001126
+cpu MHz		: 1550.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 16
+core id		: 2
+cpu cores	: 8
+apicid		: 4
+initial apicid	: 4
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_l2 mwaitx hw_pstate vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 xsaves clzero irperf arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic overflow_recov succor smca
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 5987.55
+TLB size	: 2560 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate eff_freq_ro [13] [14]
+
+processor	: 5
+vendor_id	: AuthenticAMD
+cpu family	: 23
+model		: 1
+model name	: AMD Ryzen 7 1700 Eight-Core Processor
+stepping	: 1
+microcode	: 0x8001126
+cpu MHz		: 1550.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 16
+core id		: 2
+cpu cores	: 8
+apicid		: 5
+initial apicid	: 5
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_l2 mwaitx hw_pstate vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 xsaves clzero irperf arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic overflow_recov succor smca
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 5987.55
+TLB size	: 2560 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate eff_freq_ro [13] [14]
+
+processor	: 6
+vendor_id	: AuthenticAMD
+cpu family	: 23
+model		: 1
+model name	: AMD Ryzen 7 1700 Eight-Core Processor
+stepping	: 1
+microcode	: 0x8001126
+cpu MHz		: 1550.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 16
+core id		: 3
+cpu cores	: 8
+apicid		: 6
+initial apicid	: 6
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_l2 mwaitx hw_pstate vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 xsaves clzero irperf arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic overflow_recov succor smca
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 5987.55
+TLB size	: 2560 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate eff_freq_ro [13] [14]
+
+processor	: 7
+vendor_id	: AuthenticAMD
+cpu family	: 23
+model		: 1
+model name	: AMD Ryzen 7 1700 Eight-Core Processor
+stepping	: 1
+microcode	: 0x8001126
+cpu MHz		: 1550.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 16
+core id		: 3
+cpu cores	: 8
+apicid		: 7
+initial apicid	: 7
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_l2 mwaitx hw_pstate vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 xsaves clzero irperf arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic overflow_recov succor smca
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 5987.55
+TLB size	: 2560 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate eff_freq_ro [13] [14]
+
+processor	: 8
+vendor_id	: AuthenticAMD
+cpu family	: 23
+model		: 1
+model name	: AMD Ryzen 7 1700 Eight-Core Processor
+stepping	: 1
+microcode	: 0x8001126
+cpu MHz		: 1550.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 16
+core id		: 4
+cpu cores	: 8
+apicid		: 8
+initial apicid	: 8
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_l2 mwaitx hw_pstate vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 xsaves clzero irperf arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic overflow_recov succor smca
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 5987.55
+TLB size	: 2560 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate eff_freq_ro [13] [14]
+
+processor	: 9
+vendor_id	: AuthenticAMD
+cpu family	: 23
+model		: 1
+model name	: AMD Ryzen 7 1700 Eight-Core Processor
+stepping	: 1
+microcode	: 0x8001126
+cpu MHz		: 3000.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 16
+core id		: 4
+cpu cores	: 8
+apicid		: 9
+initial apicid	: 9
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_l2 mwaitx hw_pstate vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 xsaves clzero irperf arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic overflow_recov succor smca
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 5987.55
+TLB size	: 2560 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate eff_freq_ro [13] [14]
+
+processor	: 10
+vendor_id	: AuthenticAMD
+cpu family	: 23
+model		: 1
+model name	: AMD Ryzen 7 1700 Eight-Core Processor
+stepping	: 1
+microcode	: 0x8001126
+cpu MHz		: 2700.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 16
+core id		: 5
+cpu cores	: 8
+apicid		: 10
+initial apicid	: 10
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_l2 mwaitx hw_pstate vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 xsaves clzero irperf arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic overflow_recov succor smca
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 5987.55
+TLB size	: 2560 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate eff_freq_ro [13] [14]
+
+processor	: 11
+vendor_id	: AuthenticAMD
+cpu family	: 23
+model		: 1
+model name	: AMD Ryzen 7 1700 Eight-Core Processor
+stepping	: 1
+microcode	: 0x8001126
+cpu MHz		: 1550.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 16
+core id		: 5
+cpu cores	: 8
+apicid		: 11
+initial apicid	: 11
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_l2 mwaitx hw_pstate vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 xsaves clzero irperf arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic overflow_recov succor smca
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 5987.55
+TLB size	: 2560 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate eff_freq_ro [13] [14]
+
+processor	: 12
+vendor_id	: AuthenticAMD
+cpu family	: 23
+model		: 1
+model name	: AMD Ryzen 7 1700 Eight-Core Processor
+stepping	: 1
+microcode	: 0x8001126
+cpu MHz		: 1550.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 16
+core id		: 6
+cpu cores	: 8
+apicid		: 12
+initial apicid	: 12
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_l2 mwaitx hw_pstate vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 xsaves clzero irperf arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic overflow_recov succor smca
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 5987.55
+TLB size	: 2560 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate eff_freq_ro [13] [14]
+
+processor	: 13
+vendor_id	: AuthenticAMD
+cpu family	: 23
+model		: 1
+model name	: AMD Ryzen 7 1700 Eight-Core Processor
+stepping	: 1
+microcode	: 0x8001126
+cpu MHz		: 1550.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 16
+core id		: 6
+cpu cores	: 8
+apicid		: 13
+initial apicid	: 13
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_l2 mwaitx hw_pstate vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 xsaves clzero irperf arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic overflow_recov succor smca
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 5987.55
+TLB size	: 2560 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate eff_freq_ro [13] [14]
+
+processor	: 14
+vendor_id	: AuthenticAMD
+cpu family	: 23
+model		: 1
+model name	: AMD Ryzen 7 1700 Eight-Core Processor
+stepping	: 1
+microcode	: 0x8001126
+cpu MHz		: 3000.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 16
+core id		: 7
+cpu cores	: 8
+apicid		: 14
+initial apicid	: 14
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_l2 mwaitx hw_pstate vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 xsaves clzero irperf arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic overflow_recov succor smca
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 5987.55
+TLB size	: 2560 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate eff_freq_ro [13] [14]
+
+processor	: 15
+vendor_id	: AuthenticAMD
+cpu family	: 23
+model		: 1
+model name	: AMD Ryzen 7 1700 Eight-Core Processor
+stepping	: 1
+microcode	: 0x8001126
+cpu MHz		: 1550.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 16
+core id		: 7
+cpu cores	: 8
+apicid		: 15
+initial apicid	: 15
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_l2 mwaitx hw_pstate vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 xsaves clzero irperf arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic overflow_recov succor smca
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 5987.55
+TLB size	: 2560 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate eff_freq_ro [13] [14]
+
+
+
+Memory: 4k page, physical 16445004k(181328k free), swap 499708k(58640k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.144-b01) for linux-amd64 JRE (1.8.0_144-b01), built on Jul 21 2017 21:57:33 by "java_re" with gcc 4.3.0 20080428 (Red Hat 4.3.0-8)
+
+time: Thu Dec 14 11:25:14 2017
+elapsed time: 19 seconds (0d 0h 0m 19s)
+

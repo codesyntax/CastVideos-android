@@ -1,4 +1,4 @@
-package com.google.sample.cast.refplayer.ui;
+package com.codesyntax.jarrion.ui.main.View;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,8 +12,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 
+import com.codesyntax.jarrion.data.preferences.DevicePreferences;
+import com.codesyntax.jarrion.di.component.DaggerMainComponent;
+import com.codesyntax.jarrion.ui.main.presenter.MainPresenter;
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.cast.MediaQueueItem;
 import com.google.android.gms.cast.MediaStatus;
@@ -24,12 +29,16 @@ import com.google.android.gms.cast.framework.Session;
 import com.google.android.gms.cast.framework.SessionManager;
 import com.google.android.gms.cast.framework.SessionManagerListener;
 import com.google.android.gms.cast.framework.media.RemoteMediaClient;
+import com.google.sample.cast.refplayer.JarriOnApplication;
 import com.google.sample.cast.refplayer.R;
+import com.google.sample.cast.refplayer.di.component.ApplicationComponent;
 import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
 import com.google.sample.cast.refplayer.ui.channellist.ChannelListListener;
 import com.google.sample.cast.refplayer.ui.channellist.view.ChannelListFragment;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -45,16 +54,21 @@ public class MainActivity extends AppCompatActivity implements ChannelListListen
     private AppCompatTextView channelsDrawerItemValue;
     private LinearLayout queueDrawerItem;
     private AppCompatTextView queueDrawerItemValue;
-    private LinearLayout notificationsDrawerItem;
+    private Switch notificationsDrawerItemSwitch;
     private LinearLayout aboutDrawerItem;
     private RemoteMediaClient remoteMediaClient;
     private RemoteMediaClient.Listener remoteMediaClientListener = new MyRemoteMediaClientListener();
+    @Inject
+    DevicePreferences devicePreferences;
+    @Inject
+    MainPresenter mainPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         castContext = CastContext.getSharedInstance(this);
         sessionManager = castContext.getSessionManager();
         super.onCreate(savedInstanceState);
+        inject();
         setContentView(R.layout.activity_main);
         Fabric.with(this, new Crashlytics());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -62,6 +76,11 @@ public class MainActivity extends AppCompatActivity implements ChannelListListen
         setupDrawerLayout();
         setupDrawerItems();
         setupFragment();
+    }
+
+    private void inject() {
+        ApplicationComponent component = JarriOnApplication.getInstance().getComponent();
+        DaggerMainComponent.builder().applicationComponent(component).build().inject(this);
     }
 
     private void setupFragment() {
@@ -80,6 +99,11 @@ public class MainActivity extends AppCompatActivity implements ChannelListListen
         queueDrawerItemValue = (AppCompatTextView) findViewById(R.id.drawer_item_queue_value);
         queueDrawerItemValue.setText(String.valueOf(0));
         queueDrawerItem.setOnClickListener(v -> goToQueue());
+        notificationsDrawerItemSwitch = (Switch) findViewById(R.id.drawer_item_notifications_switch);
+        notificationsDrawerItemSwitch.setChecked(devicePreferences.getNotificationStatus());
+        notificationsDrawerItemSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            mainPresenter.setNoitificationsEnabled(isChecked);
+        });
     }
 
     private void goToQueue() {
