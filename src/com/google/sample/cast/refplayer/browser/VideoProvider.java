@@ -74,6 +74,8 @@ public class VideoProvider {
 
     public static final String KEY_DESCRIPTION = "description";
     public static final String KEY_DATE = "date";
+    public static final String KEY_VIDEO_ID = "video_id";
+    public static final String KEY_CHANNEL_ID = "channel_id";
 
     private static final String TARGET_FORMAT = TAG_MP4;
     private static List<MediaInfo> mediaList;
@@ -172,7 +174,7 @@ public class VideoProvider {
                             }
                         }
                         mediaList.add(buildMediaInfo(title, studio, subTitle, duration, videoUrl,
-                                mimeType, imageUrl, bigImageUrl, tracks, null));
+                                mimeType, imageUrl, bigImageUrl, tracks, null, null, null));
                     }
                 }
             }
@@ -182,9 +184,8 @@ public class VideoProvider {
 
     public static MediaInfo buildMediaInfo(String title, String studio, String subTitle,
             int duration, String url, String mimeType, String imgUrl, String bigImageUrl,
-            List<MediaTrack> tracks, Date date) {
+            List<MediaTrack> tracks, Date date, String videoId, String channelId) {
         MediaMetadata movieMetadata = new MediaMetadata(MediaMetadata.MEDIA_TYPE_MOVIE);
-
         movieMetadata.putString(MediaMetadata.KEY_SUBTITLE, studio);
         movieMetadata.putString(MediaMetadata.KEY_TITLE, title);
         movieMetadata.addImage(new WebImage(Uri.parse(imgUrl)));
@@ -193,6 +194,8 @@ public class VideoProvider {
         try {
             jsonObj = new JSONObject();
             jsonObj.put(KEY_DESCRIPTION, subTitle);
+            jsonObj.put(KEY_CHANNEL_ID, channelId);
+            jsonObj.put(KEY_VIDEO_ID, videoId);
             if (date != null) {
                 jsonObj.put(KEY_DATE, ISO8601Utils.format(date));
             }

@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import java.util.Date;
 
 public class VideoListItemViewModel implements Parcelable {
+    private String id;
     private String title;
     private String description;
     private String thumbnailURL;
@@ -17,6 +18,7 @@ public class VideoListItemViewModel implements Parcelable {
     private String mimetype;
 
     private VideoListItemViewModel(Builder builder) {
+        id = builder.id;
         title = builder.title;
         description = builder.description;
         thumbnailURL = builder.thumbnailURL;
@@ -29,6 +31,7 @@ public class VideoListItemViewModel implements Parcelable {
     }
 
     protected VideoListItemViewModel(Parcel in) {
+        id = in.readString();
         title = in.readString();
         description = in.readString();
         thumbnailURL = in.readString();
@@ -51,6 +54,10 @@ public class VideoListItemViewModel implements Parcelable {
             return new VideoListItemViewModel[size];
         }
     };
+
+    public String getId() {
+        return id;
+    }
 
     public String getTitle() {
         return title;
@@ -95,6 +102,7 @@ public class VideoListItemViewModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
         parcel.writeString(title);
         parcel.writeString(description);
         parcel.writeString(thumbnailURL);
@@ -117,6 +125,7 @@ public class VideoListItemViewModel implements Parcelable {
         private String videoURL;
         private String studio;
         private String mimetype;
+        private String id;
 
         public Builder() {
         }
@@ -168,6 +177,11 @@ public class VideoListItemViewModel implements Parcelable {
 
         public VideoListItemViewModel build() {
             return new VideoListItemViewModel(this);
+        }
+
+        public Builder id(String val) {
+            id = val;
+            return this;
         }
     }
 }

@@ -62,6 +62,7 @@ import com.google.android.gms.cast.framework.CastSession;
 import com.google.android.gms.cast.framework.SessionManagerListener;
 import com.google.android.gms.cast.framework.media.MediaUtils;
 import com.google.android.gms.cast.framework.media.RemoteMediaClient;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.browser.VideoProvider;
 import com.google.sample.cast.refplayer.expandedcontrols.ExpandedControlsActivity;
@@ -351,6 +352,13 @@ public class LocalPlayerActivity extends AppCompatActivity {
                         mPlaybackState = PlaybackState.PLAYING;
                         restartTrickplayTimer();
                         updatePlaybackLocation(PlaybackLocation.LOCAL);
+                        Bundle bundle = new Bundle();
+                        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(this);
+                        bundle.putString(VideoProvider.KEY_CHANNEL_ID, selectedMedia.getCustomData().optString(VideoProvider.KEY_CHANNEL_ID));
+                        bundle.putString(VideoProvider.KEY_VIDEO_ID, selectedMedia.getCustomData().optString(VideoProvider.KEY_VIDEO_ID));
+                        bundle.putLong("duration", selectedMedia.getStreamDuration());
+                        bundle.putBoolean("chromecast", false);
+                        firebaseAnalytics.logEvent("play_video", bundle);
                         break;
                     case REMOTE:
                         if (mCastSession != null && mCastSession.isConnected()) {

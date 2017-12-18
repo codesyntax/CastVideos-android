@@ -15,6 +15,7 @@ public class VideoListItemViewModelMapperImpl implements VideoListItemViewModelM
     @Override
     public VideoListItemViewModel map(Video source) {
         return new VideoListItemViewModel.Builder()
+                .id(source.getId())
                 .title(source.getTitle())
                 .description(source.getDescription())
                 .coverURL(source.getSmallCoverURL())

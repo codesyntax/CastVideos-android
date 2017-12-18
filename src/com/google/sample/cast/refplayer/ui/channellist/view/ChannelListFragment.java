@@ -110,6 +110,7 @@ public class ChannelListFragment extends Fragment
     @Override
     public void onItemClick(ChannelListItemViewModel channelListItemViewModel) {
         channelActivityNavigator.navigate(getContext(),
+                channelListItemViewModel.getId(),
                 channelListItemViewModel.getJsonURL(),
                 channelListItemViewModel.getName(),
                 channelListItemViewModel.getCoverURL());

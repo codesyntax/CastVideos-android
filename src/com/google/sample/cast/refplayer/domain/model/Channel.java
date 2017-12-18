@@ -1,13 +1,13 @@
 package com.google.sample.cast.refplayer.domain.model;
 
 public class Channel {
-    private int id;
+    private String id;
     private String name;
     private String coverURL;
     private String mosaicCoverURL;
     private String jsonURL;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -36,16 +36,11 @@ public class Channel {
     }
 
     public static final class Builder {
-        private int id;
+        private String id;
         private String name;
         private String coverURL;
         private String mosaicCoverURL;
         private String jsonURL;
-
-        public Builder(int id, String coverURL) {
-            this.id = id;
-            this.coverURL = coverURL;
-        }
 
         public Builder() {
         }
@@ -54,7 +49,7 @@ public class Channel {
             return new Channel(this);
         }
 
-        public Builder id(int val) {
+        public Builder id(String val) {
             id = val;
             return this;
         }

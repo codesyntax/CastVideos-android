@@ -16,6 +16,7 @@ public class VideoDataModel {
     private String studio;
     private List<SourceDataModel> sources;
     private String date;
+    private String videoid;
 
     public String getTitle() {
         return title;
@@ -51,5 +52,9 @@ public class VideoDataModel {
 
     public String getDate() {
         return date;
+    }
+
+    public String getVideoid() {
+        return videoid;
     }
 }

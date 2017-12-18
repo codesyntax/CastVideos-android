@@ -21,6 +21,7 @@ public class VideoDataModelMapperImpl implements VideoDataModelMapper {
         String imageBaseURL = categoryDataModel.getImages();
         String videoBaseURL = categoryDataModel.getMp4();
         return new Video.Builder()
+                .id(source.getVideoid())
                 .title(source.getTitle())
                 .description(source.getSubtitle())
                 .bigCoverURL(imageBaseURL + source.getBigImageURL())

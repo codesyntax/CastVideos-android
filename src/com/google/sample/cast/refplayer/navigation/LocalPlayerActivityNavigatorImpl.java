@@ -25,9 +25,9 @@ public class LocalPlayerActivityNavigatorImpl implements LocalPlayerActivityNavi
     }
 
     @Override
-    public void navigate(Activity context, VideoListItemViewModel item,
+    public void navigate(Activity context, String channelId, VideoListItemViewModel item,
                          boolean shouldStart, ImageView imageView) {
-        MediaInfo mediaInfo = mediaInfoMapper.map(item);
+        MediaInfo mediaInfo = mediaInfoMapper.map(channelId, item);
         Intent intent = getNavigationIntent(context, mediaInfo, shouldStart);
         ActivityOptionsCompat options = getOptions(context, imageView);
         ActivityCompat.startActivity(context, intent, options.toBundle());

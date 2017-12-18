@@ -1,13 +1,13 @@
 package com.google.sample.cast.refplayer.ui.channellist.model;
 
 public class ChannelListItemViewModel {
-    private int id;
+    private String id;
     private String name;
     private String coverURL;
     private String mosaicCoverURL;
     private String jsonURL;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -36,7 +36,7 @@ public class ChannelListItemViewModel {
     }
 
     public static final class Builder {
-        private int id;
+        private String id;
         private String name;
         private String coverURL;
         private String mosaicCoverURL;
@@ -45,7 +45,7 @@ public class ChannelListItemViewModel {
         public Builder() {
         }
 
-        public Builder id(int val) {
+        public Builder id(String val) {
             id = val;
             return this;
         }

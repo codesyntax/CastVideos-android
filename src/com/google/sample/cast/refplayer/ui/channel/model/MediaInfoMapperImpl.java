@@ -11,7 +11,7 @@ public class MediaInfoMapperImpl implements MediaInfoMapper {
     public MediaInfoMapperImpl() {}
 
     @Override
-    public MediaInfo map(VideoListItemViewModel source) {
+    public MediaInfo map(String channelId, VideoListItemViewModel source) {
         return VideoProvider
                 .buildMediaInfo(source.getTitle(),
                         source.getStudio(),
@@ -22,6 +22,8 @@ public class MediaInfoMapperImpl implements MediaInfoMapper {
                         source.getThumbnailURL(),
                         source.getCoverURL(),
                         null,
-                        source.getDate());
+                        source.getDate(),
+                        source.getId(),
+                        channelId);
     }
 }

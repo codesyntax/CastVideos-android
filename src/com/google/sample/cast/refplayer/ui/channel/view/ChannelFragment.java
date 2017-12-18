@@ -62,9 +62,11 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
     private static final String KEY_JSON_URL = "key_json_url";
     private static final String KEY_TITLE = "key_title";
     private static final String KEY_COVER_URL = "key_cover_url";
+    private static final String KEY_CHANNEL_ID = "key_channel_id";
     private String jsonURL;
     private String title;
     private String coverURL;
+    private String channelId;
     private CastSession castSession;
     private CastContext castContext;
     private RecyclerView recyclerView;
@@ -79,12 +81,13 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
     @Inject
     LocalPlayerActivityNavigator localPlayerActivityNavigator;
 
-    public static ChannelFragment newInstance(String jsonURL, String title, String coverURL) {
+    public static ChannelFragment newInstance(String channelId, String jsonURL, String title, String coverURL) {
         ChannelFragment fragment = new ChannelFragment();
         Bundle args = new Bundle();
         args.putString(KEY_JSON_URL, jsonURL);
         args.putString(KEY_TITLE, title);
         args.putString(KEY_COVER_URL, coverURL);
+        args.putString(KEY_CHANNEL_ID, channelId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -95,6 +98,7 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
         jsonURL = getArguments().getString(KEY_JSON_URL);
         title = getArguments().getString(KEY_TITLE);
         coverURL = getArguments().getString(KEY_COVER_URL);
+        channelId = getArguments().getString(KEY_CHANNEL_ID);
         setHasOptionsMenu(true);
         ApplicationComponent component = JarriOnApplication.getInstance().getComponent();
         DaggerChannelComponent.builder()
@@ -198,7 +202,7 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
 
     @Override
     public void itemClicked(ImageView imageView, VideoListItemViewModel item) {
-        localPlayerActivityNavigator.navigate(getActivity(), item, false, imageView);
+        localPlayerActivityNavigator.navigate(getActivity(), channelId, item, false, imageView);
     }
 
     @Override

@@ -10,6 +10,7 @@ public interface LocalPlayerActivityNavigator {
     String EXTRA_SHOULD_START = "extra_should_start";
     String TRANSITION_IMAGE = "transition_image";
     void navigate(Activity context,
+                  String channelId,
                   VideoListItemViewModel item,
                   boolean shouldStart,
                   ImageView imageView);

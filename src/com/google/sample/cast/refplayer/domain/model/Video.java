@@ -3,6 +3,7 @@ package com.google.sample.cast.refplayer.domain.model;
 import java.util.Date;
 
 public class Video {
+    private String id;
     private String title;
     private String videoURL;
     private Date date;
@@ -15,6 +16,7 @@ public class Video {
     private String mimeType;
 
     private Video(Builder builder) {
+        id = builder.id;
         title = builder.title;
         videoURL = builder.videoURL;
         date = builder.date;
@@ -25,6 +27,10 @@ public class Video {
         bigCoverURL = builder.bigCoverURL;
         studio = builder.studio;
         mimeType = builder.mimeType;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -78,6 +84,7 @@ public class Video {
         private String bigCoverURL;
         private String studio;
         private String mimeType;
+        private String id;
 
         public Builder() {
         }
@@ -139,6 +146,11 @@ public class Video {
 
         public Video build() {
             return new Video(this);
+        }
+
+        public Builder id(String val) {
+            id = val;
+            return this;
         }
     }
 }

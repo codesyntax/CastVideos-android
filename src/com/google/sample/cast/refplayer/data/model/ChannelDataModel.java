@@ -5,12 +5,17 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class ChannelDataModel {
+    private String channelid;
     private String description;
     private ImageDataModel image;
     @SerializedName("source_json_url")
     private String sourceJsonURL;
     private String title;
     private String website;
+
+    public String getChannelid() {
+        return channelid;
+    }
 
     public String getDescription() {
         return description;
