@@ -22,7 +22,9 @@ import com.google.android.gms.cast.MediaStatus;
 import com.google.android.gms.cast.framework.CastContext;
 import com.google.android.gms.cast.framework.CastSession;
 import com.google.android.gms.cast.framework.media.RemoteMediaClient;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.sample.cast.refplayer.R;
+import com.google.sample.cast.refplayer.browser.VideoProvider;
 import com.google.sample.cast.refplayer.expandedcontrols.ExpandedControlsActivity;
 import com.google.sample.cast.refplayer.queue.QueueDataProvider;
 
@@ -33,6 +35,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.res.Configuration;
 import android.graphics.Point;
+import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.text.TextUtils;
 import android.util.Log;
@@ -192,6 +195,7 @@ public class Utils {
                                 .rebuildQueueAndAppend(provider.getItems(), queueItem);
                         remoteMediaClient.queueLoad(items, provider.getCount(),
                                 MediaStatus.REPEAT_MODE_REPEAT_OFF, null);
+                        logPlayEvent(context, mediaInfo);
                     } else {
                         return false;
                     }
@@ -199,23 +203,28 @@ public class Utils {
                     if (provider.getCount() == 0) {
                         remoteMediaClient.queueLoad(newItemArray, 0,
                                 MediaStatus.REPEAT_MODE_REPEAT_OFF, null);
+                        logPlayEvent(context, mediaInfo);
                     } else {
                         int currentId = provider.getCurrentItemId();
                         if (menuItem.getItemId() == R.id.action_play_now) {
                             remoteMediaClient.queueInsertAndPlayItem(queueItem, currentId, null);
+                            logPlayEvent(context, mediaInfo);
                         } else if (menuItem.getItemId() == R.id.action_play_next) {
                             int currentPosition = provider.getPositionByItemId(currentId);
                             if (currentPosition == provider.getCount() - 1) {
                                 //we are adding to the end of queue
                                 remoteMediaClient.queueAppendItem(queueItem, null);
+                                logPlayEvent(context, mediaInfo);
                             } else {
                                 int nextItemId = provider.getItem(currentPosition + 1).getItemId();
                                 remoteMediaClient.queueInsertItems(newItemArray, nextItemId, null);
+                                logPlayEvent(context, mediaInfo);
                             }
-                            toastMessage = context.getString(
+                            toastMessage =   context.getString(
                                     R.string.queue_item_added_to_play_next);
                         } else if (menuItem.getItemId() == R.id.action_add_to_queue) {
                             remoteMediaClient.queueAppendItem(queueItem, null);
+                            logPlayEvent(context, mediaInfo);
                             toastMessage = context.getString(R.string.queue_item_added_to_queue);
                         } else {
                             return false;
@@ -234,6 +243,16 @@ public class Utils {
         };
         popup.setOnMenuItemClickListener(clickListener);
         popup.show();
+    }
+
+    private static void logPlayEvent(Context context, MediaInfo mediaInfo) {
+        Bundle bundle = new Bundle();
+        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
+        bundle.putString(VideoProvider.KEY_CHANNEL_ID, mediaInfo.getCustomData().optString(VideoProvider.KEY_CHANNEL_ID));
+        bundle.putString(VideoProvider.KEY_VIDEO_ID, mediaInfo.getCustomData().optString(VideoProvider.KEY_VIDEO_ID));
+        bundle.putLong("duration", mediaInfo.getStreamDuration());
+        bundle.putBoolean("chromecast", true);
+        firebaseAnalytics.logEvent("play_video", bundle);
     }
 
     public static MediaQueueItem[] rebuildQueue(List<MediaQueueItem> items) {
