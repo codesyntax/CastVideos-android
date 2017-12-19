@@ -15,7 +15,7 @@ public class ChannelDataModelMapperImpl implements ChannelDataModelMapper {
     @Override
     public Channel map(ChannelDataModel source) {
         return new Channel.Builder()
-                .id(source.getChannelid())
+                .id(String.valueOf(source.getId()))
                 .name(source.getTitle())
                 .mosaicCoverURL(source.getMosaicURL())
                 .coverURL(source.getDisplayURL())

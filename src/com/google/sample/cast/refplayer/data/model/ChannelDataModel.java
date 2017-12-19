@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class ChannelDataModel {
-    private String channelid;
+    private int id;
     private String description;
     private ImageDataModel image;
     @SerializedName("source_json_url")
@@ -13,8 +13,8 @@ public class ChannelDataModel {
     private String title;
     private String website;
 
-    public String getChannelid() {
-        return channelid;
+    public int getId() {
+        return id;
     }
 
     public String getDescription() {
