@@ -76,9 +76,14 @@ public class MainActivity extends AppCompatActivity implements ChannelListListen
         Fabric.with(this, new Crashlytics());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setupDeviceId();
         setupDrawerLayout();
         setupDrawerItems();
         setupFragment();
+    }
+
+    private void setupDeviceId() {
+        mainPresenter.registerDeviceId();
     }
 
     private void inject() {
