@@ -34,6 +34,6 @@ public class DevicePreferencesImpl implements DevicePreferences {
 
     @Override
     public void setNotificationStatus(boolean notificationStatus) {
-        preferences.edit().putBoolean(KEY_NOTIFICATION_STATUS, notificationStatus);
+        preferences.edit().putBoolean(KEY_NOTIFICATION_STATUS, notificationStatus).apply();
     }
 }

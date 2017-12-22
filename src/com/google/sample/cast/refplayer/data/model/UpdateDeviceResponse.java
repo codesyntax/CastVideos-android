@@ -2,13 +2,13 @@ package com.google.sample.cast.refplayer.data.model;
 
 public class UpdateDeviceResponse {
     private boolean updated;
-    private int time;
+    private double time;
 
     public boolean isUpdated() {
         return updated;
     }
 
-    public int getTime() {
+    public double getTime() {
         return time;
     }
 }

@@ -41,6 +41,10 @@ public class EnableNotificationsInteractorImpl implements EnableNotificationsInt
 
                     @Override
                     public void onNext(Boolean updated) {
+                        if (updated) {
+                            devicePreferences.setNotificationStatus(enabled);
+                            callback.onSuccess(updated);
+                        }
                         callback.onSuccess(updated);
                     }
 

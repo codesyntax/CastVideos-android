@@ -5,13 +5,13 @@ import com.google.gson.annotations.SerializedName;
 public class RegisterDeviceResponse {
     @SerializedName("device_id")
     private String deviceId;
-    private int time;
+    private double time;
 
     public String getDeviceId() {
         return deviceId;
     }
 
-    public int getTime() {
+    public double getTime() {
         return time;
     }
 }

@@ -40,5 +40,6 @@
     <dimen name="channel_expanded_title_margin_end">64dp</dimen>
     <dimen name="channel_expanded_title_margin_start">48dp</dimen>
     <dimen name="channel_list_padding">4dp</dimen>
+    <dimen name="drawer_item_height">56dp</dimen>
 
 </resources>

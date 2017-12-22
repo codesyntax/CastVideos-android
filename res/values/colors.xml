@@ -76,5 +76,6 @@
     <color name="primary">#1E3DC1</color>
     <color name="primary_dark">#172b82</color>
     <color name="drawer_item_value">#747474</color>
+    <color name="drawer_item_divider_background">#bebebe</color>
 
 </resources>
