@@ -20,10 +20,9 @@ public class JarrionMessagingService extends FirebaseMessagingService {
     private static final int NOTIFICATION_ID = 101;
     private static final String KEY_TITLE = "title";
     private static final String KEY_MESSAGE = "message";
-    private static final String KEY_CHANNEL_ID = "channel_id";
-    private static final String KEY_CHANNEL_NAME = "channel_name";
-    private static final String KEY_CHANNEL_URL = "channel_url";
-    private static final String KEY_CHANNEL_IMAGE_URL = "channel_image_url";
+    private static final String KEY_CHANNEL_ID = "id";
+    private static final String KEY_CHANNEL_URL = "website";
+    private static final String KEY_CHANNEL_IMAGE_URL = "image";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -39,7 +38,7 @@ public class JarrionMessagingService extends FirebaseMessagingService {
         resultIntent.putExtra(ChannelActivityNavigator.EXTRA_JSON_URL, remoteMessage.getData().get(KEY_CHANNEL_URL));
         resultIntent.putExtra(ChannelActivityNavigator.EXTRA_COVER_URL, remoteMessage.getData().get(KEY_CHANNEL_IMAGE_URL));
         resultIntent.putExtra(ChannelActivityNavigator.EXTRA_CHANNEL_ID, remoteMessage.getData().get(KEY_CHANNEL_ID));
-        resultIntent.putExtra(ChannelActivityNavigator.EXTRA_TITLE, remoteMessage.getData().get(KEY_CHANNEL_NAME));
+        resultIntent.putExtra(ChannelActivityNavigator.EXTRA_TITLE, remoteMessage.getData().get(KEY_TITLE));
         PendingIntent resultPendingIntent =
                 PendingIntent.getActivity(
                         this,
