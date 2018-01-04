@@ -22,7 +22,7 @@ public class JarrionMessagingService extends FirebaseMessagingService {
     public static final String KEY_TITLE = "title";
     private static final String KEY_MESSAGE = "message";
     public static final String KEY_CHANNEL_ID = "id";
-    public static final String KEY_CHANNEL_URL = "website";
+    public static final String KEY_CHANNEL_URL = "source_json_url";
     public static final String KEY_CHANNEL_IMAGE_URL = "image";
 
     @Override
