@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 
@@ -18,11 +19,11 @@ public class JarrionMessagingService extends FirebaseMessagingService {
     private static final String CHANNEL_ID = "channel_id";
     private static final String CHANNEL_NAME = "Notifikazioak";
     private static final int NOTIFICATION_ID = 101;
-    private static final String KEY_TITLE = "title";
+    public static final String KEY_TITLE = "title";
     private static final String KEY_MESSAGE = "message";
-    private static final String KEY_CHANNEL_ID = "id";
-    private static final String KEY_CHANNEL_URL = "website";
-    private static final String KEY_CHANNEL_IMAGE_URL = "image";
+    public static final String KEY_CHANNEL_ID = "id";
+    public static final String KEY_CHANNEL_URL = "website";
+    public static final String KEY_CHANNEL_IMAGE_URL = "image";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -35,10 +36,10 @@ public class JarrionMessagingService extends FirebaseMessagingService {
             notificationManager.createNotificationChannel(channel);
         }
         Intent resultIntent = new Intent(this, ChannelActivity.class);
-        resultIntent.putExtra(ChannelActivityNavigator.EXTRA_JSON_URL, remoteMessage.getData().get(KEY_CHANNEL_URL));
-        resultIntent.putExtra(ChannelActivityNavigator.EXTRA_COVER_URL, remoteMessage.getData().get(KEY_CHANNEL_IMAGE_URL));
-        resultIntent.putExtra(ChannelActivityNavigator.EXTRA_CHANNEL_ID, remoteMessage.getData().get(KEY_CHANNEL_ID));
-        resultIntent.putExtra(ChannelActivityNavigator.EXTRA_TITLE, remoteMessage.getData().get(KEY_TITLE));
+        resultIntent.putExtra(KEY_CHANNEL_URL, remoteMessage.getData().get(KEY_CHANNEL_URL));
+        resultIntent.putExtra(KEY_CHANNEL_IMAGE_URL, remoteMessage.getData().get(KEY_CHANNEL_IMAGE_URL));
+        resultIntent.putExtra(KEY_CHANNEL_ID, remoteMessage.getData().get(KEY_CHANNEL_ID));
+        resultIntent.putExtra(KEY_TITLE, remoteMessage.getData().get(KEY_TITLE));
         PendingIntent resultPendingIntent =
                 PendingIntent.getActivity(
                         this,
@@ -52,6 +53,7 @@ public class JarrionMessagingService extends FirebaseMessagingService {
                         .setContentTitle(remoteMessage.getData().get(KEY_TITLE))
                         .setContentText(remoteMessage.getData().get(KEY_MESSAGE))
                         .setAutoCancel(true)
+                        .setColor(getColor(R.color.accent))
                         .setContentIntent(resultPendingIntent);
         notificationManager.notify(NOTIFICATION_ID, builder.build());
     }

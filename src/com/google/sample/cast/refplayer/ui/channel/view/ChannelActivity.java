@@ -23,6 +23,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 
+import com.codesyntax.jarrion.service.messaging.JarrionMessagingService;
 import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.navigation.ChannelActivityNavigator;
 
@@ -34,10 +35,10 @@ public class ChannelActivity extends AppCompatActivity implements DispatchKeyEve
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_channel);
-        String jsonURL = getIntent().getStringExtra(ChannelActivityNavigator.EXTRA_JSON_URL);
-        String coverURL = getIntent().getStringExtra(ChannelActivityNavigator.EXTRA_COVER_URL);
-        String channelId = getIntent().getStringExtra(ChannelActivityNavigator.EXTRA_CHANNEL_ID);
-        title = getIntent().getStringExtra(ChannelActivityNavigator.EXTRA_TITLE);
+        String jsonURL = getIntent().getStringExtra(JarrionMessagingService.KEY_CHANNEL_URL);
+        String coverURL = getIntent().getStringExtra(JarrionMessagingService.KEY_CHANNEL_IMAGE_URL);
+        String channelId = getIntent().getStringExtra(JarrionMessagingService.KEY_CHANNEL_ID);
+        title = getIntent().getStringExtra(JarrionMessagingService.KEY_TITLE);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.container, ChannelFragment.newInstance(channelId, jsonURL, title, coverURL));
         ft.commit();
