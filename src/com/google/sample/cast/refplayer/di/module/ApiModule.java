@@ -32,7 +32,7 @@ public class ApiModule {
     @Provides
     @Named(NAME_JARRI_ON)
     Retrofit provideJarriOnRetrofit() {
-        String baseURL = "https://jarrion.korpoweb.com/";
+        String baseURL = "https://jarrion.eus/";
         return new Retrofit.Builder()
                 .baseUrl(baseURL)
                 .addConverterFactory(GsonConverterFactory.create())
