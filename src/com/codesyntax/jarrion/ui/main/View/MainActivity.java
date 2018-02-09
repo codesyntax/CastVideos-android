@@ -43,7 +43,7 @@ import javax.inject.Inject;
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity implements ChannelListListener {
-    private static final String ABOUT_URL = "https://mendiak.eus/info/honi-buruz/";
+    private static final String ABOUT_URL = "https://jarrion.eus/page/about/";
     private CastContext castContext;
     private SessionManager sessionManager;
     private final SessionManagerListener sessionManagerListener
