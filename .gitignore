@@ -36,3 +36,5 @@ proguard-project.txt
 
 # Firebase
 google-services.json
+
+hs_err*
