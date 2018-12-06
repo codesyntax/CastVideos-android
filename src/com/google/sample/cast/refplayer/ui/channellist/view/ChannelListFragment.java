@@ -11,12 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ImageView;
 import android.widget.Toast;
 import com.google.sample.cast.refplayer.JarriOnApplication;
 import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.di.component.ApplicationComponent;
 import com.google.sample.cast.refplayer.di.component.DaggerChannelListComponent;
 import com.google.sample.cast.refplayer.navigation.ChannelActivityNavigator;
+import com.google.sample.cast.refplayer.navigation.LocalPlayerActivityNavigator;
+import com.google.sample.cast.refplayer.ui.channel.model.VideoListItemViewModel;
 import com.google.sample.cast.refplayer.ui.channellist.ChannelListListener;
 import com.google.sample.cast.refplayer.ui.channellist.model.ChannelListItemViewModel;
 import com.google.sample.cast.refplayer.ui.channellist.presenter.ChannelListPresenter;
@@ -34,6 +37,8 @@ public class ChannelListFragment extends Fragment
     ChannelListPresenter presenter;
     @Inject
     ChannelActivityNavigator channelActivityNavigator;
+    @Inject
+    LocalPlayerActivityNavigator localPlayerActivityNavigator;
     private ChannelListListener channelListListener;
 
     @Override
@@ -109,12 +114,21 @@ public class ChannelListFragment extends Fragment
     }
 
     @Override
-    public void onItemClick(ChannelListItemViewModel channelListItemViewModel) {
-        channelActivityNavigator.navigate(getContext(),
-                channelListItemViewModel.getId(),
-                channelListItemViewModel.getJsonURL(),
-                channelListItemViewModel.getName(),
-                channelListItemViewModel.getCoverURL());
+    public void onItemClick(ChannelListItemViewModel channelListItemViewModel, ImageView imageView) {
+        if (channelListItemViewModel.getChannelType() == 3 || channelListItemViewModel.getChannelType() == 4) {
+            presenter.onChannelClicked(channelListItemViewModel, imageView);
+        } else {
+            channelActivityNavigator.navigate(getContext(),
+                                              channelListItemViewModel.getId(),
+                                              channelListItemViewModel.getJsonURL(),
+                                              channelListItemViewModel.getName(),
+                                              channelListItemViewModel.getCoverURL());
+        }
+    }
+
+    @Override
+    public void navigateToVideo(VideoListItemViewModel videoListItemViewModel, String channelId, ImageView imageView) {
+        localPlayerActivityNavigator.navigate(getActivity(), channelId, videoListItemViewModel, false, imageView);
     }
 
     public void filter(int filter) {
