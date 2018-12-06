@@ -1,12 +1,11 @@
 package com.codesyntax.jarrion.service.messaging;
 
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.google.sample.cast.refplayer.R;
@@ -26,12 +25,6 @@ public class JarrionMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         final NotificationManager notificationManager=
                 (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
-                    CHANNEL_NAME,
-                    NotificationManager.IMPORTANCE_DEFAULT);
-            notificationManager.createNotificationChannel(channel);
-        }
         Intent resultIntent = new Intent(this, ChannelActivity.class);
         resultIntent.putExtra(KEY_CHANNEL_URL, remoteMessage.getData().get(KEY_CHANNEL_URL));
         resultIntent.putExtra(KEY_CHANNEL_IMAGE_URL, remoteMessage.getData().get(KEY_CHANNEL_IMAGE_URL));
@@ -50,7 +43,7 @@ public class JarrionMessagingService extends FirebaseMessagingService {
                         .setContentTitle(remoteMessage.getData().get(KEY_TITLE))
                         .setContentText(remoteMessage.getData().get(KEY_MESSAGE))
                         .setAutoCancel(true)
-                        .setColor(getColor(R.color.accent))
+                        .setColor(ContextCompat.getColor(getBaseContext(), R.color.accent))
                         .setContentIntent(resultPendingIntent);
         notificationManager.notify(NOTIFICATION_ID, builder.build());
     }
