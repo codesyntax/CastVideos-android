@@ -19,6 +19,7 @@ import com.codesyntax.jarrion.data.preferences.DevicePreferences;
 import com.codesyntax.jarrion.di.component.DaggerMainComponent;
 import com.codesyntax.jarrion.navigation.WebviewActivityNavigator;
 import com.codesyntax.jarrion.ui.main.presenter.MainPresenter;
+import com.codesyntax.jarrion.ui.widget.FilterDialogFragment;
 import com.google.android.gms.cast.MediaQueueItem;
 import com.google.android.gms.cast.MediaStatus;
 import com.google.android.gms.cast.framework.CastButtonFactory;
@@ -188,6 +189,10 @@ public class MainActivity extends AppCompatActivity implements ChannelListListen
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.filter) {
+            FilterDialogFragment fragment = new FilterDialogFragment();
+            fragment.show(getSupportFragmentManager(), "filter");
+        }
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }

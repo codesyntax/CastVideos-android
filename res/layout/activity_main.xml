@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <android.support.v7.widget.LinearLayoutCompat
-        android:layout_height="match_parent"
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:orientation="vertical">
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:elevation="4dp"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-        <fragment android:id="@+id/fragment_station_list"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.LinearLayoutCompat
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:name="com.google.sample.cast.refplayer.ui.channellist.view.ChannelListFragment" />
-    </android.support.v7.widget.LinearLayoutCompat>
-    <include layout="@layout/layout_drawer"/>
-</android.support.v4.widget.DrawerLayout>
+            android:orientation="vertical">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:elevation="4dp"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+            <fragment android:id="@+id/fragment_station_list"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:name="com.google.sample.cast.refplayer.ui.channellist.view.ChannelListFragment" />
+        </android.support.v7.widget.LinearLayoutCompat>
+        <include layout="@layout/layout_drawer"/>
+    </android.support.v4.widget.DrawerLayout>
+</android.support.design.widget.CoordinatorLayout>
 
