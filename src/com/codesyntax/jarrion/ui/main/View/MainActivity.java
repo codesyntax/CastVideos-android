@@ -196,6 +196,23 @@ public class MainActivity extends AppCompatActivity implements ChannelListListen
             fragment.setOnOptionClicked(option -> {
                 ((ChannelListFragment) getSupportFragmentManager().findFragmentByTag("stationList")).filter(option);
                 fragment.dismiss();
+                switch (option) {
+                    case 1:
+                        getSupportActionBar().setTitle(R.string.filter_video);
+                        break;
+                    case 2:
+                        getSupportActionBar().setTitle(R.string.filter_podcast);
+                        break;
+                    case 3:
+                        getSupportActionBar().setTitle(R.string.filter_tv);
+                        break;
+                    case 4:
+                        getSupportActionBar().setTitle(R.string.filter_radio);
+                        break;
+                    default:
+                        getSupportActionBar().setTitle(R.string.app_name);
+                        break;
+                }
                 return Unit.INSTANCE;
             });
             fragment.show(getSupportFragmentManager(), "filter");
