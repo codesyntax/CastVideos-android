@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Toast;
 import com.google.sample.cast.refplayer.JarriOnApplication;
 import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.di.component.ApplicationComponent;
@@ -114,5 +115,9 @@ public class ChannelListFragment extends Fragment
                 channelListItemViewModel.getJsonURL(),
                 channelListItemViewModel.getName(),
                 channelListItemViewModel.getCoverURL());
+    }
+
+    public void filter(int filter) {
+        Toast.makeText(getContext(), "selected option" + filter, Toast.LENGTH_SHORT).show();
     }
 }

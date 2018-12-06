@@ -39,6 +39,8 @@ import com.google.sample.cast.refplayer.ui.channellist.view.ChannelListFragment;
 import java.util.List;
 
 import javax.inject.Inject;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 public class MainActivity extends AppCompatActivity implements ChannelListListener {
     private static final String ABOUT_URL = "https://jarrion.eus/page/about/";
@@ -191,6 +193,11 @@ public class MainActivity extends AppCompatActivity implements ChannelListListen
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.filter) {
             FilterDialogFragment fragment = new FilterDialogFragment();
+            fragment.setOnOptionClicked(option -> {
+                ((ChannelListFragment) getSupportFragmentManager().findFragmentByTag("stationList")).filter(option);
+                fragment.dismiss();
+                return Unit.INSTANCE;
+            });
             fragment.show(getSupportFragmentManager(), "filter");
         }
         if (drawerToggle.onOptionsItemSelected(item)) {
