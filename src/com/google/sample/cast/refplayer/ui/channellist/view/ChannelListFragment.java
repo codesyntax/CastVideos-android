@@ -118,6 +118,6 @@ public class ChannelListFragment extends Fragment
     }
 
     public void filter(int filter) {
-        Toast.makeText(getContext(), "selected option" + filter, Toast.LENGTH_SHORT).show();
+        channelListAdapter.setFilter(filter);
     }
 }
