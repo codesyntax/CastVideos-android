@@ -22,5 +22,6 @@ class FilterDialogFragment: BottomSheetDialogFragment() {
         podcast.setOnClickListener { onOptionClicked(2) }
         tv.setOnClickListener { onOptionClicked(3) }
         radio.setOnClickListener { onOptionClicked(4) }
+        reset.setOnClickListener { onOptionClicked(0) }
     }
 }
