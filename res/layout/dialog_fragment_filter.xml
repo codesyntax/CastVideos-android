@@ -34,7 +34,7 @@
     <TextView android:id="@+id/reset"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="@string/app_name"
+        android:text="@string/filter_reset"
         android:padding="12dp"
         android:textSize="22sp"
         android:textStyle="bold"/>

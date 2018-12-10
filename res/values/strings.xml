@@ -102,6 +102,7 @@
     <string name="filter_tv">TELEBISTA</string>
     <string name="filter_radio">IRRATIA</string>
     <string name="filter_podcast">PODCAST</string>
+    <string name="filter_reset">GUZTIAK</string>
 
     <!-- months -->
     <string-array name="months">
