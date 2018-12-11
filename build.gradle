@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
 
 task wrapper(type: Wrapper) {
     gradleVersion = '4.1'
@@ -8,12 +7,10 @@ buildscript {
     repositories {
         jcenter()
         google()
-        maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath 'com.google.gms:google-services:3.1.0'
-        classpath 'io.fabric.tools:gradle:1.25.1'
+        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.google.gms:google-services:4.1.0'
     }
 }
 
@@ -36,12 +33,12 @@ allprojects {
 }
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 26
+        minSdkVersion 21
+        targetSdkVersion 28
         applicationId="com.codesyntax.jarrion"
     }
     dexOptions {
@@ -62,28 +59,25 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.android.support:mediarouter-v7:26.1.0'
-    compile 'com.android.support:recyclerview-v7:26.1.0'
-    compile 'com.google.android.gms:play-services-cast-framework:11.6.2'
-    compile 'com.googlecode.android-query:android-query:0.25.9'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'io.reactivex.rxjava2:rxjava:2.1.6'
-    compile 'com.google.dagger:dagger:2.12'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.12'
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.android.support:design:26.1.0'
-    compile 'com.google.firebase:firebase-core:11.6.2'
-    compile 'com.google.firebase:firebase-messaging:11.6.2'
-    compile('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
-        transitive = true;
-    }
-
-    compile 'com.facebook.stetho:stetho:1.5.0'
-    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
-    compile 'com.facebook.stetho:stetho-urlconnection:1.5.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:support-compat:28.0.0'
+    implementation 'com.android.support:mediarouter-v7:28.0.0'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.google.android.gms:play-services-cast-framework:16.1.0'
+    implementation 'com.googlecode.android-query:android-query:0.25.9'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.6'
+    implementation 'com.google.dagger:dagger:2.19'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.19'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.google.firebase:firebase-core:16.0.5'
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    implementation 'com.facebook.stetho:stetho-urlconnection:1.5.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

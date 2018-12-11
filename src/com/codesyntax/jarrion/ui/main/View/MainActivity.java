@@ -19,7 +19,6 @@ import com.codesyntax.jarrion.data.preferences.DevicePreferences;
 import com.codesyntax.jarrion.di.component.DaggerMainComponent;
 import com.codesyntax.jarrion.navigation.WebviewActivityNavigator;
 import com.codesyntax.jarrion.ui.main.presenter.MainPresenter;
-import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.cast.MediaQueueItem;
 import com.google.android.gms.cast.MediaStatus;
 import com.google.android.gms.cast.framework.CastButtonFactory;
@@ -39,8 +38,6 @@ import com.google.sample.cast.refplayer.ui.channellist.view.ChannelListFragment;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity implements ChannelListListener {
     private static final String ABOUT_URL = "https://jarrion.eus/page/about/";
@@ -73,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements ChannelListListen
         super.onCreate(savedInstanceState);
         inject();
         setContentView(R.layout.activity_main);
-        Fabric.with(this, new Crashlytics());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setupDeviceId();
