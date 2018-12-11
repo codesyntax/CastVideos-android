@@ -6,6 +6,7 @@ public class Channel {
     private String coverURL;
     private String mosaicCoverURL;
     private String jsonURL;
+    private int channelType;
 
     public String getId() {
         return id;
@@ -27,12 +28,17 @@ public class Channel {
         return jsonURL;
     }
 
+    public int getChannelType() {
+        return channelType;
+    }
+
     private Channel(Builder builder) {
         id = builder.id;
         name = builder.name;
         coverURL = builder.coverURL;
         mosaicCoverURL = builder.mosaicCoverURL;
         jsonURL = builder.jsonURL;
+        channelType = builder.channelType;
     }
 
     public static final class Builder {
@@ -41,6 +47,7 @@ public class Channel {
         private String coverURL;
         private String mosaicCoverURL;
         private String jsonURL;
+        private int channelType;
 
         public Builder() {
         }
@@ -71,6 +78,11 @@ public class Channel {
 
         public Builder jsonURL(String val) {
             jsonURL = val;
+            return this;
+        }
+
+        public Builder channelType(int val) {
+            channelType = val;
             return this;
         }
     }

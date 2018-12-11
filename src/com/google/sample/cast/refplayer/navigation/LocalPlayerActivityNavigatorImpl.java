@@ -29,8 +29,12 @@ public class LocalPlayerActivityNavigatorImpl implements LocalPlayerActivityNavi
                          boolean shouldStart, ImageView imageView) {
         MediaInfo mediaInfo = mediaInfoMapper.map(channelId, item);
         Intent intent = getNavigationIntent(context, mediaInfo, shouldStart);
-        ActivityOptionsCompat options = getOptions(context, imageView);
-        ActivityCompat.startActivity(context, intent, options.toBundle());
+        if (imageView != null) {
+            ActivityOptionsCompat options = getOptions(context, imageView);
+            ActivityCompat.startActivity(context, intent, options.toBundle());
+        } else {
+            context.startActivity(intent);
+        }
     }
 
     private ActivityOptionsCompat getOptions(Activity context, ImageView imageView) {

@@ -13,17 +13,20 @@ import java.util.List;
 
 public class ChannelListAdapter extends RecyclerView.Adapter<ChannelListItemViewHolder> {
     private final List<ChannelListItemViewModel> stations;
+    private final List<ChannelListItemViewModel> filteredStations;
     private final ChannelListItemClickListener channelListItemClickListener;
+    private int filter = 0;
 
     public ChannelListAdapter(ChannelListItemClickListener channelListItemClickListener) {
         this.stations = new ArrayList<>();
+        this.filteredStations = new ArrayList<>();
         this.channelListItemClickListener = channelListItemClickListener;
     }
 
     public void setStations(List<ChannelListItemViewModel> stations) {
         this.stations.clear();
         this.stations.addAll(stations);
-        notifyDataSetChanged();
+        updateFilter();
     }
 
     @Override
@@ -36,12 +39,31 @@ public class ChannelListAdapter extends RecyclerView.Adapter<ChannelListItemView
 
     @Override
     public void onBindViewHolder(ChannelListItemViewHolder holder, int position) {
-        ChannelListItemViewModel station = stations.get(position);
+        ChannelListItemViewModel station = filteredStations.get(position);
         holder.bind(station, channelListItemClickListener);
     }
 
     @Override
     public int getItemCount() {
-        return stations.size();
+        return filteredStations.size();
+    }
+
+    public void setFilter(int filter) {
+        this.filter = filter;
+        updateFilter();
+    }
+
+    private void updateFilter() {
+        this.filteredStations.clear();
+        if (filter == 0) {
+            this.filteredStations.addAll(stations);
+        } else {
+            for (int i = 0; i < stations.size(); i++) {
+                if (stations.get(i).getChannelType() == filter) {
+                    this.filteredStations.add(stations.get(i));
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }

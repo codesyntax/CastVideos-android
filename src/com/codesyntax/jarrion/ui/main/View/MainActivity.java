@@ -19,6 +19,7 @@ import com.codesyntax.jarrion.data.preferences.DevicePreferences;
 import com.codesyntax.jarrion.di.component.DaggerMainComponent;
 import com.codesyntax.jarrion.navigation.WebviewActivityNavigator;
 import com.codesyntax.jarrion.ui.main.presenter.MainPresenter;
+import com.codesyntax.jarrion.ui.widget.FilterDialogFragment;
 import com.google.android.gms.cast.MediaQueueItem;
 import com.google.android.gms.cast.MediaStatus;
 import com.google.android.gms.cast.framework.CastButtonFactory;
@@ -38,6 +39,8 @@ import com.google.sample.cast.refplayer.ui.channellist.view.ChannelListFragment;
 import java.util.List;
 
 import javax.inject.Inject;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 public class MainActivity extends AppCompatActivity implements ChannelListListener {
     private static final String ABOUT_URL = "https://jarrion.eus/page/about/";
@@ -188,6 +191,32 @@ public class MainActivity extends AppCompatActivity implements ChannelListListen
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.filter) {
+            FilterDialogFragment fragment = new FilterDialogFragment();
+            fragment.setOnOptionClicked(option -> {
+                ((ChannelListFragment) getSupportFragmentManager().findFragmentByTag("stationList")).filter(option);
+                fragment.dismiss();
+                switch (option) {
+                    case 1:
+                        getSupportActionBar().setTitle(R.string.filter_video);
+                        break;
+                    case 2:
+                        getSupportActionBar().setTitle(R.string.filter_podcast);
+                        break;
+                    case 3:
+                        getSupportActionBar().setTitle(R.string.filter_tv);
+                        break;
+                    case 4:
+                        getSupportActionBar().setTitle(R.string.filter_radio);
+                        break;
+                    default:
+                        getSupportActionBar().setTitle(R.string.app_name);
+                        break;
+                }
+                return Unit.INSTANCE;
+            });
+            fragment.show(getSupportFragmentManager(), "filter");
+        }
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }

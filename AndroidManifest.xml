@@ -34,7 +34,8 @@
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:theme="@style/Theme.CastVideosTheme"
-            android:name=".JarriOnApplication">
+            android:name=".JarriOnApplication"
+            android:usesCleartextTraffic="true">
 
         <activity
                 android:name="com.google.sample.cast.refplayer.ui.channel.view.ChannelActivity"

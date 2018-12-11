@@ -87,12 +87,22 @@
     <string name="queue_item_added_to_play_next">Bideoa jarraian ikusiko da</string>
     <string name="queue_item_added_to_queue">Bideoa gehitu duzu ilarara</string>
 
+    <!-- Channel list -->
+    <string name="channel_list_filter_option">filter</string>
+    
     <!-- Video list -->
     <string name="video_list_item_date_today">GAUR %s</string>
     <string name="video_list_item_date_yesterday">ATZO, %s</string>
     <string name="video_list_item_month_and_day">%1$s %2$s</string>
     <string name="video_list_item_duration_minutes">%s min</string>
     <string name="video_list_item_duration_seconds">%s seg</string>
+    
+    <!-- Filter -->
+    <string name="filter_video">BIDEOAK</string>
+    <string name="filter_tv">TELEBISTA</string>
+    <string name="filter_radio">IRRATIA</string>
+    <string name="filter_podcast">PODCAST</string>
+    <string name="filter_reset">GUZTIAK</string>
 
     <!-- months -->
     <string-array name="months">

@@ -12,6 +12,7 @@ public class ChannelDataModel {
     private String sourceJsonURL;
     private String title;
     private String website;
+    private int channeltype;
 
     public int getId() {
         return id;
@@ -67,5 +68,9 @@ public class ChannelDataModel {
             }
         }
         return result;
+    }
+
+    public int getChanneltype() {
+        return channeltype;
     }
 }

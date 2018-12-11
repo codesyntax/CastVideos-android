@@ -20,6 +20,7 @@ public class ChannelListItemViewModelMapperImpl implements ChannelListItemViewMo
                 .coverURL(source.getCoverURL())
                 .mosaicCoverURL(source.getMosaicCoverURL())
                 .jsonURL(source.getJsonURL())
+                .channelType(source.getChannelType())
                 .build();
     }
 

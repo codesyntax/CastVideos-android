@@ -20,6 +20,7 @@ public class ChannelDataModelMapperImpl implements ChannelDataModelMapper {
                 .mosaicCoverURL(source.getMosaicURL())
                 .coverURL(source.getDisplayURL())
                 .jsonURL(source.getSourceJsonURL())
+                .channelType(source.getChanneltype())
                 .build();
     }
 
