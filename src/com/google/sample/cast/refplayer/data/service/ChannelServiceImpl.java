@@ -2,11 +2,10 @@ package com.google.sample.cast.refplayer.data.service;
 
 import com.google.sample.cast.refplayer.data.api.JarriOnApi;
 import com.google.sample.cast.refplayer.data.model.ChannelDataModel;
-
+import com.google.sample.cast.refplayer.data.model.LivestreamResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
 
 public class ChannelServiceImpl implements ChannelService {
@@ -24,6 +23,17 @@ public class ChannelServiceImpl implements ChannelService {
             response = jarriOnApi.getChannels()
                     .execute()
                     .body().getData().getChannels();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    @Override
+    public LivestreamResponse getLivestream() {
+        LivestreamResponse response = null;
+        try {
+            response = jarriOnApi.getLivestream().execute().body();
         } catch (IOException e) {
             e.printStackTrace();
         }

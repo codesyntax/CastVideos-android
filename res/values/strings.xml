@@ -125,6 +125,7 @@
     <string name="open">open</string>
     <string name="close">close</string>
     <string name="drawer_item_channels_name">Kanalak</string>
+    <string name="drawer_item_livestream">Zuzenekoak</string>
     <string name="drawer_item_queue_name">Ilara</string>
     <string name="drawer_item_notifications_name">Notifikazioak</string>
     <string name="drawer_item_about_name">Honi buruz</string>

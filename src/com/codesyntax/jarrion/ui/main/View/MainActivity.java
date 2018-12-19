@@ -33,6 +33,7 @@ import com.google.sample.cast.refplayer.JarriOnApplication;
 import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.di.component.ApplicationComponent;
 import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
+import com.google.sample.cast.refplayer.ui.channel.view.LivestreamActivity;
 import com.google.sample.cast.refplayer.ui.channellist.ChannelListListener;
 import com.google.sample.cast.refplayer.ui.channellist.view.ChannelListFragment;
 
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements ChannelListListen
     private ActionBarDrawerToggle drawerToggle;
     private LinearLayout drawerMenu;
     private LinearLayout channelsDrawerItem;
+    private LinearLayout livestreamDrawerItem;
     private AppCompatTextView channelsDrawerItemValue;
     private LinearLayout queueDrawerItem;
     private AppCompatTextView queueDrawerItemValue;
@@ -100,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements ChannelListListen
 
     private void setupDrawerItems() {
         channelsDrawerItem = (LinearLayout) findViewById(R.id.drawer_item_channels);
+        livestreamDrawerItem = (LinearLayout) findViewById(R.id.drawer_item_livestream);
         channelsDrawerItemValue = (AppCompatTextView) findViewById(R.id.drawer_item_channels_value);
         channelsDrawerItem.setOnClickListener(v -> drawerLayout.closeDrawer(drawerMenu));
         queueDrawerItem = (LinearLayout) findViewById(R.id.drawer_item_queue);
@@ -113,11 +116,16 @@ public class MainActivity extends AppCompatActivity implements ChannelListListen
         });
         aboutDrawerItem = (LinearLayout) findViewById(R.id.drawer_item_about);
         aboutDrawerItem.setOnClickListener(v -> goToAbout());
+        livestreamDrawerItem.setOnClickListener(v -> goToLivestream());
     }
 
     private void goToAbout() {
         drawerLayout.closeDrawer(drawerMenu);
         webviewActivityNavigator.navigate(MainActivity.this, ABOUT_URL);
+    }
+
+    private void goToLivestream() {
+        startActivity(new Intent(this, LivestreamActivity.class));
     }
 
     private void goToQueue() {

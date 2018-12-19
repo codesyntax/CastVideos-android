@@ -16,6 +16,8 @@ public class VideoListItemViewModel implements Parcelable {
     private String videoURL;
     private String studio;
     private String mimetype;
+    private Date begin;
+    private Date end;
 
     private VideoListItemViewModel(Builder builder) {
         id = builder.id;
@@ -28,6 +30,8 @@ public class VideoListItemViewModel implements Parcelable {
         videoURL = builder.videoURL;
         studio = builder.studio;
         mimetype = builder.mimetype;
+        begin = builder.begin;
+        end = builder.end;
     }
 
     protected VideoListItemViewModel(Parcel in) {
@@ -41,6 +45,8 @@ public class VideoListItemViewModel implements Parcelable {
         videoURL = in.readString();
         studio = in.readString();
         mimetype = in.readString();
+        begin = (Date) in.readSerializable();
+        end = (Date) in.readSerializable();
     }
 
     public static final Creator<VideoListItemViewModel> CREATOR = new Creator<VideoListItemViewModel>() {
@@ -95,6 +101,14 @@ public class VideoListItemViewModel implements Parcelable {
         return mimetype;
     }
 
+    public Date getBegin() {
+        return begin;
+    }
+
+    public Date getEnd() {
+        return end;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -112,6 +126,8 @@ public class VideoListItemViewModel implements Parcelable {
         parcel.writeString(videoURL);
         parcel.writeString(studio);
         parcel.writeString(mimetype);
+        parcel.writeSerializable(begin);
+        parcel.writeSerializable(end);
     }
 
 
@@ -126,6 +142,8 @@ public class VideoListItemViewModel implements Parcelable {
         private String studio;
         private String mimetype;
         private String id;
+        private Date begin;
+        private Date end;
 
         public Builder() {
         }
@@ -172,6 +190,16 @@ public class VideoListItemViewModel implements Parcelable {
 
         public Builder mimetype(String val) {
             mimetype = val;
+            return this;
+        }
+
+        public Builder begin(Date val) {
+            begin = val;
+            return this;
+        }
+
+        public Builder end(Date val) {
+            end = val;
             return this;
         }
 

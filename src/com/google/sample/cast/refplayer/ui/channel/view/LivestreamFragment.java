@@ -36,7 +36,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import com.google.android.gms.cast.framework.CastButtonFactory;
 import com.google.android.gms.cast.framework.CastContext;
 import com.google.android.gms.cast.framework.CastSession;
@@ -44,67 +43,47 @@ import com.google.android.gms.cast.framework.SessionManagerListener;
 import com.google.sample.cast.refplayer.JarriOnApplication;
 import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.di.component.ApplicationComponent;
-import com.google.sample.cast.refplayer.di.component.DaggerChannelComponent;
+import com.google.sample.cast.refplayer.di.component.DaggerLivestreamComponent;
 import com.google.sample.cast.refplayer.navigation.LocalPlayerActivityNavigator;
 import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
 import com.google.sample.cast.refplayer.ui.VerticalSpaceItemDecoration;
 import com.google.sample.cast.refplayer.ui.channel.model.VideoListItemViewModel;
-import com.google.sample.cast.refplayer.ui.channel.presenter.ChannelPresenter;
+import com.google.sample.cast.refplayer.ui.channel.presenter.LivestreamPresenter;
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
-
 import javax.inject.Inject;
 
-public class ChannelFragment extends Fragment implements VideoListAdapter.ItemClickListener,
+public class LivestreamFragment extends Fragment implements LiveVideoListAdapter.ItemClickListener,
         DispatchKeyEventListener,
         StationView {
-    private static final String KEY_JSON_URL = "key_json_url";
-    private static final String KEY_TITLE = "key_title";
-    private static final String KEY_COVER_URL = "key_cover_url";
-    private static final String KEY_CHANNEL_ID = "key_channel_id";
-    private String jsonURL;
-    private String title;
-    private String coverURL;
-    private String channelId;
     private CastSession castSession;
     private CastContext castContext;
     private RecyclerView recyclerView;
-    private VideoListAdapter adapter;
+    private LiveVideoListAdapter adapter;
     private View emptyView;
     private View loadingView;
     private final SessionManagerListener<CastSession> sessionManagerListener =
             new MySessionManagerListener();
     private MenuItem queueMenuItem;
     @Inject
-    ChannelPresenter channelPresenter;
-    @Inject
     LocalPlayerActivityNavigator localPlayerActivityNavigator;
+    @Inject
+    LivestreamPresenter livestreamPresenter;
 
-    public static ChannelFragment newInstance(String channelId, String jsonURL, String title, String coverURL) {
-        ChannelFragment fragment = new ChannelFragment();
-        Bundle args = new Bundle();
-        args.putString(KEY_JSON_URL, jsonURL);
-        args.putString(KEY_TITLE, title);
-        args.putString(KEY_COVER_URL, coverURL);
-        args.putString(KEY_CHANNEL_ID, channelId);
-        fragment.setArguments(args);
+    public static LivestreamFragment newInstance() {
+        LivestreamFragment fragment = new LivestreamFragment();
         return fragment;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        jsonURL = getArguments().getString(KEY_JSON_URL);
-        title = getArguments().getString(KEY_TITLE);
-        coverURL = getArguments().getString(KEY_COVER_URL);
-        channelId = getArguments().getString(KEY_CHANNEL_ID);
         setHasOptionsMenu(true);
         ApplicationComponent component = JarriOnApplication.getInstance().getComponent();
-        DaggerChannelComponent.builder()
-                .applicationComponent(component)
-                .build()
-                .inject(this);
+        DaggerLivestreamComponent.builder()
+                                 .applicationComponent(component)
+                                 .build()
+                                 .inject(this);
     }
 
     @Override
@@ -116,25 +95,19 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        channelPresenter.setView(this);
+        livestreamPresenter.setView(this);
         setupToolbar();
         setupRecyclerView();
         emptyView = getView().findViewById(R.id.empty_view);
         loadingView = getView().findViewById(R.id.progress_indicator);
         castContext = CastContext.getSharedInstance(getContext());
-        setupCoverImage();
-        channelPresenter.getVideos(jsonURL);
-    }
-
-    private void setupCoverImage() {
-        AppCompatImageView coverImage = (AppCompatImageView) getView().findViewById(R.id.cover_image);
-        Picasso.with(getContext()).load(coverURL).fit().centerCrop().into(coverImage);
+        livestreamPresenter.getLivestream();
     }
 
     @Override
     public void onDestroyView() {
-        if (channelPresenter != null) {
-            channelPresenter.removeView();
+        if (livestreamPresenter != null) {
+            livestreamPresenter.removeView();
         }
         super.onDestroyView();
     }
@@ -143,7 +116,7 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
         recyclerView = (RecyclerView) getView().findViewById(R.id.list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        adapter = new VideoListAdapter(this);
+        adapter = new LiveVideoListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
         Resources r = getResources();
@@ -155,7 +128,6 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
         Toolbar toolbar = (Toolbar) getView().findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getActivity().setTitle(title);
     }
 
     @Override
@@ -202,7 +174,7 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
 
     @Override
     public void itemClicked(ImageView imageView, VideoListItemViewModel item) {
-        localPlayerActivityNavigator.navigate(getActivity(), channelId, item, false, imageView);
+        localPlayerActivityNavigator.navigate(getActivity(), null, item, false, imageView);
     }
 
     @Override
@@ -261,7 +233,8 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
 
     @Override
     public void showCover(String coverURL) {
-
+        AppCompatImageView coverImage = (AppCompatImageView) getView().findViewById(R.id.cover_image);
+        Picasso.with(getContext()).load(coverURL).into(coverImage);
     }
 
     @Override

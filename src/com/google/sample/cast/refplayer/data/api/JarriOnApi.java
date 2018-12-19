@@ -1,6 +1,7 @@
 package com.google.sample.cast.refplayer.data.api;
 
 import com.google.sample.cast.refplayer.data.model.ChannelsResponseDataModel;
+import com.google.sample.cast.refplayer.data.model.LivestreamResponse;
 import com.google.sample.cast.refplayer.data.model.RegisterDeviceRequestBody;
 import com.google.sample.cast.refplayer.data.model.RegisterDeviceResponse;
 import com.google.sample.cast.refplayer.data.model.UpdateDeviceRequestBody;
@@ -20,4 +21,7 @@ public interface JarriOnApi {
 
     @POST("api/1.0/update-device")
     Call<UpdateDeviceResponse> updateDevice(@Body UpdateDeviceRequestBody body);
+
+    @GET("api/1.0/livestreams.json")
+    Call<LivestreamResponse> getLivestream();
 }
