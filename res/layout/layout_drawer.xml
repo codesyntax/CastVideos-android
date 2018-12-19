@@ -55,6 +55,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    <View
+        android:background="@color/drawer_item_divider_background"
+        android:layout_width="match_parent"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="64dp"
+        android:layout_height="1dp"/>
     <LinearLayout
         android:id="@+id/drawer_item_livestream"
         android:orientation="horizontal"
@@ -67,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <android.support.v7.widget.AppCompatTextView
-            android:text="@string/drawer_item_channels_name"
+            android:text="@string/drawer_item_livestream"
             android:layout_marginLeft="32dp"
             android:textSize="18sp"
             android:layout_width="0dp"

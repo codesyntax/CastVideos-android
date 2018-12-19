@@ -30,6 +30,7 @@ public class LivestreamPresenterImpl implements LivestreamPresenter {
     @Override
     public void getLivestream() {
         getLivestreamInteractor.execute( livestream -> {
+            view.showCover(livestream.getCoverURL());
             view.showVideos(videoListItemViewModelMapper.map(livestream));
         });
     }

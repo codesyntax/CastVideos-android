@@ -53,13 +53,13 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 import javax.inject.Inject;
 
-public class LivestreamFragment extends Fragment implements VideoListAdapter.ItemClickListener,
+public class LivestreamFragment extends Fragment implements LiveVideoListAdapter.ItemClickListener,
         DispatchKeyEventListener,
         StationView {
     private CastSession castSession;
     private CastContext castContext;
     private RecyclerView recyclerView;
-    private VideoListAdapter adapter;
+    private LiveVideoListAdapter adapter;
     private View emptyView;
     private View loadingView;
     private final SessionManagerListener<CastSession> sessionManagerListener =
@@ -101,13 +101,7 @@ public class LivestreamFragment extends Fragment implements VideoListAdapter.Ite
         emptyView = getView().findViewById(R.id.empty_view);
         loadingView = getView().findViewById(R.id.progress_indicator);
         castContext = CastContext.getSharedInstance(getContext());
-        setupCoverImage();
         livestreamPresenter.getLivestream();
-    }
-
-    private void setupCoverImage() {
-        AppCompatImageView coverImage = (AppCompatImageView) getView().findViewById(R.id.cover_image);
-        //Picasso.with(getContext()).load(coverURL).fit().centerCrop().into(coverImage);
     }
 
     @Override
@@ -122,7 +116,7 @@ public class LivestreamFragment extends Fragment implements VideoListAdapter.Ite
         recyclerView = (RecyclerView) getView().findViewById(R.id.list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        adapter = new VideoListAdapter(this);
+        adapter = new LiveVideoListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
         Resources r = getResources();
@@ -134,7 +128,6 @@ public class LivestreamFragment extends Fragment implements VideoListAdapter.Ite
         Toolbar toolbar = (Toolbar) getView().findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //getActivity().setTitle(title);
     }
 
     @Override
@@ -236,6 +229,12 @@ public class LivestreamFragment extends Fragment implements VideoListAdapter.Ite
         adapter.setData(videos);
         loadingView.setVisibility(View.GONE);
         emptyView.setVisibility(null == videos || videos.isEmpty() ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void showCover(String coverURL) {
+        AppCompatImageView coverImage = (AppCompatImageView) getView().findViewById(R.id.cover_image);
+        Picasso.with(getContext()).load(coverURL).into(coverImage);
     }
 
     @Override

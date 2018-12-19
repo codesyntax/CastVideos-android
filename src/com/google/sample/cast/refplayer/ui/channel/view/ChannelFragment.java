@@ -260,6 +260,11 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
     }
 
     @Override
+    public void showCover(String coverURL) {
+
+    }
+
+    @Override
     public void hideRefresh() {
         loadingView.setVisibility(View.GONE);
     }

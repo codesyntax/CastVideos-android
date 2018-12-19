@@ -54,6 +54,10 @@ public class VideoListItemViewHolder extends RecyclerView.ViewHolder {
         Picasso.with(image.getContext()).load(imgUrl).into(image);
     }
 
+    public void hideDuration() {
+        duration.setVisibility(View.GONE);
+    }
+
     public void setOnClickListener(View.OnClickListener listener) {
         parent.setOnClickListener(listener);
     }
