@@ -5,6 +5,7 @@ import com.google.sample.cast.refplayer.domain.model.LivestreamItem;
 import com.google.sample.cast.refplayer.domain.model.Video;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -51,6 +52,8 @@ public class VideoListItemViewModelMapperImpl implements VideoListItemViewModelM
                            .videoURL(item.getUrl())
                            .begin(item.getBegin())
                            .end(item.getEnd())
+                           .playable(item.getBegin().before(Calendar.getInstance().getTime()) && item.getEnd().after(Calendar.getInstance().getTime()))
+                           .live(true)
                            .build());
         }
         return result;

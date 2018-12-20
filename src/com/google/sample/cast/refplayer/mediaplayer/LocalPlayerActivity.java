@@ -110,6 +110,8 @@ public class LocalPlayerActivity extends AppCompatActivity {
     private SessionManagerListener<CastSession> mSessionManagerListener;
     private MenuItem mQueueMenuItem;
     private AppCompatTextView dateAndTimeTextView;
+    private boolean playable;
+    private boolean live;
 
     /**
      * indicates whether we are doing a local or a remote playback
@@ -142,6 +144,8 @@ public class LocalPlayerActivity extends AppCompatActivity {
             selectedMedia = getIntent().getParcelableExtra(LocalPlayerActivityNavigator.EXTRA_MEDIA_INFO);
             setupActionBar();
             boolean shouldStartPlayback = bundle.getBoolean(LocalPlayerActivityNavigator.EXTRA_SHOULD_START);
+            playable = bundle.getBoolean(LocalPlayerActivityNavigator.EXTRA_PLAYABLE);
+            live = bundle.getBoolean(LocalPlayerActivityNavigator.EXTRA_LIVE);
             int startPosition = bundle.getInt("startPosition", 0);
             mVideoView.setVideoURI(Uri.parse(selectedMedia.getContentId()));
             Log.d(TAG, "Setting url of the VideoView to: " + selectedMedia.getContentId());
@@ -172,6 +176,9 @@ public class LocalPlayerActivity extends AppCompatActivity {
             updateMetadata(true);
         }
         setDateAndTime();
+        if (!playable) {
+            mPlayCircle.setVisibility(View.GONE);
+        }
     }
 
     private void setDateAndTime() {

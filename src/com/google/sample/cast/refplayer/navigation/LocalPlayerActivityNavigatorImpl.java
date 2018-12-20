@@ -28,7 +28,7 @@ public class LocalPlayerActivityNavigatorImpl implements LocalPlayerActivityNavi
     public void navigate(Activity context, String channelId, VideoListItemViewModel item,
                          boolean shouldStart, ImageView imageView) {
         MediaInfo mediaInfo = mediaInfoMapper.map(channelId, item);
-        Intent intent = getNavigationIntent(context, mediaInfo, shouldStart);
+        Intent intent = getNavigationIntent(context, mediaInfo, shouldStart, item.isPlayable(), item.isLive());
         if (imageView != null) {
             ActivityOptionsCompat options = getOptions(context, imageView);
             ActivityCompat.startActivity(context, intent, options.toBundle());
@@ -44,10 +44,12 @@ public class LocalPlayerActivityNavigatorImpl implements LocalPlayerActivityNavi
                 .makeSceneTransitionAnimation(context, imagePair);
     }
 
-    private Intent getNavigationIntent(Context context, MediaInfo mediaInfo, boolean shouldStart) {
+    private Intent getNavigationIntent(Context context, MediaInfo mediaInfo, boolean shouldStart, boolean playable, boolean live) {
         Intent intent = new Intent(context, LocalPlayerActivity.class);
         intent.putExtra(EXTRA_MEDIA_INFO, mediaInfo);
         intent.putExtra(EXTRA_SHOULD_START, shouldStart);
+        intent.putExtra(EXTRA_PLAYABLE, playable);
+        intent.putExtra(EXTRA_LIVE, live);
         return intent;
     }
 }

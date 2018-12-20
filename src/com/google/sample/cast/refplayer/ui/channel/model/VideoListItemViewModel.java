@@ -18,6 +18,8 @@ public class VideoListItemViewModel implements Parcelable {
     private String mimetype;
     private Date begin;
     private Date end;
+    private boolean playable;
+    private boolean live;
 
     private VideoListItemViewModel(Builder builder) {
         id = builder.id;
@@ -32,6 +34,8 @@ public class VideoListItemViewModel implements Parcelable {
         mimetype = builder.mimetype;
         begin = builder.begin;
         end = builder.end;
+        playable = builder.playable;
+        live = builder.live;
     }
 
     protected VideoListItemViewModel(Parcel in) {
@@ -47,6 +51,8 @@ public class VideoListItemViewModel implements Parcelable {
         mimetype = in.readString();
         begin = (Date) in.readSerializable();
         end = (Date) in.readSerializable();
+        playable = in.readInt() == 1;
+        live = in.readInt() == 1;
     }
 
     public static final Creator<VideoListItemViewModel> CREATOR = new Creator<VideoListItemViewModel>() {
@@ -109,6 +115,14 @@ public class VideoListItemViewModel implements Parcelable {
         return end;
     }
 
+    public boolean isPlayable() {
+        return playable;
+    }
+
+    public boolean isLive() {
+        return live;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -128,6 +142,8 @@ public class VideoListItemViewModel implements Parcelable {
         parcel.writeString(mimetype);
         parcel.writeSerializable(begin);
         parcel.writeSerializable(end);
+        parcel.writeInt(playable ? 1 : 0);
+        parcel.writeInt(live ? 1 : 0);
     }
 
 
@@ -144,6 +160,8 @@ public class VideoListItemViewModel implements Parcelable {
         private String id;
         private Date begin;
         private Date end;
+        private boolean playable;
+        private boolean live;
 
         public Builder() {
         }
@@ -200,6 +218,16 @@ public class VideoListItemViewModel implements Parcelable {
 
         public Builder end(Date val) {
             end = val;
+            return this;
+        }
+
+        public Builder playable(boolean val) {
+            playable = val;
+            return this;
+        }
+
+        public Builder live(boolean val) {
+            live = val;
             return this;
         }
 

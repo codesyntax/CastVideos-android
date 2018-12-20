@@ -67,7 +67,8 @@ public class LiveVideoListAdapter extends RecyclerView.Adapter<VideoListItemView
             viewHolder.getPlayButton().setVisibility(View.VISIBLE);
         } else {
             viewHolder.getPlayButton().setVisibility(View.GONE);
-            viewHolder.setOnClickListener(null);
+            viewHolder.setOnClickListener(
+                view -> mClickListener.itemClicked(viewHolder.getImageView(), video));
         }
     }
 
