@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements ChannelListListen
     private ActionBarDrawerToggle drawerToggle;
     private LinearLayout drawerMenu;
     private LinearLayout channelsDrawerItem;
-    private LinearLayout livestreamDrawerItem;
     private AppCompatTextView channelsDrawerItemValue;
     private LinearLayout queueDrawerItem;
     private AppCompatTextView queueDrawerItemValue;
@@ -102,7 +101,6 @@ public class MainActivity extends AppCompatActivity implements ChannelListListen
 
     private void setupDrawerItems() {
         channelsDrawerItem = (LinearLayout) findViewById(R.id.drawer_item_channels);
-        livestreamDrawerItem = (LinearLayout) findViewById(R.id.drawer_item_livestream);
         channelsDrawerItemValue = (AppCompatTextView) findViewById(R.id.drawer_item_channels_value);
         channelsDrawerItem.setOnClickListener(v -> drawerLayout.closeDrawer(drawerMenu));
         queueDrawerItem = (LinearLayout) findViewById(R.id.drawer_item_queue);
@@ -116,7 +114,6 @@ public class MainActivity extends AppCompatActivity implements ChannelListListen
         });
         aboutDrawerItem = (LinearLayout) findViewById(R.id.drawer_item_about);
         aboutDrawerItem.setOnClickListener(v -> goToAbout());
-        livestreamDrawerItem.setOnClickListener(v -> goToLivestream());
     }
 
     private void goToAbout() {
@@ -202,9 +199,14 @@ public class MainActivity extends AppCompatActivity implements ChannelListListen
         if (item.getItemId() == R.id.filter) {
             FilterDialogFragment fragment = new FilterDialogFragment();
             fragment.setOnOptionClicked(option -> {
-                ((ChannelListFragment) getSupportFragmentManager().findFragmentByTag("stationList")).filter(option);
+                if (option != -1) {
+                    ((ChannelListFragment) getSupportFragmentManager().findFragmentByTag("stationList")).filter(option);
+                }
                 fragment.dismiss();
                 switch (option) {
+                    case -1:
+                        goToLivestream();
+                        break;
                     case 1:
                         getSupportActionBar().setTitle(R.string.filter_video);
                         break;

@@ -3,6 +3,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <TextView android:id="@+id/future"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="@string/drawer_item_livestream"
+        android:padding="12dp"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
     <TextView android:id="@+id/video"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"

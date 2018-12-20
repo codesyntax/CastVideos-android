@@ -18,6 +18,7 @@ class FilterDialogFragment: BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        future.setOnClickListener { onOptionClicked(-1) }
         video.setOnClickListener { onOptionClicked(1) }
         podcast.setOnClickListener { onOptionClicked(2) }
         tv.setOnClickListener { onOptionClicked(3) }
