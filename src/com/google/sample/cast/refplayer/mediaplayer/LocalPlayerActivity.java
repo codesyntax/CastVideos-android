@@ -134,7 +134,6 @@ public class LocalPlayerActivity extends AppCompatActivity {
         setContentView(R.layout.player_activity);
         mAquery = new AQuery(this);
         loadViews();
-        setupControlsCallbacks();
         setupCastListener();
         mCastContext = CastContext.getSharedInstance(this);
         mCastSession = mCastContext.getSessionManager().getCurrentCastSession();
@@ -175,6 +174,7 @@ public class LocalPlayerActivity extends AppCompatActivity {
         if (mTitleView != null) {
             updateMetadata(true);
         }
+        setupControlsCallbacks();
         setDateAndTime();
         if (!playable) {
             mPlayCircle.setVisibility(View.GONE);
@@ -631,7 +631,9 @@ public class LocalPlayerActivity extends AppCompatActivity {
                 return false;
             }
         });
-
+        if (live) {
+            mSeekbar.setVisibility(View.GONE);
+        }
         mSeekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
             @Override
