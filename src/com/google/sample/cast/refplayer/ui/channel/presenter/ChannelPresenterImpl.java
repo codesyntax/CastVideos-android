@@ -29,10 +29,10 @@ public class ChannelPresenterImpl implements ChannelPresenter {
     }
 
     @Override
-    public void getVideos(String url) {
+    public void getVideos(String url, int channelType) {
         getVideosByStationInteractor.execute(url, videos -> {
             if (view != null) {
-                view.showVideos(videoListItemViewModelMapper.map(videos));
+                view.showVideos(videoListItemViewModelMapper.map(videos, channelType));
             }
         });
     }

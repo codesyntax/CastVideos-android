@@ -7,5 +7,5 @@ public interface ChannelActivityNavigator {
     String EXTRA_JSON_URL = "extra_json_url";
     String EXTRA_TITLE = "extra_title";
     String EXTRA_COVER_URL = "extra_cover_url";
-    void navigate(Context context, String channelId, String jsonURL, String title, String coverURL);
+    void navigate(Context context, String channelId, String jsonURL, String title, String coverURL, int channelType);
 }

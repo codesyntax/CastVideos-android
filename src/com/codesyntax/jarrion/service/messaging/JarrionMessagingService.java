@@ -20,6 +20,7 @@ public class JarrionMessagingService extends FirebaseMessagingService {
     public static final String KEY_CHANNEL_ID = "id";
     public static final String KEY_CHANNEL_URL = "source_json_url";
     public static final String KEY_CHANNEL_IMAGE_URL = "image";
+    public static final String KEY_CHANNEL_TYPE = "type";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {

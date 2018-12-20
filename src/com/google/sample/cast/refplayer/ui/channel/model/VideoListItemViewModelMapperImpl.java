@@ -16,7 +16,7 @@ public class VideoListItemViewModelMapperImpl implements VideoListItemViewModelM
     public VideoListItemViewModelMapperImpl() {}
 
     @Override
-    public VideoListItemViewModel map(Video source) {
+    public VideoListItemViewModel map(Video source, int channelType) {
         return new VideoListItemViewModel.Builder()
                 .id(source.getId())
                 .title(source.getTitle())
@@ -28,14 +28,16 @@ public class VideoListItemViewModelMapperImpl implements VideoListItemViewModelM
                 .duration(source.getDuration())
                 .date(source.getDate())
                 .mimetype(source.getMimeType())
+                .playable(true)
+                .live(channelType == 3 || channelType == 4)
                 .build();
     }
 
     @Override
-    public List<VideoListItemViewModel> map(List<Video> source) {
+    public List<VideoListItemViewModel> map(List<Video> source, int channelType) {
         List<VideoListItemViewModel> result = new ArrayList<>();
         for (Video video : source) {
-            result.add(map(video));
+            result.add(map(video, channelType));
         }
         return result;
     }

@@ -63,10 +63,12 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
     private static final String KEY_TITLE = "key_title";
     private static final String KEY_COVER_URL = "key_cover_url";
     private static final String KEY_CHANNEL_ID = "key_channel_id";
+    private static final String KEY_CHANNEL_TYPE = "key_channel_type";
     private String jsonURL;
     private String title;
     private String coverURL;
     private String channelId;
+    private int channelType;
     private CastSession castSession;
     private CastContext castContext;
     private RecyclerView recyclerView;
@@ -81,13 +83,14 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
     @Inject
     LocalPlayerActivityNavigator localPlayerActivityNavigator;
 
-    public static ChannelFragment newInstance(String channelId, String jsonURL, String title, String coverURL) {
+    public static ChannelFragment newInstance(String channelId, String jsonURL, String title, String coverURL, int channelType) {
         ChannelFragment fragment = new ChannelFragment();
         Bundle args = new Bundle();
         args.putString(KEY_JSON_URL, jsonURL);
         args.putString(KEY_TITLE, title);
         args.putString(KEY_COVER_URL, coverURL);
         args.putString(KEY_CHANNEL_ID, channelId);
+        args.putInt(KEY_CHANNEL_TYPE, channelType);
         fragment.setArguments(args);
         return fragment;
     }
@@ -99,6 +102,7 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
         title = getArguments().getString(KEY_TITLE);
         coverURL = getArguments().getString(KEY_COVER_URL);
         channelId = getArguments().getString(KEY_CHANNEL_ID);
+        channelType = getArguments().getInt(KEY_CHANNEL_TYPE);
         setHasOptionsMenu(true);
         ApplicationComponent component = JarriOnApplication.getInstance().getComponent();
         DaggerChannelComponent.builder()
@@ -123,7 +127,7 @@ public class ChannelFragment extends Fragment implements VideoListAdapter.ItemCl
         loadingView = getView().findViewById(R.id.progress_indicator);
         castContext = CastContext.getSharedInstance(getContext());
         setupCoverImage();
-        channelPresenter.getVideos(jsonURL);
+        channelPresenter.getVideos(jsonURL, channelType);
     }
 
     private void setupCoverImage() {

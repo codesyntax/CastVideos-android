@@ -14,8 +14,8 @@ public class ChannelActivityNavigatorImpl implements ChannelActivityNavigator {
     public ChannelActivityNavigatorImpl() {}
 
     @Override
-    public void navigate(Context context, String channelId, String jsonURL, String title, String coverURL) {
-        Intent intent = getNavigationIntent(context, channelId, jsonURL, title, coverURL);
+    public void navigate(Context context, String channelId, String jsonURL, String title, String coverURL, int channelType) {
+        Intent intent = getNavigationIntent(context, channelId, jsonURL, title, coverURL, channelType);
         context.startActivity(intent);
     }
 
@@ -23,12 +23,14 @@ public class ChannelActivityNavigatorImpl implements ChannelActivityNavigator {
                                        String channelId,
                                        String jsonURL,
                                        String title,
-                                       String coverURL) {
+                                       String coverURL,
+                                       int channelType) {
         Intent result = new Intent(context, ChannelActivity.class);
         result.putExtra(JarrionMessagingService.KEY_CHANNEL_ID, channelId);
         result.putExtra(JarrionMessagingService.KEY_CHANNEL_URL, jsonURL);
         result.putExtra(JarrionMessagingService.KEY_TITLE, title);
         result.putExtra(JarrionMessagingService.KEY_CHANNEL_IMAGE_URL, coverURL);
+        result.putExtra(JarrionMessagingService.KEY_CHANNEL_TYPE, channelType);
         return result;
     }
 }

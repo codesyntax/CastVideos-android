@@ -38,9 +38,10 @@ public class ChannelActivity extends AppCompatActivity implements DispatchKeyEve
         String jsonURL = getIntent().getStringExtra(JarrionMessagingService.KEY_CHANNEL_URL);
         String coverURL = getIntent().getStringExtra(JarrionMessagingService.KEY_CHANNEL_IMAGE_URL);
         String channelId = getIntent().getStringExtra(JarrionMessagingService.KEY_CHANNEL_ID);
+        int channelType = getIntent().getIntExtra(JarrionMessagingService.KEY_CHANNEL_TYPE, 0);
         title = getIntent().getStringExtra(JarrionMessagingService.KEY_TITLE);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.container, ChannelFragment.newInstance(channelId, jsonURL, title, coverURL));
+        ft.add(R.id.container, ChannelFragment.newInstance(channelId, jsonURL, title, coverURL, channelType));
         ft.commit();
     }
 

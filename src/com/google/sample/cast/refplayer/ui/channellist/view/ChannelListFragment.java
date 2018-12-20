@@ -122,7 +122,8 @@ public class ChannelListFragment extends Fragment
                                               channelListItemViewModel.getId(),
                                               channelListItemViewModel.getJsonURL(),
                                               channelListItemViewModel.getName(),
-                                              channelListItemViewModel.getCoverURL());
+                                              channelListItemViewModel.getCoverURL(),
+                                              channelListItemViewModel.getChannelType());
         }
     }
 

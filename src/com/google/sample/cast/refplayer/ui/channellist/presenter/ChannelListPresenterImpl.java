@@ -52,7 +52,7 @@ public class ChannelListPresenterImpl implements ChannelListPresenter, GetChanne
         getVideosByStationInteractor.execute(channelListItemViewModel.getJsonURL(), new GetVideosByStationInteractor.Callback() {
             @Override
             public void onSuccess(List<Video> videos) {
-                view.navigateToVideo(videoListItemViewModelMapper.map(videos.get(0)), channelListItemViewModel.getId(), imageView);
+                view.navigateToVideo(videoListItemViewModelMapper.map(videos.get(0), channelListItemViewModel.getChannelType()), channelListItemViewModel.getId(), imageView);
             }
         });
     }
