@@ -17,7 +17,7 @@ public class DateFormatter {
     private static final String HOUR_FORMAT = "HH:mm";
     private static final String DAY_FORMAT = "dd";
 
-    public static String format(String stringDate, Context context) {
+    public static String format(String stringDate, Context context, boolean withTime) {
         Date date = Calendar.getInstance().getTime();
         ParsePosition parsePosition = new ParsePosition(0);
         try {
@@ -25,23 +25,31 @@ public class DateFormatter {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return format(date, context);
+        return format(date, context, withTime);
     }
 
-    public static String format(Date date, Context context) {
+    public static String format(Date date, Context context, boolean withTime) {
         String result;
         Calendar now = Calendar.getInstance();
         Calendar givenDate = Calendar.getInstance();
         givenDate.setTime(date);
+        SimpleDateFormat todayDateFormat = new SimpleDateFormat(HOUR_FORMAT, Locale.US);
         if (now.get(Calendar.DATE) == givenDate.get(Calendar.DATE)) {
-            SimpleDateFormat todayDateFormat = new SimpleDateFormat(HOUR_FORMAT, Locale.US);
             result = context.getString(R.string.video_list_item_date_today,
                     todayDateFormat.format(date));
         } else if (now.get(Calendar.DATE) - givenDate.get(Calendar.DATE) == 1) {
+            String month = getMonthString(date, context);
+            if (withTime) {
+                month = month + " " + todayDateFormat.format(date);
+            }
             result = context.getString(R.string.video_list_item_date_yesterday,
-                    getMonthString(date, context));
+                    month);
         } else {
-            result = getMonthString(date, context);
+            String month = getMonthString(date, context);
+            if (withTime) {
+                month = month + " " + todayDateFormat.format(date);
+            }
+            result = month;
         }
         return result;
     }

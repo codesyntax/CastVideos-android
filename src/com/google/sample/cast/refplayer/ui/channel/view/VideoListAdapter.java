@@ -59,7 +59,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListItemViewHold
         final VideoListItemViewModel video = videos.get(position);
         viewHolder.setTitle(video.getTitle());
         if (video.getDate() != null) {
-            String date = DateFormatter.format(video.getDate(), viewHolder.itemView.getContext());
+            String date = DateFormatter.format(video.getDate(), viewHolder.itemView.getContext(), false);
             viewHolder.setDatetime(date);
         }
         viewHolder.setImage(video.getThumbnailURL());

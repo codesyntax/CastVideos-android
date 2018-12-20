@@ -179,7 +179,7 @@ public class LocalPlayerActivity extends AppCompatActivity {
         if (selectedMedia.getCustomData().has(VideoProvider.KEY_DATE)) {
             try {
                 String stringDate = selectedMedia.getCustomData().getString(VideoProvider.KEY_DATE);
-                dateAndTime = DateFormatter.format(stringDate, this);
+                dateAndTime = DateFormatter.format(stringDate, this, false);
             } catch (JSONException e) {
                 dateAndTime = null;
             }
