@@ -162,7 +162,7 @@ public class Utils {
      * Show a popup to select whether the selected item should play immediately, be added to the
      * end of queue or be added to the queue right after the current item.
      */
-    public static void showQueuePopup(final Context context, View view, final MediaInfo mediaInfo) {
+    public static void showQueuePopup(final Context context, View view, final MediaInfo mediaInfo, boolean live) {
         CastSession castSession =
                 CastContext.getSharedInstance(context).getSessionManager().getCurrentCastSession();
         if (castSession == null || !castSession.isConnected()) {
@@ -176,10 +176,14 @@ public class Utils {
         }
         final QueueDataProvider provider = QueueDataProvider.getInstance(context);
         PopupMenu popup = new PopupMenu(context, view);
-        popup.getMenuInflater().inflate(
+        if (live) {
+            popup.getMenuInflater().inflate(R.menu.detached_popup_play, popup.getMenu());
+        } else {
+            popup.getMenuInflater().inflate(
                 provider.isQueueDetached() || provider.getCount() == 0
-                        ? R.menu.detached_popup_add_to_queue
-                        : R.menu.popup_add_to_queue, popup.getMenu());
+                    ? R.menu.detached_popup_add_to_queue
+                    : R.menu.popup_add_to_queue, popup.getMenu());
+        }
         PopupMenu.OnMenuItemClickListener clickListener = new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {

@@ -56,6 +56,7 @@ import android.widget.VideoView;
 import com.androidquery.AQuery;
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaMetadata;
+import com.google.android.gms.cast.MediaQueueItem;
 import com.google.android.gms.cast.framework.CastButtonFactory;
 import com.google.android.gms.cast.framework.CastContext;
 import com.google.android.gms.cast.framework.CastSession;
@@ -67,6 +68,7 @@ import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.browser.VideoProvider;
 import com.google.sample.cast.refplayer.expandedcontrols.ExpandedControlsActivity;
 import com.google.sample.cast.refplayer.navigation.LocalPlayerActivityNavigator;
+import com.google.sample.cast.refplayer.queue.QueueDataProvider;
 import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
 import com.google.sample.cast.refplayer.settings.CastPreference;
 import com.google.sample.cast.refplayer.ui.DateFormatter;
@@ -82,6 +84,7 @@ import java.util.TimerTask;
  */
 public class LocalPlayerActivity extends AppCompatActivity {
 
+    private static final int PRELOAD_TIME_S = 20;
     private static final String TAG = "LocalPlayerActivity";
     private VideoView mVideoView;
     private TextView mTitleView;
@@ -369,7 +372,7 @@ public class LocalPlayerActivity extends AppCompatActivity {
                         break;
                     case REMOTE:
                         if (mCastSession != null && mCastSession.isConnected()) {
-                            Utils.showQueuePopup(this, mPlayCircle, selectedMedia);
+                            Utils.showQueuePopup(this, mPlayCircle, selectedMedia, live);
                         }
                         break;
                     default:
