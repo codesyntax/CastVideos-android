@@ -30,6 +30,7 @@
     <string name="unmute">Unmute</string>
     <string name="loading">Loading&#8230;</string>
     <string name="no_video_found">No video was found</string>
+    <string name="no_livestream_found">Ez dago zuzenekorik programatuta une honetan</string>
     <string name="about_app">About Cast Videos</string>
     <string name="version">CastVideos: %1$s</string>
     <string name="session_reconnection_attempt">Attempting to recover previous

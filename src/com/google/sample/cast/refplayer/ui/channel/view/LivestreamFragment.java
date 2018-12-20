@@ -89,7 +89,7 @@ public class LivestreamFragment extends Fragment implements LiveVideoListAdapter
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_channel, container, false);
+        return inflater.inflate(R.layout.fragment_livestream, container, false);
     }
 
     @Override
