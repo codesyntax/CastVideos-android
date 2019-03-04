@@ -1,5 +1,6 @@
 package com.google.sample.cast.refplayer.data.model;
 
+import android.webkit.URLUtil;
 import com.google.gson.internal.bind.util.ISO8601Utils;
 import com.google.sample.cast.refplayer.domain.model.Video;
 
@@ -20,13 +21,25 @@ public class VideoDataModelMapperImpl implements VideoDataModelMapper {
     public Video map(VideoDataModel source, CategoryDataModel categoryDataModel) {
         String imageBaseURL = categoryDataModel.getImages();
         String videoBaseURL = categoryDataModel.getMp4();
+        String bigImageUrl = source.getBigImageURL();
+        String smallImageUrl = source.getSmallImageURL();
+        String thumbnailImageUrl = source.getThumb();
+        if (!URLUtil.isValidUrl(bigImageUrl)) {
+            bigImageUrl = imageBaseURL + bigImageUrl;
+        }
+        if (!URLUtil.isValidUrl(smallImageUrl)) {
+            smallImageUrl = imageBaseURL + smallImageUrl;
+        }
+        if (!URLUtil.isValidUrl(thumbnailImageUrl)) {
+            thumbnailImageUrl = imageBaseURL + thumbnailImageUrl;
+        }
         return new Video.Builder()
                 .id(source.getVideoid())
                 .title(source.getTitle())
                 .description(source.getSubtitle())
-                .bigCoverURL(imageBaseURL + source.getBigImageURL())
-                .smallCoverURL(imageBaseURL + source.getSmallImageURL())
-                .thumbnailURL(imageBaseURL + source.getThumb())
+                .bigCoverURL(bigImageUrl)
+                .smallCoverURL(smallImageUrl)
+                .thumbnailURL(thumbnailImageUrl)
                 .videoURL(videoBaseURL + source.getSources().get(0).getUrl())
                 .studio(source.getStudio())
                 .duration(source.getDuration())
